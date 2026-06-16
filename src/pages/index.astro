@@ -1,0 +1,513 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import AnimatedCard from '../components/AnimatedCard.astro';
+---
+
+<Layout title="Aura - Creative GSAP & Tailwind v4 Showcase">
+	<Navbar />
+
+	<main class="flex-grow pt-16">
+		<!-- Hero Section -->
+		<section id="hero" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden px-6 md:px-12 py-20">
+			<!-- Subtle background grids -->
+			<div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
+			
+			<div class="max-w-5xl mx-auto text-center relative z-10 flex flex-col items-center">
+				<!-- Tagline Pill -->
+				<div class="hero-reveal opacity-0 translate-y-4 mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/5 text-purple-300 text-xs font-semibold tracking-wider uppercase">
+					<span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-ping"></span>
+					Astro 6.0 + Tailwind CSS v4 + GSAP
+				</div>
+
+				<!-- Main Headline -->
+				<h1 class="hero-reveal opacity-0 translate-y-6 text-4xl sm:text-6xl md:text-7xl font-display font-extrabold tracking-tight text-white mb-6 leading-[1.1]">
+					Design with <span class="text-gradient-purple-cyan font-black">Motion</span>,<br/>
+					Build with <span class="text-gradient-pink-orange font-black">Precision</span>
+				</h1>
+
+				<!-- Description -->
+				<p class="hero-reveal opacity-0 translate-y-6 text-base sm:text-xl text-gray-400 max-w-2xl mb-10 leading-relaxed font-light">
+					Welcome to AURA. Experience fluid animations, high-performance rendering, and a state-of-the-art interactive playground powered by GSAP.
+				</p>
+
+				<!-- Hero Actions -->
+				<div class="hero-reveal opacity-0 translate-y-8 flex flex-col sm:flex-row items-center gap-4">
+					<a 
+						href="#interactive" 
+						class="px-8 py-3.5 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 text-white font-semibold text-sm hover:opacity-95 shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:shadow-[0_0_30px_rgba(139,92,246,0.5)] transition-all duration-300 transform hover:scale-[1.02]"
+					>
+						Try Interactive Sandbox
+					</a>
+					<a 
+						href="#features" 
+						class="px-8 py-3.5 rounded-full glass-panel text-white font-semibold text-sm hover:bg-white/5 transition-all duration-300"
+					>
+						Explore Features
+					</a>
+				</div>
+			</div>
+
+			<!-- Floating visual nodes for aesthetic background detailing -->
+			<div class="hero-blob absolute top-1/4 left-1/10 w-24 h-24 rounded-full bg-purple-500/10 blur-xl pointer-events-none opacity-0"></div>
+			<div class="hero-blob absolute bottom-1/4 right-1/10 w-32 h-32 rounded-full bg-cyan-500/10 blur-xl pointer-events-none opacity-0"></div>
+		</section>
+
+		<!-- Features Grid Section -->
+		<section id="features" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/5">
+			<div class="text-center mb-16">
+				<h2 class="section-title opacity-0 translate-y-6 text-3xl md:text-5xl font-display font-bold text-white mb-4">
+					Core Superpowers
+				</h2>
+				<p class="section-subtitle opacity-0 translate-y-6 text-gray-400 max-w-lg mx-auto">
+					Engineered with modern tools to deliver exceptionally fast page speeds and breathtaking transitions.
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="features-grid">
+				<div class="feature-card-wrapper opacity-0 translate-y-8">
+					<AnimatedCard 
+						title="High Performance" 
+						description="Leverages Astro's zero-JS-by-default architecture to ensure blazing fast first contentful paint." 
+						iconName="zap"
+					/>
+				</div>
+				<div class="feature-card-wrapper opacity-0 translate-y-8">
+					<AnimatedCard 
+						title="Tailwind CSS v4" 
+						description="Utilizes the brand new CSS-first design system with lightning fast bundling and natively extended theme values." 
+						iconName="cpu"
+					/>
+				</div>
+				<div class="feature-card-wrapper opacity-0 translate-y-8">
+					<AnimatedCard 
+						title="GSAP Magic" 
+						description="Integrates industry-leading animation engines for ultra-smooth transitions, scroll interactions, and coordinate physics." 
+						iconName="sparkles"
+					/>
+				</div>
+			</div>
+		</section>
+
+		<!-- Interactive Playground Section -->
+		<section id="interactive" class="py-24 px-6 md:px-12 bg-white/1 border-t border-white/5 relative overflow-hidden">
+			<div class="absolute inset-0 bg-radial-gradient from-purple-500/5 to-transparent pointer-events-none"></div>
+
+			<div class="max-w-7xl mx-auto">
+				<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+					<!-- Interactive Description -->
+					<div class="lg:col-span-5 text-left flex flex-col gap-6" id="playground-desc">
+						<div class="inline-flex w-fit items-center gap-1.5 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/5 text-cyan-300 text-xs font-semibold uppercase tracking-wider">
+							Interactive Sandbox
+						</div>
+						<h2 class="text-3xl md:text-5xl font-display font-bold text-white leading-tight">
+							Play with <span class="text-gradient-purple-cyan">GSAP Physics</span>
+						</h2>
+						<p class="text-gray-400 leading-relaxed font-light">
+							Experience GSAP's power firsthand. Interact with the dashboard options to morph and animate the coordinate states of fluid background particles. Watch them align, disperse, or orbit in real-time.
+						</p>
+
+						<!-- Control Buttons -->
+						<div class="flex flex-wrap gap-3 mt-4">
+							<button id="btn-disperse" class="px-5 py-2.5 rounded-lg border border-purple-500/30 bg-purple-500/10 text-purple-200 text-sm font-semibold hover:bg-purple-500/20 active:scale-95 transition-all">
+								Disperse
+							</button>
+							<button id="btn-grid" class="px-5 py-2.5 rounded-lg border border-cyan-500/30 bg-cyan-500/10 text-cyan-200 text-sm font-semibold hover:bg-cyan-500/20 active:scale-95 transition-all">
+								Grid Mode
+							</button>
+							<button id="btn-orbit" class="px-5 py-2.5 rounded-lg border border-pink-500/30 bg-pink-500/10 text-pink-200 text-sm font-semibold hover:bg-pink-500/20 active:scale-95 transition-all">
+								Orbit
+							</button>
+							<button id="btn-pulse" class="px-5 py-2.5 rounded-lg border border-yellow-500/30 bg-yellow-500/10 text-yellow-200 text-sm font-semibold hover:bg-yellow-500/20 active:scale-95 transition-all">
+								Pulse Ring
+							</button>
+						</div>
+					</div>
+
+					<!-- Interactive Canvas Container -->
+					<div class="lg:col-span-7" id="playground-canvas">
+						<div class="glass-panel w-full aspect-[4/3] rounded-3xl p-8 relative overflow-hidden flex items-center justify-center border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+							<!-- Central Orb -->
+							<div id="central-orb" class="absolute w-20 h-20 rounded-full bg-gradient-to-br from-purple-500 to-cyan-500 blur-sm flex items-center justify-center shadow-[0_0_30px_rgba(139,92,246,0.3)] z-10 transition-transform duration-300">
+								<div class="w-16 h-16 rounded-full bg-[#030014] flex items-center justify-center text-xs font-semibold tracking-wider text-cyan-400">
+									AURA
+								</div>
+							</div>
+
+							<!-- Floating Nodes -->
+							<div class="interactive-node absolute w-6 h-6 rounded-full bg-purple-500 shadow-[0_0_15px_#8b5cf6]" data-index="0"></div>
+							<div class="interactive-node absolute w-8 h-8 rounded-full bg-cyan-400 shadow-[0_0_15px_#22d3ee]" data-index="1"></div>
+							<div class="interactive-node absolute w-5 h-5 rounded-full bg-pink-500 shadow-[0_0_15px_#ec4899]" data-index="2"></div>
+							<div class="interactive-node absolute w-7 h-7 rounded-full bg-indigo-500 shadow-[0_0_15px_#6366f1]" data-index="3"></div>
+							<div class="interactive-node absolute w-6 h-6 rounded-full bg-yellow-400 shadow-[0_0_15px_#facc15]" data-index="4"></div>
+							<div class="interactive-node absolute w-9 h-9 rounded-full bg-teal-400 shadow-[0_0_15px_#2dd4bf]" data-index="5"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Scroll-driven Showcase Section -->
+		<section id="showcase" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/5">
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+				<!-- Image Container (animated scale on scroll) -->
+				<div class="relative group rounded-3xl overflow-hidden glass-panel border border-white/10 aspect-[16/10]" id="showcase-img-container">
+					<!-- Ambient glowing layer behind -->
+					<div class="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-cyan-500/20 group-hover:scale-105 duration-700 transition-transform"></div>
+					<div class="absolute inset-0 flex flex-col justify-between p-8">
+						<div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-md">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-white">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5h6.75M8.625 14.25h6.75" />
+							</svg>
+						</div>
+						<div class="flex flex-col gap-2">
+							<span class="text-xs font-semibold tracking-widest text-cyan-400 uppercase">Interactive Design</span>
+							<h3 class="text-2xl font-bold text-white font-display">Spatial Interface</h3>
+						</div>
+					</div>
+				</div>
+
+				<!-- Text revealing scroll details -->
+				<div class="flex flex-col gap-6 text-left" id="showcase-text">
+					<h2 class="text-3xl md:text-5xl font-display font-bold text-white leading-tight">
+						Scroll Triggered <br/><span class="text-gradient-pink-orange">Storytelling</span>
+					</h2>
+					<p class="text-gray-400 leading-relaxed font-light">
+						AURA blends smooth typography with custom GSAP scroll timelines. Connect animations directly to user scrolls to capture attention and direct user flow elegantly. 
+					</p>
+					<ul class="flex flex-col gap-3 text-sm text-gray-300">
+						<li class="flex items-center gap-3">
+							<span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+							Scroll-linked scrub animations for active participation.
+						</li>
+						<li class="flex items-center gap-3">
+							<span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+							Hardware-accelerated CSS transforms.
+						</li>
+						<li class="flex items-center gap-3">
+							<span class="w-1.5 h-1.5 rounded-full bg-pink-400"></span>
+							Mobile-optimized frame-throttled animations.
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- Call to Action / Contact Section -->
+		<section id="contact" class="py-24 px-6 md:px-12 bg-gradient-to-t from-purple-950/20 to-transparent border-t border-white/5">
+			<div class="max-w-4xl mx-auto text-center flex flex-col items-center gap-8" id="contact-panel">
+				<h2 class="text-4xl md:text-6xl font-display font-extrabold text-white leading-tight">
+					Let's build something <br/><span class="text-gradient-purple-cyan">mind-blowing</span> together
+				</h2>
+				<p class="text-gray-400 max-w-lg leading-relaxed font-light">
+					Reach out to collaborate on immersive creative sites, bespoke UI interactions, and high-performance WebGL/GSAP applications.
+				</p>
+				<a 
+					href="mailto:hello@aura-creative.io" 
+					class="px-10 py-4 rounded-full bg-white text-[#030014] font-bold text-base hover:bg-gray-200 shadow-[0_10px_30px_rgba(255,255,255,0.15)] transition-all duration-300 transform hover:scale-[1.02]"
+				>
+					Send a Message
+				</a>
+			</div>
+		</section>
+	</main>
+
+	<!-- Footer -->
+	<footer class="py-12 border-t border-white/5 text-center text-xs text-gray-500">
+		<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+			<div>
+				&copy; {new Date().getFullYear()} AURA. All rights reserved. Created with Astro, Tailwind, & GSAP.
+			</div>
+			<div class="flex gap-6">
+				<a href="#" class="hover:text-gray-300 transition-colors">Twitter</a>
+				<a href="#" class="hover:text-gray-300 transition-colors">GitHub</a>
+				<a href="#" class="hover:text-gray-300 transition-colors">Dribbble</a>
+			</div>
+		</div>
+	</footer>
+</Layout>
+
+<script>
+	// import GSAP and ScrollTrigger
+	import { gsap } from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+	// Register ScrollTrigger plugin
+	gsap.registerPlugin(ScrollTrigger);
+
+	// --- 1. HERO ANIMATIONS ---
+	window.addEventListener('DOMContentLoaded', () => {
+		const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+
+		// Entrance fade in for elements in hero section
+		tl.to('#navbar', {
+			opacity: 1,
+			y: 0,
+			duration: 1.2
+		})
+		.to('.hero-reveal', {
+			opacity: 1,
+			y: 0,
+			stagger: 0.15,
+			duration: 1.2
+		}, '-=0.8')
+		.to('.hero-blob', {
+			opacity: 0.8,
+			duration: 2,
+			stagger: 0.3
+		}, '-=1');
+
+		// Subtle continuous float animations for decorative blobs
+		gsap.to('.hero-blob', {
+			y: '+=30',
+			x: '-=15',
+			duration: 6,
+			repeat: -1,
+			yoyo: true,
+			ease: 'sine.inOut',
+			stagger: {
+				each: 2,
+				from: 'random'
+			}
+		});
+	});
+
+	// --- 2. SCROLL TRIGGER ANIMATIONS ---
+	
+	// Features Section Header Reveal
+	gsap.to('.section-title', {
+		scrollTrigger: {
+			trigger: '#features',
+			start: 'top 80%',
+			toggleActions: 'play none none none'
+		},
+		opacity: 1,
+		y: 0,
+		duration: 1
+	});
+	gsap.to('.section-subtitle', {
+		scrollTrigger: {
+			trigger: '#features',
+			start: 'top 75%',
+			toggleActions: 'play none none none'
+		},
+		opacity: 1,
+		y: 0,
+		duration: 1
+	});
+
+	// Cards Stagger reveal
+	gsap.to('.feature-card-wrapper', {
+		scrollTrigger: {
+			trigger: '#features-grid',
+			start: 'top 80%',
+			toggleActions: 'play none none none'
+		},
+		opacity: 1,
+		y: 0,
+		stagger: 0.15,
+		duration: 1.2,
+		ease: 'power3.out'
+	});
+
+	// Showcase Section Scroll Trigger
+	gsap.from('#showcase-img-container', {
+		scrollTrigger: {
+			trigger: '#showcase',
+			start: 'top 75%',
+			scrub: 1
+		},
+		scale: 0.9,
+		opacity: 0.6,
+		duration: 1.5
+	});
+
+	gsap.from('#showcase-text', {
+		scrollTrigger: {
+			trigger: '#showcase',
+			start: 'top 70%',
+			toggleActions: 'play none none none'
+		},
+		opacity: 0,
+		x: 50,
+		duration: 1.2,
+		ease: 'power3.out'
+	});
+
+	// Contact panel glow-up
+	gsap.from('#contact-panel > *', {
+		scrollTrigger: {
+			trigger: '#contact',
+			start: 'top 75%'
+		},
+		opacity: 0,
+		y: 30,
+		stagger: 0.15,
+		duration: 1.2,
+		ease: 'power3.out'
+	});
+
+	// --- 3. INTERACTIVE PLAYGROUND (GSAP Coordinates Morphing) ---
+	const nodes = document.querySelectorAll('.interactive-node');
+	const container = document.querySelector('#playground-canvas > div');
+	const centralOrb = document.getElementById('central-orb');
+	
+	// Helper to get random bounds within container
+	const getContainerBounds = () => {
+		if (!container) return { width: 400, height: 300 };
+		const rect = container.getBoundingClientRect();
+		return {
+			width: rect.width - 60, // subtract padding
+			height: rect.height - 60
+		};
+	};
+
+	// State 1: Disperse (Random Spread)
+	const disperseNodes = () => {
+		const bounds = getContainerBounds();
+		
+		// Stop any active orbit timelines
+		stopOrbit();
+
+		nodes.forEach((node) => {
+			const rx = Math.random() * (bounds.width - 40) - bounds.width / 2 + 20;
+			const ry = Math.random() * (bounds.height - 40) - bounds.height / 2 + 20;
+			
+			gsap.to(node, {
+				x: rx,
+				y: ry,
+				scale: 1,
+				duration: 1.5,
+				ease: 'elastic.out(1, 0.75)'
+			});
+		});
+	};
+
+	// State 2: Grid Alignment
+	const alignNodesGrid = () => {
+		stopOrbit();
+		
+		// Grid spacing relative coordinates
+		const coords = [
+			{ x: -160, y: -70 },
+			{ x: 0, y: -90 },
+			{ x: 160, y: -70 },
+			{ x: -160, y: 70 },
+			{ x: 0, y: 90 },
+			{ x: 160, y: 70 }
+		];
+
+		nodes.forEach((node, i) => {
+			const pos = coords[i] || { x: 0, y: 0 };
+			gsap.to(node, {
+				x: pos.x,
+				y: pos.y,
+				scale: 1.1,
+				duration: 1.2,
+				ease: 'power4.out'
+			});
+		});
+	};
+
+	// State 3: Orbiting Motion
+	let orbitTimelineActive = false;
+	const startOrbit = () => {
+		if (orbitTimelineActive) return;
+		orbitTimelineActive = true;
+		
+		// Move nodes to circular orbit path first
+		const radius = 120;
+		nodes.forEach((node, i) => {
+			const angle = (i / nodes.length) * Math.PI * 2;
+			const targetX = Math.cos(angle) * radius;
+			const targetY = Math.sin(angle) * radius;
+
+			gsap.to(node, {
+				x: targetX,
+				y: targetY,
+				scale: 1,
+				duration: 1.2,
+				ease: 'power3.out',
+				onComplete: () => {
+					// Once aligned, start custom rotational animation
+					gsap.to(node, {
+						rotation: '+=360',
+						transformOrigin: `${-targetX}px ${-targetY}px`,
+						duration: 8 + i * 2, // variable speeds for depth
+						repeat: -1,
+						ease: 'none',
+						id: `orbit-anim-${i}`
+					});
+				}
+			});
+		});
+
+		// Animate central orb slightly
+		gsap.to(centralOrb, {
+			scale: 1.15,
+			duration: 1,
+			repeat: -1,
+			yoyo: true,
+			ease: 'sine.inOut'
+		});
+	};
+
+	const stopOrbit = () => {
+		orbitTimelineActive = false;
+		nodes.forEach((node, i) => {
+			// Kill specific rotation tweens
+			gsap.killTweensOf(node);
+			gsap.set(node, { rotation: 0, transformOrigin: '50% 50%' });
+		});
+		gsap.to(centralOrb, {
+			scale: 1,
+			duration: 0.5,
+			ease: 'power2.out'
+		});
+	};
+
+	// State 4: Pulse Ring
+	const pulseRingNodes = () => {
+		stopOrbit();
+		const radius = 80;
+
+		nodes.forEach((node, i) => {
+			const angle = (i / nodes.length) * Math.PI * 2;
+			const targetX = Math.cos(angle) * radius;
+			const targetY = Math.sin(angle) * radius;
+
+			// Morph timeline: move closer and expand out dynamically
+			const tl = gsap.timeline();
+			tl.to(node, {
+				x: targetX * 0.5,
+				y: targetY * 0.5,
+				scale: 0.6,
+				duration: 0.6,
+				ease: 'power2.in'
+			})
+			.to(node, {
+				x: targetX * 1.8,
+				y: targetY * 1.8,
+				scale: 1.5,
+				duration: 0.8,
+				ease: 'power3.out'
+			})
+			.to(node, {
+				x: targetX * 1.3,
+				y: targetY * 1.3,
+				scale: 1.1,
+				duration: 0.8,
+				ease: 'elastic.out(1, 0.5)'
+			});
+		});
+	};
+
+	// Event Listeners for Playground buttons
+	document.getElementById('btn-disperse')?.addEventListener('click', disperseNodes);
+	document.getElementById('btn-grid')?.addEventListener('click', alignNodesGrid);
+	document.getElementById('btn-orbit')?.addEventListener('click', startOrbit);
+	document.getElementById('btn-pulse')?.addEventListener('click', pulseRingNodes);
+
+	// Start in Disperse mode initially
+	setTimeout(disperseNodes, 2000);
+</script>

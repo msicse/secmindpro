@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SecurityMind Pro — AI-Native Wazuh SIEM + Compliance</title>
+<style>
+  :root{
+    --bg:#05080f;
+    --bg-2:#0a1120;
+    --panel:#0e1626;
+    --panel-2:#121d33;
+    --line:#1c2b47;
+    --blue:#1f8cff;
+    --blue-2:#39a0ff;
+    --blue-deep:#0b63d6;
+    --cyan:#36d4ff;
+    --ink:#eaf2ff;
+    --muted:#8ea3c4;
+    --muted-2:#5f7494;
+    --green:#27d98a;
+    --amber:#ffb43d;
+    --red:#ff5470;
+    --grad: linear-gradient(135deg,#39a0ff,#0b63d6);
+    --maxw:1180px;
+    --font: "Inter","Segoe UI",system-ui,-apple-system,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font);
+    background:var(--bg);
+    color:var(--ink);
+    overflow-x:hidden;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+  /* ---------- TOP BAR / NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    backdrop-filter:blur(14px);
+    background:rgba(5,8,15,.55);
+    border-bottom:1px solid transparent;
+    transition:background .3s,border-color .3s;
+  }
+  header.scrolled{background:rgba(5,8,15,.92);border-color:var(--line)}
+  .navrow{display:flex;align-items:center;gap:28px;height:72px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;letter-spacing:-.5px}
+  .logo .mark{
+    width:34px;height:34px;border-radius:9px;
+    background:var(--grad);
+    display:grid;place-items:center;
+    box-shadow:0 4px 18px rgba(31,140,255,.45);
+    position:relative;
+  }
+  .logo .mark svg{width:20px;height:20px}
+  .logo .sub{display:block;font-size:9px;letter-spacing:3px;color:var(--blue-2);font-weight:600;margin-top:-2px}
+  .ticker{
+    display:flex;align-items:center;gap:8px;font-size:13px;
+    padding:5px 12px;border:1px solid var(--line);border-radius:8px;
+    background:rgba(15,22,38,.6);
+  }
+  .ticker .mkt{color:var(--muted);font-weight:600}
+  .ticker .price{font-weight:700}
+  .ticker .up{color:var(--green);font-weight:600;display:flex;align-items:center;gap:3px}
+  nav{display:flex;align-items:center;gap:26px;margin-left:auto;font-size:14.5px;font-weight:500}
+  nav .navlink{color:var(--muted);transition:color .2s;cursor:pointer;display:flex;align-items:center;gap:4px}
+  nav .navlink:hover{color:var(--ink)}
+  .btn{
+    border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:14px;
+    padding:11px 20px;border-radius:9px;transition:transform .15s,box-shadow .2s,background .2s;
+  }
+  .btn-primary{background:var(--grad);color:#fff;box-shadow:0 6px 20px rgba(31,140,255,.4)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(31,140,255,.55)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--blue);color:var(--blue-2)}
+  @media(max-width:880px){nav .navlink,.ticker{display:none}}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;padding:160px 0 90px;text-align:center;overflow:hidden;
+    background:
+      radial-gradient(1100px 520px at 50% -8%, rgba(31,140,255,.28), transparent 60%),
+      radial-gradient(700px 400px at 80% 30%, rgba(54,212,255,.12), transparent 60%),
+      var(--bg);
+  }
+  .hero-rays{position:absolute;inset:0;pointer-events:none;opacity:.5;
+    background:repeating-linear-gradient(95deg, rgba(57,160,255,.08) 0 2px, transparent 2px 60px);
+    mask-image:radial-gradient(600px 600px at 50% 0%,#000,transparent 70%);
+    animation:drift 16s linear infinite;
+  }
+  @keyframes drift{to{background-position:600px 0}}
+  .eyebrow{color:var(--blue-2);font-weight:600;font-size:15px;letter-spacing:.3px;margin-bottom:18px}
+  h1.hero-title{
+    font-size:clamp(38px,6vw,76px);font-weight:800;letter-spacing:-2px;line-height:1.02;
+    margin:0 auto 22px;max-width:14ch;
+    background:linear-gradient(180deg,#fff 40%,#bcd5ff);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  h1.hero-title .accent{
+    background:linear-gradient(135deg,#39a0ff,#36d4ff);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero-sub{color:var(--muted);font-size:clamp(15px,1.6vw,19px);max-width:60ch;margin:0 auto 36px}
+  .hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+  .hero-cta .btn{padding:15px 28px;font-size:15.5px}
+
+  /* fade-up reveal */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- DASHBOARD MOCKUP ---------- */
+  .dash-stage{position:relative;margin-top:64px;perspective:1600px}
+  .dash{
+    max-width:1000px;margin:0 auto;border-radius:14px;overflow:hidden;
+    border:1px solid var(--line);
+    background:linear-gradient(180deg,#0c1424,#070d18);
+    box-shadow:0 40px 120px rgba(0,0,0,.7),0 0 0 1px rgba(57,160,255,.08);
+    transform:rotateX(8deg);transform-origin:center top;
+  }
+  .dash-side{
+    position:absolute;top:14%;width:200px;border-radius:12px;overflow:hidden;
+    border:1px solid var(--line);background:linear-gradient(180deg,#0c1424,#070d18);
+    box-shadow:0 30px 80px rgba(0,0,0,.6);opacity:.55;filter:blur(.3px);
+  }
+  .dash-side.l{left:-60px;transform:rotateY(18deg) scale(.9)}
+  .dash-side.r{right:-60px;transform:rotateY(-18deg) scale(.9)}
+  @media(max-width:1024px){.dash-side{display:none}}
+  .dbar{display:flex;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid var(--line);background:#0a1120}
+  .dbar .brandmini{display:flex;align-items:center;gap:7px;font-weight:700;font-size:13px}
+  .dbar .brandmini .dot{width:18px;height:18px;border-radius:5px;background:var(--grad)}
+  .dbar .search{flex:1;max-width:300px;margin:0 auto;height:24px;border-radius:6px;background:#0e1626;border:1px solid var(--line)}
+  .dbar .pill{font-size:10px;padding:4px 9px;border-radius:6px;background:#0e1626;border:1px solid var(--line);color:var(--muted)}
+  .dgrid{display:grid;grid-template-columns:160px 1fr;min-height:430px}
+  .dnav{border-right:1px solid var(--line);padding:14px 10px;display:flex;flex-direction:column;gap:3px;background:#080f1c}
+  .dnav .item{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--muted);padding:8px 10px;border-radius:7px}
+  .dnav .item.active{background:rgba(31,140,255,.14);color:var(--blue-2)}
+  .dnav .item .ic{width:14px;height:14px;border-radius:4px;background:#1c2b47}
+  .dnav .item.active .ic{background:var(--blue)}
+  .dbody{padding:18px;display:flex;flex-direction:column;gap:16px}
+  .dtitle{font-size:14px;font-weight:600;color:#cfe0ff;display:flex;justify-content:space-between;align-items:center}
+  .dtitle .small{font-size:10px;color:var(--muted);font-weight:500}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:14px}
+  .card .lab{font-size:10.5px;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:5px}
+  /* score gauge */
+  .gauge{width:110px;height:110px;margin:4px auto 0;position:relative}
+  .gauge svg{transform:rotate(-90deg)}
+  .gauge .val{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+  .gauge .val b{font-size:22px;color:var(--green)}
+  .gauge .val span{display:block;font-size:9px;color:var(--muted)}
+  /* donut */
+  .donut{width:110px;height:110px;margin:4px auto 0;position:relative}
+  .donut .val{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+  .donut .val b{font-size:20px}
+  .donut .val span{display:block;font-size:9px;color:var(--muted)}
+  /* bars */
+  .expo{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+  .expo .row{display:flex;align-items:center;gap:8px;font-size:10px;color:var(--muted)}
+  .expo .row .name{width:46px}
+  .expo .row .track{flex:1;height:7px;border-radius:4px;background:#0a1120;overflow:hidden}
+  .expo .row .fill{height:100%;border-radius:4px;width:0;transition:width 1.3s ease}
+  /* counts */
+  .counts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .cbox{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center}
+  .cbox b{font-size:22px;display:block}
+  .cbox span{font-size:10px;color:var(--muted)}
+  /* trend chart */
+  .trend{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:14px;position:relative}
+  .trend svg{width:100%;height:120px;display:block}
+  .area-path{opacity:0;transition:opacity 1s ease .3s}
+  .area-path.in{opacity:1}
+  .line-path{stroke-dasharray:1400;stroke-dashoffset:1400;transition:stroke-dashoffset 2s ease .3s}
+  .line-path.in{stroke-dashoffset:0}
+
+  /* ---------- TRUST STRIP ---------- */
+  .trust{background:var(--grad);padding:0;overflow:hidden;position:relative}
+  .trust-inner{display:flex;align-items:center;gap:14px;padding:22px 24px}
+  .trust-label{color:#eaf4ff;font-weight:700;font-size:14px;white-space:nowrap;display:flex;flex-direction:column;line-height:1.1}
+  .trust-label b{font-size:20px}
+  .marquee{overflow:hidden;flex:1;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+  .marquee-track{display:flex;gap:64px;width:max-content;animation:scrollx 26s linear infinite}
+  .marquee-track .cl{color:rgba(255,255,255,.92);font-weight:800;font-size:19px;letter-spacing:1px;white-space:nowrap;opacity:.85}
+  @keyframes scrollx{to{transform:translateX(-50%)}}
+
+  /* ---------- SECTION SHELL ---------- */
+  section.block{padding:96px 0;position:relative}
+  .sec-head{text-align:center;max-width:62ch;margin:0 auto 56px}
+  .sec-eyebrow{color:var(--blue-2);font-weight:600;font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}
+  .sec-head h2{font-size:clamp(28px,4vw,46px);font-weight:800;letter-spacing:-1px;line-height:1.08;margin-bottom:16px}
+  .sec-head p{color:var(--muted);font-size:17px}
+
+  /* ---------- WORKFLOW NODE GRAPH ---------- */
+  .flow{position:relative;height:440px;max-width:1000px;margin:0 auto}
+  .flow svg{position:absolute;inset:0;width:100%;height:100%}
+  .node{position:absolute;border-radius:999px;display:grid;place-items:center;color:#fff;font-weight:700;
+    background:var(--grad);box-shadow:0 10px 30px rgba(31,140,255,.4);transform:translate(-50%,-50%);
+    transition:transform .25s,box-shadow .25s;cursor:default;font-size:13px}
+  .node:hover{transform:translate(-50%,-50%) scale(1.12);box-shadow:0 14px 40px rgba(57,160,255,.7)}
+  .node.dim{background:linear-gradient(135deg,#16385f,#0d2440);}
+  .stage-node{position:absolute;transform:translate(-50%,-50%);font-weight:700;font-size:15px;color:var(--ink);white-space:nowrap}
+  .stage-node.pred{color:var(--blue-2)}
+  .flow-center{position:absolute;left:62%;top:50%;transform:translate(-50%,-50%);text-align:center;color:var(--muted);font-size:12px;max-width:160px}
+  .flow-center .orb{width:34px;height:34px;margin:0 auto 8px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%,#fff,#39a0ff);box-shadow:0 0 26px rgba(57,160,255,.7);
+    animation:pulse 2.6s ease-in-out infinite}
+  @keyframes pulse{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.15);opacity:1}}
+  @media(max-width:860px){.flow{height:auto;display:flex;flex-direction:column;gap:14px;align-items:center}
+    .flow svg,.flow-center{display:none}
+    .node,.stage-node{position:static;transform:none}}
+
+  /* ---------- COMPLIANCE TABS ---------- */
+  .tabs{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-bottom:42px;border-bottom:1px solid var(--line)}
+  .tab{padding:14px 22px;font-weight:600;font-size:15px;color:var(--muted);cursor:pointer;position:relative;transition:color .2s}
+  .tab:hover{color:var(--ink)}
+  .tab.active{color:var(--blue-2)}
+  .tab.active::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--grad)}
+  .tabpane{display:none;animation:fade .4s ease}
+  .tabpane.active{display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:center}
+  @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1}}
+  @media(max-width:860px){.tabpane.active{grid-template-columns:1fr}}
+  .tabpane h3{font-size:30px;font-weight:800;letter-spacing:-.5px;margin-bottom:14px}
+  .tabpane p{color:var(--muted);font-size:16px;margin-bottom:22px}
+  .checklist{display:flex;flex-direction:column;gap:12px}
+  .checklist .ci{display:flex;gap:12px;align-items:flex-start;font-size:15px}
+  .checklist .ci .tick{flex:none;width:22px;height:22px;border-radius:6px;background:rgba(39,217,138,.15);
+    display:grid;place-items:center;color:var(--green);font-size:12px;font-weight:800}
+  .panel-visual{border:1px solid var(--line);border-radius:14px;background:linear-gradient(180deg,#0c1424,#070d18);
+    padding:22px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .panel-visual .ph{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+  .panel-visual .ph b{font-size:14px}
+  .compbar{display:flex;flex-direction:column;gap:14px}
+  .compbar .cr{font-size:13px}
+  .compbar .cr .top{display:flex;justify-content:space-between;margin-bottom:6px;color:var(--muted)}
+  .compbar .cr .top b{color:var(--ink)}
+  .compbar .cr .track{height:9px;border-radius:5px;background:#0a1120;overflow:hidden}
+  .compbar .cr .fill{height:100%;border-radius:5px;width:0;background:var(--grad);transition:width 1.2s ease}
+
+  /* ---------- FEATURE / CAPABILITY GRID ---------- */
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  @media(max-width:860px){.feat-grid{grid-template-columns:1fr}}
+  .feat{background:linear-gradient(180deg,var(--panel),#0a1120);border:1px solid var(--line);border-radius:14px;
+    padding:26px;transition:transform .25s,border-color .25s}
+  .feat:hover{transform:translateY(-5px);border-color:var(--blue)}
+  .feat .ficon{width:46px;height:46px;border-radius:11px;background:rgba(31,140,255,.14);display:grid;place-items:center;margin-bottom:16px}
+  .feat .ficon svg{width:24px;height:24px;stroke:var(--blue-2)}
+  .feat h4{font-size:18px;font-weight:700;margin-bottom:8px}
+  .feat p{color:var(--muted);font-size:14.5px}
+
+  /* ---------- STATS BAND ---------- */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+  @media(max-width:680px){.stats{grid-template-columns:repeat(2,1fr)}}
+  .stat b{font-size:clamp(32px,5vw,52px);font-weight:800;background:linear-gradient(135deg,#39a0ff,#36d4ff);
+    -webkit-background-clip:text;background-clip:text;color:transparent;display:block;letter-spacing:-1px}
+  .stat span{color:var(--muted);font-size:14px;font-weight:500}
+
+  /* ---------- PRODUCT SUITE DOME ---------- */
+  .dome{position:relative;padding:90px 0 0;text-align:center;color:#fff;overflow:hidden;
+    background:radial-gradient(140% 100% at 50% -30%, #39a0ff 0%, #1f8cff 38%, #0b63d6 70%, #05080f 100%)}
+  .dome h2{font-size:clamp(30px,5vw,56px);font-weight:800;letter-spacing:-1.5px;line-height:1.05}
+  .dome h2 span{display:block;font-weight:600;font-size:.55em;opacity:.95;margin-top:4px}
+  .dome p{max-width:62ch;margin:18px auto 24px;color:rgba(255,255,255,.9);font-size:16px}
+  .dome .btn-white{background:#fff;color:var(--blue-deep);padding:13px 26px;border-radius:9px;font-weight:700;border:none;cursor:pointer}
+  .suite-tabs{display:flex;justify-content:center;gap:clamp(18px,5vw,60px);flex-wrap:wrap;margin-top:46px;
+    border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:0}
+  .stab{font-weight:700;font-size:clamp(15px,1.7vw,19px);color:rgba(255,255,255,.7);cursor:pointer;
+    padding:0 4px 16px;position:relative;transition:color .2s}
+  .stab:hover{color:#fff}
+  .stab.active{color:#fff}
+  .stab.active::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:3px;background:#fff;border-radius:3px}
+  .suite-body{max-width:var(--maxw);margin:0 auto;padding:48px 24px 90px}
+  .spane{display:none;grid-template-columns:1fr 1.25fr;gap:48px;align-items:center;text-align:left;animation:fade .4s ease}
+  .spane.active{display:grid}
+  @media(max-width:900px){.spane.active{grid-template-columns:1fr}}
+  .spane .stag{font-size:clamp(24px,3.2vw,36px);font-weight:800;letter-spacing:-.5px;margin-bottom:12px}
+  .spane .sname{display:flex;align-items:center;gap:12px;font-size:30px;font-weight:800;margin-bottom:18px}
+  .spane .sname .ico{width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,.15);display:grid;place-items:center;border:1px solid rgba(255,255,255,.3)}
+  .spane .sname .ico svg{width:26px;height:26px;stroke:#fff}
+  .spane .sname small{display:block;font-size:11px;font-weight:600;opacity:.8;letter-spacing:.5px}
+  .spane p{color:rgba(255,255,255,.9);font-size:16px;margin-bottom:22px;max-width:46ch}
+  .spane .btn-out{background:transparent;border:1.5px solid rgba(255,255,255,.6);color:#fff;padding:12px 24px;border-radius:9px;font-weight:600;cursor:pointer;transition:background .2s}
+  .spane .btn-out:hover{background:rgba(255,255,255,.15)}
+  /* mini product dashboard (light) */
+  .pdash{border-radius:14px;overflow:hidden;background:#fff;color:#1a2438;box-shadow:0 40px 90px rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.4)}
+  .pdash .pbar{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid #e7ecf5;font-size:12px;font-weight:700}
+  .pdash .pbar .pd{width:18px;height:18px;border-radius:5px;background:var(--grad)}
+  .pdash .pbar .pright{margin-left:auto;display:flex;gap:6px}
+  .pdash .pbar .pchip{font-size:9px;padding:3px 8px;border-radius:5px;background:#eef3fb;color:#5570a0;font-weight:600}
+  .pdash .pgrid{display:grid;grid-template-columns:120px 1fr;min-height:300px}
+  .pdash .pnav{background:#0e1626;padding:12px 8px;display:flex;flex-direction:column;gap:2px}
+  .pdash .pnav .pi{font-size:10px;color:#8ea3c4;padding:7px 9px;border-radius:6px;display:flex;align-items:center;gap:6px}
+  .pdash .pnav .pi.on{background:rgba(31,140,255,.18);color:#9ecbff}
+  .pdash .pnav .pi b{width:11px;height:11px;border-radius:3px;background:#24365c;display:inline-block}
+  .pdash .pnav .pi.on b{background:var(--blue)}
+  .pdash .pmain{padding:16px;display:flex;flex-direction:column;gap:14px;background:#f6f8fc}
+  .pdash .prow{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:12px}
+  .pcard{background:#fff;border:1px solid #e7ecf5;border-radius:10px;padding:12px}
+  .pcard .pl{font-size:9.5px;color:#7488ab;font-weight:600;margin-bottom:8px}
+  .semi{width:96px;height:54px;margin:2px auto 0;position:relative;overflow:hidden}
+  .semi .vtxt{position:absolute;bottom:0;left:0;right:0;text-align:center;font-size:18px;font-weight:800;color:#1a2438}
+  .pmini{display:flex;flex-direction:column;gap:7px}
+  .pmini .m{display:flex;align-items:center;gap:7px;font-size:9.5px;color:#5a6e91}
+  .pmini .m .t{flex:1;height:6px;border-radius:3px;background:#eef2f8;overflow:hidden}
+  .pmini .m .f{height:100%;border-radius:3px}
+  .pstat{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .pstat .b{background:#fff;border:1px solid #e7ecf5;border-radius:8px;padding:9px;text-align:center}
+  .pstat .b b{font-size:16px;display:block}.pstat .b span{font-size:8.5px;color:#7488ab}
+
+  /* ---------- CASE STUDY SHOWCASE ---------- */
+  .cs-wrap{max-width:var(--maxw);margin:0 auto;border-radius:18px;overflow:hidden;display:grid;
+    grid-template-columns:340px 1fr;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  @media(max-width:860px){.cs-wrap{grid-template-columns:1fr}}
+  .cs-side{background:#05080f;padding:40px 30px;display:flex;flex-direction:column}
+  .cs-side h2{font-size:34px;font-weight:800;letter-spacing:-1px;line-height:1.05;margin-bottom:30px}
+  .cs-item{padding:18px 6px;font-weight:700;font-size:16px;color:var(--muted);cursor:pointer;border-top:1px solid var(--line);transition:color .2s}
+  .cs-item:first-of-type{border-top:none}
+  .cs-item:hover{color:#fff}
+  .cs-item.active{color:#fff}
+  .cs-side .btn{margin-top:auto;align-self:flex-start}
+  .cs-main{background:linear-gradient(180deg,#dcebff,#eaf3ff);background:#e6f0ff;position:relative;padding:40px 36px 0;display:flex;flex-direction:column}
+  .cs-pane{display:none;animation:fade .4s ease}
+  .cs-pane.active{display:block}
+  .cs-pane h3{text-align:center;color:#1a2438;font-size:18px;font-weight:700;margin-bottom:22px}
+  .cs-points{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:24px}
+  @media(max-width:620px){.cs-points{grid-template-columns:1fr}}
+  .cs-points .cp{text-align:center;color:#33405a;font-size:13.5px;line-height:1.4}
+  .cs-points .cp .ck{width:30px;height:30px;border-radius:50%;border:2px solid var(--green);display:grid;place-items:center;color:var(--green);margin:0 auto 10px;font-weight:800;font-size:14px}
+  .cs-get{text-align:center;font-weight:700;color:#0b63d6;margin-bottom:14px;cursor:pointer}
+  .cs-card{margin:0 auto;max-width:560px;background:linear-gradient(160deg,#0e1626,#0a1120);border-radius:14px;
+    padding:30px;color:#fff;transform:rotate(-3deg);box-shadow:0 30px 60px rgba(0,0,0,.45);border:1px solid var(--line);
+    position:relative;top:6px}
+  .cs-card .chead{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+  .cs-card .clogo{display:flex;align-items:center;gap:7px;font-weight:800;font-size:14px}
+  .cs-card .clogo .cd{width:22px;height:22px;border-radius:6px;background:var(--grad)}
+  .cs-card .tag{font-size:9px;background:rgba(255,255,255,.12);padding:4px 8px;border-radius:5px;letter-spacing:.5px}
+  .cs-card h4{font-size:22px;font-weight:800;line-height:1.2;margin:14px 0 8px;letter-spacing:-.3px}
+  .cs-card p{font-size:12.5px;color:var(--muted);line-height:1.5}
+  .cs-strip{margin-top:-2px}
+  .cs-strip .sb{padding:20px;text-align:center;font-weight:700;color:#fff;cursor:pointer;font-size:15px;transition:filter .2s}
+  .cs-strip .sb:hover{filter:brightness(1.12)}
+  .cs-strip .sb.b1{background:linear-gradient(90deg,#1f8cff,#0b63d6)}
+  .cs-strip .sb.b2{background:linear-gradient(90deg,#0b63d6,#36d4ff)}
+
+  /* ---------- CTA ---------- */
+  .cta-band{position:relative;text-align:center;padding:90px 0;overflow:hidden;
+    background:radial-gradient(700px 360px at 50% 120%,rgba(31,140,255,.3),transparent 60%),var(--bg-2)}
+  .cta-band h2{font-size:clamp(28px,4.5vw,48px);font-weight:800;letter-spacing:-1px;margin-bottom:16px}
+  .cta-band p{color:var(--muted);font-size:18px;margin-bottom:32px}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid var(--line);padding:54px 0 34px;background:var(--bg)}
+  .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:36px;margin-bottom:40px}
+  @media(max-width:760px){.foot-grid{grid-template-columns:1fr 1fr}}
+  .foot-grid h5{font-size:13px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:16px}
+  .foot-grid a{display:block;color:var(--muted-2,#5f7494);font-size:14px;margin-bottom:10px;transition:color .2s}
+  .foot-grid a:hover{color:var(--blue-2)}
+  .foot-about{color:var(--muted);font-size:14px;max-width:34ch;margin-top:14px}
+  .foot-bottom{border-top:1px solid var(--line);padding-top:22px;display:flex;justify-content:space-between;
+    color:var(--muted-2,#5f7494);font-size:13px;flex-wrap:wrap;gap:10px}
+
+  /* chat bubble */
+  .chatbub{position:fixed;right:22px;bottom:22px;z-index:120;width:54px;height:54px;border-radius:50%;
+    background:var(--grad);display:grid;place-items:center;box-shadow:0 10px 30px rgba(31,140,255,.5);cursor:pointer;
+    transition:transform .2s}
+  .chatbub:hover{transform:scale(1.08)}
+  .chatbub svg{width:24px;height:24px;stroke:#fff}
+
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header id="hdr">
+  <div class="wrap navrow">
+    <a class="logo" href="#">
+      <span class="mark">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L20 6V11C20 16 16.5 20.5 12 22C7.5 20.5 4 16 4 11V6L12 2Z" stroke="#fff" stroke-width="1.6" fill="rgba(255,255,255,.15)"/><path d="M8.5 12L11 14.5L15.5 9.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span>SecurityMind<span style="color:var(--blue-2)"> Pro</span>
+        <span class="sub">DEFEND · DETECT · COMPLY</span>
+      </span>
+    </a>
+
+    <div class="ticker" title="Illustrative status indicator">
+      <span class="mkt">SOC</span>
+      <span class="up">▲ LIVE</span>
+      <span class="price">99.98% uptime</span>
+    </div>
+
+    <nav>
+      <span class="navlink">Platform ▾</span>
+      <span class="navlink">Solutions ▾</span>
+      <span class="navlink">Compliance ▾</span>
+      <span class="navlink">Company ▾</span>
+      <span class="navlink">Resources</span>
+      <button class="btn btn-primary">Request a Demo</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-rays"></div>
+  <div class="wrap">
+    <div class="eyebrow reveal">One Platform. Complete Threat Defense & Compliance.</div>
+    <h1 class="hero-title reveal">AI-Native <span class="accent">Wazuh SIEM</span> + Compliance</h1>
+    <p class="hero-sub reveal">Real-time threat detection, AI-assisted triage, and audit-ready compliance — deployed on your infrastructure, tuned for local regulation, and backed by hands-on consultancy and training.</p>
+    <div class="hero-cta reveal">
+      <button class="btn btn-primary">Get My Threat Score</button>
+      <button class="btn btn-ghost">Book a Demo</button>
+    </div>
+
+    <!-- DASHBOARD MOCKUP -->
+    <div class="dash-stage reveal">
+      <!-- side previews -->
+      <div class="dash-side l">
+        <div class="dbar"><span class="brandmini"><span class="dot"></span>SOC</span></div>
+        <div style="padding:14px;display:flex;flex-direction:column;gap:8px">
+          <div style="height:8px;border-radius:4px;background:#16335a;width:80%"></div>
+          <div style="height:8px;border-radius:4px;background:#122b4d;width:60%"></div>
+          <div style="height:60px;border-radius:8px;background:#0e1d36;margin-top:6px"></div>
+          <div style="height:8px;border-radius:4px;background:#122b4d;width:70%"></div>
+          <div style="height:8px;border-radius:4px;background:#122b4d;width:45%"></div>
+        </div>
+      </div>
+      <div class="dash-side r">
+        <div class="dbar"><span class="brandmini"><span class="dot"></span>Alerts</span></div>
+        <div style="padding:14px;display:flex;flex-direction:column;gap:7px">
+          <div style="height:10px;border-radius:4px;background:#3a1622;width:90%"></div>
+          <div style="height:10px;border-radius:4px;background:#3a2c16;width:75%"></div>
+          <div style="height:10px;border-radius:4px;background:#16335a;width:85%"></div>
+          <div style="height:10px;border-radius:4px;background:#16335a;width:55%"></div>
+          <div style="height:10px;border-radius:4px;background:#162e4d;width:70%"></div>
+        </div>
+      </div>
+
+      <!-- main dashboard -->
+      <div class="dash" id="dash">
+        <div class="dbar">
+          <span class="brandmini"><span class="dot"></span>SecurityMind Console</span>
+          <span class="search"></span>
+          <span class="pill">Schedule Scan</span>
+          <span class="pill">AI Triage</span>
+        </div>
+        <div class="dgrid">
+          <div class="dnav">
+            <div class="item active"><span class="ic"></span>Console</div>
+            <div class="item"><span class="ic"></span>Insights</div>
+            <div class="item"><span class="ic"></span>Threat Intel</div>
+            <div class="item"><span class="ic"></span>Detections</div>
+            <div class="item"><span class="ic"></span>Compliance</div>
+            <div class="item"><span class="ic"></span>Agents</div>
+            <div class="item"><span class="ic"></span>Reports</div>
+            <div class="item"><span class="ic"></span>Tickets</div>
+          </div>
+          <div class="dbody">
+            <div class="dtitle">Security Operations Console <span class="small">Last 24h · Auto-refresh</span></div>
+            <div class="cards">
+              <!-- gauge -->
+              <div class="card">
+                <div class="lab">⬡ Security Posture Score</div>
+                <div class="gauge">
+                  <svg width="110" height="110" viewBox="0 0 110 110">
+                    <circle cx="55" cy="55" r="46" stroke="#13233f" stroke-width="11" fill="none"/>
+                    <circle id="gaugeArc" cx="55" cy="55" r="46" stroke="url(#gg)" stroke-width="11" fill="none"
+                      stroke-linecap="round" stroke-dasharray="289" stroke-dashoffset="289"
+                      style="transition:stroke-dashoffset 1.6s ease .2s"/>
+                    <defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0" stop-color="#27d98a"/><stop offset="1" stop-color="#36d4ff"/></linearGradient></defs>
+                  </svg>
+                  <div class="val"><b>8.6</b><span>/ 10 healthy</span></div>
+                </div>
+              </div>
+              <!-- donut -->
+              <div class="card">
+                <div class="lab">◷ Monitored Assets</div>
+                <div class="donut">
+                  <svg width="110" height="110" viewBox="0 0 110 110" style="transform:rotate(-90deg)">
+                    <circle cx="55" cy="55" r="44" stroke="#13233f" stroke-width="12" fill="none"/>
+                    <circle cx="55" cy="55" r="44" stroke="#1f8cff" stroke-width="12" fill="none" stroke-dasharray="138 276"/>
+                    <circle cx="55" cy="55" r="44" stroke="#36d4ff" stroke-width="12" fill="none" stroke-dasharray="83 276" stroke-dashoffset="-138"/>
+                    <circle cx="55" cy="55" r="44" stroke="#7c5cff" stroke-width="12" fill="none" stroke-dasharray="55 276" stroke-dashoffset="-221"/>
+                  </svg>
+                  <div class="val"><b>473</b><span>endpoints</span></div>
+                </div>
+              </div>
+              <!-- exposure bars -->
+              <div class="card">
+                <div class="lab">⚠ Alert Severity</div>
+                <div class="expo" id="expo">
+                  <div class="row"><span class="name">Critical</span><span class="track"><span class="fill" style="background:#ff5470" data-w="22%"></span></span></div>
+                  <div class="row"><span class="name">High</span><span class="track"><span class="fill" style="background:#ffb43d" data-w="38%"></span></span></div>
+                  <div class="row"><span class="name">Medium</span><span class="track"><span class="fill" style="background:#39a0ff" data-w="62%"></span></span></div>
+                  <div class="row"><span class="name">Low</span><span class="track"><span class="fill" style="background:#27d98a" data-w="85%"></span></span></div>
+                  <div class="row"><span class="name">Info</span><span class="track"><span class="fill" style="background:#5f7494" data-w="95%"></span></span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- trend + counts -->
+            <div style="display:grid;grid-template-columns:1.6fr 1fr;gap:16px">
+              <div class="trend">
+                <div class="dtitle" style="font-size:12px;margin-bottom:8px">Detection Trend <span class="small">Monthly</span></div>
+                <svg id="trendSvg" viewBox="0 0 400 120" preserveAspectRatio="none">
+                  <defs><linearGradient id="ta" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="rgba(57,160,255,.45)"/><stop offset="1" stop-color="rgba(57,160,255,0)"/></linearGradient></defs>
+                  <path class="area-path" id="areaP" fill="url(#ta)"
+                    d="M0,110 C60,70 90,30 140,45 C190,60 210,15 260,25 C310,35 340,80 400,70 L400,120 L0,120 Z"/>
+                  <path class="line-path" id="lineP" fill="none" stroke="#39a0ff" stroke-width="2.5"
+                    d="M0,110 C60,70 90,30 140,45 C190,60 210,15 260,25 C310,35 340,80 400,70"/>
+                </svg>
+              </div>
+              <div class="counts">
+                <div class="cbox"><b style="color:#fff">4,522</b><span>Events</span></div>
+                <div class="cbox"><b style="color:#ff5470">38</b><span>Critical</span></div>
+                <div class="cbox"><b style="color:#ffb43d">128</b><span>High</span></div>
+                <div class="cbox"><b style="color:#39a0ff">319</b><span>Medium</span></div>
+                <div class="cbox"><b style="color:#27d98a">3,975</b><span>Resolved</span></div>
+                <div class="cbox"><b style="color:#7c5cff">62</b><span>AI Triaged</span></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRUST STRIP ===== -->
+<div class="trust">
+  <div class="trust-inner">
+    <span class="trust-label"><b>Built for</b>Regulated industries</span>
+    <div class="marquee">
+      <div class="marquee-track">
+        <span class="cl">BANKS</span><span class="cl">FINTECH</span><span class="cl">TELECOM</span>
+        <span class="cl">INSURANCE</span><span class="cl">GOV &amp; PUBLIC</span><span class="cl">HEALTHCARE</span>
+        <span class="cl">E-COMMERCE</span><span class="cl">MFS / MOBILE MONEY</span>
+        <span class="cl">BANKS</span><span class="cl">FINTECH</span><span class="cl">TELECOM</span>
+        <span class="cl">INSURANCE</span><span class="cl">GOV &amp; PUBLIC</span><span class="cl">HEALTHCARE</span>
+        <span class="cl">E-COMMERCE</span><span class="cl">MFS / MOBILE MONEY</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PRODUCT SUITE DOME ===== -->
+<section class="dome">
+  <div class="wrap reveal">
+    <h2>Cybersecurity’s Future.<span>Powered by SecurityMind Pro.</span></h2>
+    <p>One platform for detection, response, and compliance — built on hardened open-source foundations, deployed on your infrastructure, and backed by a local team that knows your regulators.</p>
+    <button class="btn-white">Platform Overview</button>
+
+    <div class="suite-tabs" id="suiteTabs">
+      <span class="stab active" data-s="0">SentinelCore</span>
+      <span class="stab" data-s="1">ComplyHub</span>
+      <span class="stab" data-s="2">ThreatLens</span>
+      <span class="stab" data-s="3">EdgeGuard</span>
+      <span class="stab" data-s="4">GovShield</span>
+    </div>
+  </div>
+
+  <div class="suite-body">
+    <!-- pane 0 SentinelCore -->
+    <div class="spane active" data-sp="0">
+      <div>
+        <div class="stag">AI-Assisted SOC Platform</div>
+        <div class="sname"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          SentinelCore<small>by SecurityMind Pro</small></div>
+        <p>Real-time threat detection on a tuned Wazuh core, with an AI layer that enriches and ranks every alert so your team acts on what matters.</p>
+        <button class="btn-out">Explore SentinelCore</button>
+      </div>
+      <div class="pdash">
+        <div class="pbar"><span class="pd"></span>SentinelCore Overview<span class="pright"><span class="pchip">Live</span><span class="pchip">AI</span></span></div>
+        <div class="pgrid">
+          <div class="pnav">
+            <div class="pi on"><b></b>Dashboard</div><div class="pi"><b></b>Detections</div>
+            <div class="pi"><b></b>Threat Intel</div><div class="pi"><b></b>Agents</div>
+            <div class="pi"><b></b>Hunting</div><div class="pi"><b></b>Reports</div>
+          </div>
+          <div class="pmain">
+            <div class="prow">
+              <div class="pcard"><div class="pl">Posture Score</div>
+                <div class="semi"><svg width="96" height="54" viewBox="0 0 96 54"><path d="M6 50 A42 42 0 0 1 90 50" fill="none" stroke="#eef2f8" stroke-width="9"/><path d="M6 50 A42 42 0 0 1 78 18" fill="none" stroke="#27d98a" stroke-width="9" stroke-linecap="round"/></svg><span class="vtxt">86%</span></div>
+              </div>
+              <div class="pcard"><div class="pl">Alerts by Severity</div>
+                <div class="pmini">
+                  <div class="m"><span style="width:38px">Crit</span><span class="t"><span class="f" style="width:25%;background:#ff5470"></span></span></div>
+                  <div class="m"><span style="width:38px">High</span><span class="t"><span class="f" style="width:45%;background:#ffb43d"></span></span></div>
+                  <div class="m"><span style="width:38px">Med</span><span class="t"><span class="f" style="width:70%;background:#1f8cff"></span></span></div>
+                </div>
+              </div>
+              <div class="pcard"><div class="pl">24h Events</div>
+                <div class="pstat">
+                  <div class="b"><b style="color:#1a2438">4.5k</b><span>Events</span></div>
+                  <div class="b"><b style="color:#ff5470">38</b><span>Critical</span></div>
+                  <div class="b"><b style="color:#27d98a">3.9k</b><span>Resolved</span></div>
+                  <div class="b"><b style="color:#7c5cff">62</b><span>AI triaged</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="pcard"><div class="pl">Detection trend</div>
+              <svg width="100%" height="70" viewBox="0 0 460 70" preserveAspectRatio="none">
+                <path d="M0,60 C70,30 110,48 170,32 C230,16 270,44 330,30 C390,18 420,40 460,28" fill="none" stroke="#1f8cff" stroke-width="2.5"/>
+                <path d="M0,60 C70,30 110,48 170,32 C230,16 270,44 330,30 C390,18 420,40 460,28 L460,70 L0,70 Z" fill="rgba(31,140,255,.12)"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- pane 1 ComplyHub -->
+    <div class="spane" data-sp="1">
+      <div>
+        <div class="stag">Compliance Automation Tool</div>
+        <div class="sname"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M9 12l2 2 4-4M5 4h14v16l-7-3-7 3z" stroke-linejoin="round"/></svg></span>
+          ComplyHub<small>by SecurityMind Pro</small></div>
+        <p>Automate your journey to ISO 27001, PCI-DSS, SOC 2 and local banking circulars with guided workflows, evidence collection, and rapid readiness assessments.</p>
+        <button class="btn-out">Start with ComplyHub</button>
+      </div>
+      <div class="pdash">
+        <div class="pbar"><span class="pd"></span>ComplyHub Overview<span class="pright"><span class="pchip">Fail only</span><span class="pchip">Scan</span></span></div>
+        <div class="pgrid">
+          <div class="pnav">
+            <div class="pi on"><b></b>Dashboard</div><div class="pi"><b></b>Roadmap</div>
+            <div class="pi"><b></b>Policy hub</div><div class="pi"><b></b>Evidence</div>
+            <div class="pi"><b></b>Controls</div><div class="pi"><b></b>Audit log</div>
+          </div>
+          <div class="pmain">
+            <div class="prow">
+              <div class="pcard"><div class="pl">Compliance Score</div>
+                <div class="semi"><svg width="96" height="54" viewBox="0 0 96 54"><path d="M6 50 A42 42 0 0 1 90 50" fill="none" stroke="#eef2f8" stroke-width="9"/><path d="M6 50 A42 42 0 0 1 56 11" fill="none" stroke="#ffb43d" stroke-width="9" stroke-linecap="round"/></svg><span class="vtxt">55%</span></div>
+                <div style="text-align:center;font-size:8.5px;color:#7488ab;margin-top:4px">Moderate</div>
+              </div>
+              <div class="pcard"><div class="pl">Findings by Severity</div>
+                <div class="pmini">
+                  <div class="m"><span style="width:38px">Crit</span><span class="t"><span class="f" style="width:60%;background:#ff5470"></span></span><span>20</span></div>
+                  <div class="m"><span style="width:38px">High</span><span class="t"><span class="f" style="width:48%;background:#ffb43d"></span></span><span>22</span></div>
+                  <div class="m"><span style="width:38px">Med</span><span class="t"><span class="f" style="width:30%;background:#1f8cff"></span></span><span>10</span></div>
+                </div>
+              </div>
+              <div class="pcard"><div class="pl">Policies</div>
+                <div class="pstat">
+                  <div class="b"><b style="color:#1a2438">35</b><span>Active</span></div>
+                  <div class="b"><b style="color:#27d98a">35</b><span>Compliant</span></div>
+                  <div class="b"><b style="color:#ffb43d">2</b><span>Review</span></div>
+                  <div class="b"><b style="color:#ff5470">2</b><span>Non-comp.</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="pcard"><div class="pl">Top failed controls</div>
+              <div class="pmini" style="gap:9px">
+                <div class="m"><span style="flex:1;color:#33405a">A.5 — Access control</span><span class="t" style="max-width:120px"><span class="f" style="width:80%;background:#ff5470"></span></span><span>27</span></div>
+                <div class="m"><span style="flex:1;color:#33405a">A.8 — System ops</span><span class="t" style="max-width:120px"><span class="f" style="width:65%;background:#ffb43d"></span></span><span>25</span></div>
+                <div class="m"><span style="flex:1;color:#33405a">A.12 — Change mgmt</span><span class="t" style="max-width:120px"><span class="f" style="width:30%;background:#1f8cff"></span></span><span>7</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- pane 2 ThreatLens -->
+    <div class="spane" data-sp="2">
+      <div>
+        <div class="stag">Threat Intelligence Engine</div>
+        <div class="sname"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" stroke-linecap="round"/></svg></span>
+          ThreatLens<small>by SecurityMind Pro</small></div>
+        <p>Correlate your telemetry with global and regional threat feeds. ThreatLens scores emerging risks and maps them to the assets you actually run.</p>
+        <button class="btn-out">See ThreatLens</button>
+      </div>
+      <div class="pdash">
+        <div class="pbar"><span class="pd"></span>ThreatLens Overview<span class="pright"><span class="pchip">Feeds</span><span class="pchip">IOC</span></span></div>
+        <div class="pgrid">
+          <div class="pnav">
+            <div class="pi on"><b></b>Overview</div><div class="pi"><b></b>IOCs</div>
+            <div class="pi"><b></b>Actors</div><div class="pi"><b></b>Campaigns</div>
+            <div class="pi"><b></b>Feeds</div><div class="pi"><b></b>Map</div>
+          </div>
+          <div class="pmain">
+            <div class="prow">
+              <div class="pcard"><div class="pl">Active IOCs</div><div class="pstat" style="grid-template-columns:1fr"><div class="b"><b style="color:#ff5470">1,284</b><span>Indicators tracked</span></div></div></div>
+              <div class="pcard"><div class="pl">Feed health</div>
+                <div class="pmini">
+                  <div class="m"><span style="width:46px">AbuseDB</span><span class="t"><span class="f" style="width:92%;background:#27d98a"></span></span></div>
+                  <div class="m"><span style="width:46px">MISP</span><span class="t"><span class="f" style="width:78%;background:#27d98a"></span></span></div>
+                  <div class="m"><span style="width:46px">Local</span><span class="t"><span class="f" style="width:64%;background:#ffb43d"></span></span></div>
+                </div>
+              </div>
+              <div class="pcard"><div class="pl">Risk by category</div>
+                <div class="pstat"><div class="b"><b style="color:#ff5470">High</b><span>Phishing</span></div><div class="b"><b style="color:#ffb43d">Med</b><span>Malware</span></div></div>
+              </div>
+            </div>
+            <div class="pcard"><div class="pl">Threat activity (30d)</div>
+              <svg width="100%" height="70" viewBox="0 0 460 70" preserveAspectRatio="none">
+                <path d="M0,50 C60,52 90,20 150,30 C210,40 250,10 310,22 C370,34 410,18 460,40" fill="none" stroke="#7c5cff" stroke-width="2.5"/>
+                <path d="M0,50 C60,52 90,20 150,30 C210,40 250,10 310,22 C370,34 410,18 460,40 L460,70 L0,70 Z" fill="rgba(124,92,255,.12)"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- pane 3 EdgeGuard -->
+    <div class="spane" data-sp="3">
+      <div>
+        <div class="stag">Endpoint &amp; Cloud Coverage</div>
+        <div class="sname"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4" stroke-linecap="round"/></svg></span>
+          EdgeGuard<small>by SecurityMind Pro</small></div>
+        <p>Lightweight agents extend detection to endpoints, servers, containers and cloud workloads — with file integrity monitoring and active response.</p>
+        <button class="btn-out">Deploy EdgeGuard</button>
+      </div>
+      <div class="pdash">
+        <div class="pbar"><span class="pd"></span>EdgeGuard Fleet<span class="pright"><span class="pchip">473 agents</span></span></div>
+        <div class="pgrid">
+          <div class="pnav">
+            <div class="pi on"><b></b>Fleet</div><div class="pi"><b></b>Endpoints</div>
+            <div class="pi"><b></b>Cloud</div><div class="pi"><b></b>FIM</div>
+            <div class="pi"><b></b>Response</div><div class="pi"><b></b>Policies</div>
+          </div>
+          <div class="pmain">
+            <div class="prow">
+              <div class="pcard"><div class="pl">Agent status</div>
+                <div class="semi"><svg width="96" height="54" viewBox="0 0 96 54"><path d="M6 50 A42 42 0 0 1 90 50" fill="none" stroke="#eef2f8" stroke-width="9"/><path d="M6 50 A42 42 0 0 1 86 38" fill="none" stroke="#27d98a" stroke-width="9" stroke-linecap="round"/></svg><span class="vtxt">96%</span></div>
+                <div style="text-align:center;font-size:8.5px;color:#7488ab;margin-top:4px">Healthy</div>
+              </div>
+              <div class="pcard"><div class="pl">Coverage</div>
+                <div class="pmini">
+                  <div class="m"><span style="width:52px">Endpoints</span><span class="t"><span class="f" style="width:88%;background:#1f8cff"></span></span></div>
+                  <div class="m"><span style="width:52px">Servers</span><span class="t"><span class="f" style="width:74%;background:#1f8cff"></span></span></div>
+                  <div class="m"><span style="width:52px">Cloud</span><span class="t"><span class="f" style="width:60%;background:#36d4ff"></span></span></div>
+                </div>
+              </div>
+              <div class="pcard"><div class="pl">Fleet</div>
+                <div class="pstat">
+                  <div class="b"><b style="color:#27d98a">454</b><span>Online</span></div>
+                  <div class="b"><b style="color:#ffb43d">14</b><span>Stale</span></div>
+                  <div class="b"><b style="color:#ff5470">5</b><span>Offline</span></div>
+                  <div class="b"><b style="color:#1a2438">473</b><span>Total</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="pcard"><div class="pl">File integrity events (24h)</div>
+              <svg width="100%" height="70" viewBox="0 0 460 70" preserveAspectRatio="none">
+                <path d="M0,55 C60,40 110,46 170,38 C230,30 270,42 330,26 C390,12 420,30 460,24" fill="none" stroke="#27d98a" stroke-width="2.5"/>
+                <path d="M0,55 C60,40 110,46 170,38 C230,30 270,42 330,26 C390,12 420,30 460,24 L460,70 L0,70 Z" fill="rgba(39,217,138,.12)"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- pane 4 GovShield -->
+    <div class="spane" data-sp="4">
+      <div>
+        <div class="stag">Public-Sector Security Platform</div>
+        <div class="sname"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" stroke-linejoin="round"/></svg></span>
+          GovShield<small>by SecurityMind Pro</small></div>
+        <p>VAPT, endpoint protection, and incident response for government infrastructure and agencies — with data residency and Bengali-language reporting.</p>
+        <button class="btn-out">Get GovShield</button>
+      </div>
+      <div class="pdash">
+        <div class="pbar"><span class="pd"></span>GovShield — Agency view<span class="pright"><span class="pchip">15 units</span></span></div>
+        <div class="pgrid">
+          <div class="pnav">
+            <div class="pi on"><b></b>Overview</div><div class="pi"><b></b>Agencies</div>
+            <div class="pi"><b></b>VAPT</div><div class="pi"><b></b>Incidents</div>
+            <div class="pi"><b></b>Aging</div><div class="pi"><b></b>Reports</div>
+          </div>
+          <div class="pmain">
+            <div class="pcard"><div class="pl">Vulnerability aging by unit</div>
+              <svg width="100%" height="80" viewBox="0 0 460 80" preserveAspectRatio="none">
+                <path d="M0,72 C80,68 130,20 200,16 C270,12 320,60 460,66" fill="none" stroke="#ff5470" stroke-width="2.5"/>
+                <path d="M0,72 C80,68 130,20 200,16 C270,12 320,60 460,66 L460,80 L0,80 Z" fill="rgba(255,84,112,.12)"/>
+              </svg>
+            </div>
+            <div class="prow">
+              <div class="pcard"><div class="pl">Open by severity</div>
+                <div class="pmini">
+                  <div class="m"><span style="width:38px">Crit</span><span class="t"><span class="f" style="width:55%;background:#ff5470"></span></span></div>
+                  <div class="m"><span style="width:38px">High</span><span class="t"><span class="f" style="width:40%;background:#ffb43d"></span></span></div>
+                  <div class="m"><span style="width:38px">Med</span><span class="t"><span class="f" style="width:75%;background:#1f8cff"></span></span></div>
+                </div>
+              </div>
+              <div class="pcard"><div class="pl">Agencies</div><div class="pstat" style="grid-template-columns:1fr"><div class="b"><b style="color:#1a2438">15</b><span>Units monitored</span></div></div></div>
+              <div class="pcard"><div class="pl">SLA</div><div class="pstat" style="grid-template-columns:1fr"><div class="b"><b style="color:#27d98a">92%</b><span>Within SLA</span></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WORKFLOW NODE GRAPH ===== -->
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">How it works</div>
+      <h2>From raw logs to predicted threats</h2>
+      <p>SecurityMind Pro ingests every signal across your environment, correlates it with AI, and surfaces what matters — before an incident becomes a breach.</p>
+    </div>
+
+    <div class="flow reveal">
+      <svg viewBox="0 0 1000 440" preserveAspectRatio="xMidYMid meet">
+        <!-- ingest cluster threads -->
+        <g stroke="#1f8cff" stroke-width="1" fill="none" opacity="0.35">
+          <path d="M120,150 C280,120 360,240 470,330"/>
+          <path d="M150,250 C300,230 380,260 470,330"/>
+          <path d="M110,320 C260,330 360,330 470,330"/>
+          <path d="M210,110 C320,160 400,260 470,330"/>
+          <path d="M250,360 C340,350 410,340 470,330"/>
+          <path d="M180,200 C300,210 390,290 470,330"/>
+        </g>
+        <!-- dashed prediction loop -->
+        <g stroke="#3a557e" stroke-width="1.6" fill="none" stroke-dasharray="5 6">
+          <path d="M520,360 L700,360 L780,250 L740,150 L640,110 L560,170 L520,260 Z"/>
+        </g>
+        <!-- solid predict arc -->
+        <path d="M520,360 L760,360 L840,230" stroke="#1f8cff" stroke-width="2.5" fill="none"/>
+      </svg>
+
+      <!-- ingest nodes -->
+      <div class="node" style="left:12%;top:34%;width:62px;height:62px">Logs</div>
+      <div class="node" style="left:16%;top:58%;width:54px;height:54px">EDR</div>
+      <div class="node" style="left:23%;top:24%;width:50px;height:50px">Net</div>
+      <div class="node" style="left:30%;top:48%;width:66px;height:66px">Wazuh</div>
+      <div class="node" style="left:37%;top:30%;width:48px;height:48px">Cloud</div>
+      <div class="node" style="left:25%;top:78%;width:58px;height:58px">SIEM</div>
+      <!-- start -->
+      <div class="node" style="left:47%;top:75%;width:64px;height:34px;border-radius:18px">Ingest</div>
+
+      <!-- prediction loop stages -->
+      <div class="stage-node" style="left:56%;top:38%">Correlate</div>
+      <div class="stage-node" style="left:70%;top:25%">Detect</div>
+      <div class="stage-node" style="left:78%;top:52%">Score</div>
+      <div class="stage-node pred" style="left:84%;top:52%;display:none">Predict</div>
+      <div class="stage-node" style="left:70%;top:78%">Respond</div>
+      <div class="stage-node" style="left:54%;top:55%">Triage</div>
+      <div class="stage-node pred" style="left:84%;top:30%">Predict</div>
+
+      <div class="flow-center">
+        <div class="orb"></div>
+        AI surfaces &amp; scores your riskiest signals — before they escalate.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS BAND ===== -->
+<section class="block" style="padding:40px 0 80px">
+  <div class="wrap">
+    <div class="stats reveal">
+      <div class="stat"><b data-count="1200">0</b><span>Detection rules tuned</span></div>
+      <div class="stat"><b data-count="80">0</b><span>% alert noise cut by AI</span></div>
+      <div class="stat"><b data-count="24" data-suffix="/7">0</b><span>Local SOC coverage</span></div>
+      <div class="stat"><b data-count="15" data-suffix="+">0</b><span>Compliance frameworks</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CAPABILITIES ===== -->
+<section class="block" style="padding-top:20px">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">Capabilities</div>
+      <h2>An AI-assisted SOC, deployed on your terms</h2>
+      <p>Everything an in-house team needs — without the burn rate. Hosted on your infrastructure so sensitive data never leaves the country.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat reveal">
+        <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z" stroke-linejoin="round"/></svg></div>
+        <h4>Wazuh-powered detection</h4>
+        <p>Hardened Wazuh deployment with custom decoders and rulesets tuned to your stack and threat model.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></div>
+        <h4>AI alert triage</h4>
+        <p>An assistant layer enriches and ranks alerts, cutting false-positive noise so analysts focus on real threats.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 5h16M4 12h16M4 19h10"/></svg></div>
+        <h4>Natural-language queries</h4>
+        <p>Ask “failed logins from outside the country in 24h” in plain language — no query syntax required.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M9 12l2 2 4-4M5 4h14v16l-7-3-7 3z" stroke-linejoin="round"/></svg></div>
+        <h4>Audit-ready reporting</h4>
+        <p>One-click compliance narratives for ISO 27001, PCI-DSS and local banking circulars — AI drafts, humans sign off.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zM2 12h20"/></svg></div>
+        <h4>Data stays in-country</h4>
+        <p>Self-hosted models and storage keep sensitive logs on infrastructure you control — built for data-residency rules.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM4 21v-2a4 4 0 014-4h8a4 4 0 014 4v2"/></svg></div>
+        <h4>Consultancy &amp; training</h4>
+        <p>Hands-on deployment, tuning, and a local training program that builds your team’s capability over time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMPLIANCE TABS ===== -->
+<section class="block" style="background:var(--bg-2)">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">Compliance &amp; Audit</div>
+      <h2>Pass your audit with evidence, not scrambling</h2>
+      <p>Map detections and controls to the frameworks your regulators care about — with progress you can show at any moment.</p>
+    </div>
+
+    <div class="tabs reveal" id="tabs">
+      <div class="tab active" data-tab="0">ISO 27001</div>
+      <div class="tab" data-tab="1">PCI-DSS</div>
+      <div class="tab" data-tab="2">Banking Circular</div>
+      <div class="tab" data-tab="3">SOC 2</div>
+    </div>
+
+    <div class="tabpanes">
+      <!-- pane 0 -->
+      <div class="tabpane active" data-pane="0">
+        <div>
+          <h3>ISO 27001 readiness</h3>
+          <p>Continuous control monitoring mapped to Annex A, with auto-generated evidence packs for your certification body.</p>
+          <div class="checklist">
+            <div class="ci"><span class="tick">✓</span><span>Access control &amp; logging mapped to A.5–A.8</span></div>
+            <div class="ci"><span class="tick">✓</span><span>Live evidence collection from Wazuh agents</span></div>
+            <div class="ci"><span class="tick">✓</span><span>Gap analysis with prioritized remediation</span></div>
+            <div class="ci"><span class="tick">✓</span><span>Surveillance-audit ready reporting</span></div>
+          </div>
+        </div>
+        <div class="panel-visual">
+          <div class="ph"><b>ISO 27001 — Control coverage</b><span class="pill" style="font-size:10px;padding:4px 9px;border:1px solid var(--line);border-radius:6px;color:var(--green)">82% ready</span></div>
+          <div class="compbar comp-anim">
+            <div class="cr"><div class="top"><span>Organizational controls</span><b>90%</b></div><div class="track"><span class="fill" data-w="90%"></span></div></div>
+            <div class="cr"><div class="top"><span>People controls</span><b>75%</b></div><div class="track"><span class="fill" data-w="75%"></span></div></div>
+            <div class="cr"><div class="top"><span>Physical controls</span><b>68%</b></div><div class="track"><span class="fill" data-w="68%"></span></div></div>
+            <div class="cr"><div class="top"><span>Technological controls</span><b>88%</b></div><div class="track"><span class="fill" data-w="88%"></span></div></div>
+          </div>
+        </div>
+      </div>
+      <!-- pane 1 -->
+      <div class="tabpane" data-pane="1">
+        <div>
+          <h3>PCI-DSS monitoring</h3>
+          <p>File integrity, log retention and intrusion detection requirements continuously verified across cardholder environments.</p>
+          <div class="checklist">
+            <div class="ci"><span class="tick">✓</span><span>Req 10 — log monitoring &amp; retention automated</span></div>
+            <div class="ci"><span class="tick">✓</span><span>Req 11 — intrusion detection via Wazuh</span></div>
+            <div class="ci"><span class="tick">✓</span><span>File integrity monitoring on critical assets</span></div>
+            <div class="ci"><span class="tick">✓</span><span>Quarterly evidence export for QSA review</span></div>
+          </div>
+        </div>
+        <div class="panel-visual">
+          <div class="ph"><b>PCI-DSS — Requirement status</b><span class="pill" style="font-size:10px;padding:4px 9px;border:1px solid var(--line);border-radius:6px;color:var(--amber)">76% ready</span></div>
+          <div class="compbar comp-anim">
+            <div class="cr"><div class="top"><span>Req 10 — Logging</span><b>95%</b></div><div class="track"><span class="fill" data-w="95%"></span></div></div>
+            <div class="cr"><div class="top"><span>Req 11 — Testing</span><b>80%</b></div><div class="track"><span class="fill" data-w="80%"></span></div></div>
+            <div class="cr"><div class="top"><span>Req 6 — Secure systems</span><b>64%</b></div><div class="track"><span class="fill" data-w="64%"></span></div></div>
+            <div class="cr"><div class="top"><span>Req 8 — Access</span><b>72%</b></div><div class="track"><span class="fill" data-w="72%"></span></div></div>
+          </div>
+        </div>
+      </div>
+      <!-- pane 2 -->
+      <div class="tabpane" data-pane="2">
+        <div>
+          <h3>Central bank circular alignment</h3>
+          <p>Built around local banking ICT security guidelines — log retention, incident reporting timelines, and SOC requirements.</p>
+          <div class="checklist">
+            <div class="ci"><span class="tick">✓</span><span>Mandated log retention windows enforced</span></div>
+            <div class="ci"><span class="tick">✓</span><span>Incident reporting workflows &amp; timelines</span></div>
+            <div class="ci"><span class="tick">✓</span><span>24/7 monitoring evidence for inspectors</span></div>
+            <div class="ci"><span class="tick">✓</span><span>Bengali-language documentation on request</span></div>
+          </div>
+        </div>
+        <div class="panel-visual">
+          <div class="ph"><b>Circular — Compliance status</b><span class="pill" style="font-size:10px;padding:4px 9px;border:1px solid var(--line);border-radius:6px;color:var(--green)">85% ready</span></div>
+          <div class="compbar comp-anim">
+            <div class="cr"><div class="top"><span>Log retention</span><b>98%</b></div><div class="track"><span class="fill" data-w="98%"></span></div></div>
+            <div class="cr"><div class="top"><span>Incident reporting</span><b>82%</b></div><div class="track"><span class="fill" data-w="82%"></span></div></div>
+            <div class="cr"><div class="top"><span>SOC monitoring</span><b>90%</b></div><div class="track"><span class="fill" data-w="90%"></span></div></div>
+            <div class="cr"><div class="top"><span>Governance</span><b>70%</b></div><div class="track"><span class="fill" data-w="70%"></span></div></div>
+          </div>
+        </div>
+      </div>
+      <!-- pane 3 -->
+      <div class="tabpane" data-pane="3">
+        <div>
+          <h3>SOC 2 evidence automation</h3>
+          <p>Map your security, availability and confidentiality controls to Trust Services Criteria with continuous evidence.</p>
+          <div class="checklist">
+            <div class="ci"><span class="tick">✓</span><span>Continuous control monitoring for CC-series</span></div>
+            <div class="ci"><span class="tick">✓</span><span>Availability &amp; uptime evidence collection</span></div>
+            <div class="ci"><span class="tick">✓</span><span>Change management &amp; access reviews logged</span></div>
+            <div class="ci"><span class="tick">✓</span><span>Type II observation-window reporting</span></div>
+          </div>
+        </div>
+        <div class="panel-visual">
+          <div class="ph"><b>SOC 2 — Trust criteria</b><span class="pill" style="font-size:10px;padding:4px 9px;border:1px solid var(--line);border-radius:6px;color:var(--amber)">78% ready</span></div>
+          <div class="compbar comp-anim">
+            <div class="cr"><div class="top"><span>Security (CC)</span><b>88%</b></div><div class="track"><span class="fill" data-w="88%"></span></div></div>
+            <div class="cr"><div class="top"><span>Availability</span><b>84%</b></div><div class="track"><span class="fill" data-w="84%"></span></div></div>
+            <div class="cr"><div class="top"><span>Confidentiality</span><b>72%</b></div><div class="track"><span class="fill" data-w="72%"></span></div></div>
+            <div class="cr"><div class="top"><span>Processing integrity</span><b>66%</b></div><div class="track"><span class="fill" data-w="66%"></span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CASE STUDY SHOWCASE ===== -->
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">Proof, not promises</div>
+      <h2>Detection and compliance that makes your job easier</h2>
+      <p>How teams use SecurityMind Pro to cut noise, pass audits, and respond faster — with evidence to show for it.</p>
+    </div>
+
+    <div class="cs-wrap reveal">
+      <div class="cs-side">
+        <h2>Proof-based detection to make your job easier</h2>
+        <div class="cs-item active" data-cs="0">SentinelCore Case Study</div>
+        <div class="cs-item" data-cs="1">ComplyHub Case Study</div>
+        <div class="cs-item" data-cs="2">GovShield Case Study</div>
+        <button class="btn btn-primary">Book Demo</button>
+      </div>
+
+      <div class="cs-main">
+        <!-- pane 0 -->
+        <div class="cs-pane active" data-csp="0">
+          <h3>SentinelCore — SOC Case Study</h3>
+          <div class="cs-points">
+            <div class="cp"><span class="ck">✓</span>Secure every layer — SentinelCore watches it all in one place.</div>
+            <div class="cp"><span class="ck">✓</span>From endpoint to cloud, detection follows your workloads.</div>
+            <div class="cp"><span class="ck">✓</span>Cut alert noise by 80% with AI-assisted triage.</div>
+          </div>
+          <div class="cs-get">Get started →</div>
+          <div class="cs-card">
+            <div class="chead"><span class="clogo"><span class="cd"></span>SecurityMind Pro</span><span class="tag">SOC Datasheet</span></div>
+            <h4>SentinelCore — One platform for detection, triage, and response with a live posture score</h4>
+            <p>A modern, AI-assisted SOC built on a hardened Wazuh core — augmenting your team’s monitoring without the burn rate of building one from scratch.</p>
+          </div>
+        </div>
+        <!-- pane 1 -->
+        <div class="cs-pane" data-csp="1">
+          <h3>ComplyHub — Compliance Case Study</h3>
+          <div class="cs-points">
+            <div class="cp"><span class="ck">✓</span>One workflow for ISO 27001, PCI-DSS, and SOC 2.</div>
+            <div class="cp"><span class="ck">✓</span>Evidence collected automatically from live agents.</div>
+            <div class="cp"><span class="ck">✓</span>Reach audit readiness 3× faster with guided gap analysis.</div>
+          </div>
+          <div class="cs-get">Get started →</div>
+          <div class="cs-card">
+            <div class="chead"><span class="clogo"><span class="cd"></span>SecurityMind Pro</span><span class="tag">Compliance Datasheet</span></div>
+            <h4>ComplyHub — Continuous compliance evidence mapped to the frameworks your regulators ask for</h4>
+            <p>Guided workflows, tailored policy templates, and rapid readiness assessments — so an audit becomes a report you export, not a fire drill.</p>
+          </div>
+        </div>
+        <!-- pane 2 -->
+        <div class="cs-pane" data-csp="2">
+          <h3>GovShield — Public Sector Case Study</h3>
+          <div class="cs-points">
+            <div class="cp"><span class="ck">✓</span>VAPT and incident response across multiple agencies.</div>
+            <div class="cp"><span class="ck">✓</span>Data stays in-country with Bengali-language reporting.</div>
+            <div class="cp"><span class="ck">✓</span>92% of findings remediated within SLA.</div>
+          </div>
+          <div class="cs-get">Get started →</div>
+          <div class="cs-card">
+            <div class="chead"><span class="clogo"><span class="cd"></span>SecurityMind Pro</span><span class="tag">Gov Datasheet</span></div>
+            <h4>GovShield — Statewide security monitoring for government infrastructure and agencies</h4>
+            <p>Centralized detection, vulnerability management, and response for critical public infrastructure — built around local data-residency requirements.</p>
+          </div>
+        </div>
+
+        <div class="cs-strip">
+          <div class="sb b1" data-cs="1">More about ComplyHub Case Study</div>
+          <div class="sb b2" data-cs="2">More about GovShield Case Study</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-band">
+  <div class="wrap reveal">
+    <h2>See your environment through an attacker’s eyes</h2>
+    <p>Book a walkthrough and get a free posture assessment of your current monitoring.</p>
+    <div class="hero-cta">
+      <button class="btn btn-primary" style="padding:15px 30px">Book a Demo</button>
+      <button class="btn btn-ghost" style="padding:15px 30px">Talk to an Engineer</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="#" style="font-size:19px">
+          <span class="mark" style="width:30px;height:30px">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L20 6V11C20 16 16.5 20.5 12 22C7.5 20.5 4 16 4 11V6L12 2Z" stroke="#fff" stroke-width="1.6" fill="rgba(255,255,255,.15)"/><path d="M8.5 12L11 14.5L15.5 9.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          SecurityMind<span style="color:var(--blue-2)"> Pro</span>
+        </a>
+        <p class="foot-about">AI-assisted SOC, SIEM and compliance — deployed on your infrastructure, supported by a local team.</p>
+      </div>
+      <div>
+        <h5>Platform</h5>
+        <a href="#">Detection &amp; Response</a><a href="#">AI Triage</a><a href="#">Compliance</a><a href="#">Dashboards</a>
+      </div>
+      <div>
+        <h5>Services</h5>
+        <a href="#">Deployment</a><a href="#">Audit Support</a><a href="#">Consultancy</a><a href="#">Training</a>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <a href="#">About</a><a href="#">Careers</a><a href="#">Contact</a><a href="#">Blog</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 SecurityMind Pro. All rights reserved.</span>
+      <span>Privacy · Terms · Security</span>
+    </div>
+  </div>
+</footer>
+
+<div class="chatbub" title="Chat with us">
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 01-8.5 8.5 8.5 8.5 0 01-3.6-.8L3 21l1.8-5.9A8.38 8.38 0 014 11.5 8.5 8.5 0 0112.5 3 8.38 8.38 0 0121 11.5z" stroke-linejoin="round"/></svg>
+</div>
+
+<script>
+  // header scroll state
+  const hdr=document.getElementById('hdr');
+  addEventListener('scroll',()=>{hdr.classList.toggle('scrolled',scrollY>20)});
+
+  // reveal on scroll
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // dashboard animations when in view
+  const dashIO=new IntersectionObserver((es)=>{
+    es.forEach(e=>{
+      if(!e.isIntersecting)return;
+      // gauge
+      const arc=document.getElementById('gaugeArc');
+      if(arc) arc.style.strokeDashoffset=289-(289*0.86);
+      // severity bars
+      document.querySelectorAll('#expo .fill').forEach(f=>f.style.width=f.dataset.w);
+      // trend
+      document.getElementById('areaP')?.classList.add('in');
+      document.getElementById('lineP')?.classList.add('in');
+      dashIO.disconnect();
+    })
+  },{threshold:.25});
+  dashIO.observe(document.getElementById('dash'));
+
+  // count-up stats
+  const statIO=new IntersectionObserver((es)=>{
+    es.forEach(e=>{
+      if(!e.isIntersecting)return;
+      e.target.querySelectorAll('[data-count]').forEach(el=>{
+        const target=+el.dataset.count, suf=el.dataset.suffix||'';
+        let cur=0; const step=Math.max(1,Math.ceil(target/45));
+        const t=setInterval(()=>{cur+=step;if(cur>=target){cur=target;clearInterval(t)}
+          el.textContent=cur.toLocaleString()+suf},22);
+      });
+      statIO.disconnect();
+    })
+  },{threshold:.4});
+  statIO.observe(document.querySelector('.stats'));
+
+  // compliance bars animate per active pane
+  function animComp(pane){
+    pane.querySelectorAll('.comp-anim .fill').forEach(f=>{f.style.width='0';requestAnimationFrame(()=>{setTimeout(()=>f.style.width=f.dataset.w,40)})});
+  }
+  const compIO=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){animComp(document.querySelector('.tabpane.active'));compIO.disconnect()}})
+  },{threshold:.3});
+  compIO.observe(document.querySelector('.tabs'));
+
+  // tabs
+  const tabs=document.querySelectorAll('.tab'), panes=document.querySelectorAll('.tabpane');
+  tabs.forEach(t=>t.addEventListener('click',()=>{
+    tabs.forEach(x=>x.classList.remove('active'));panes.forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    const p=document.querySelector(`.tabpane[data-pane="${t.dataset.tab}"]`);
+    p.classList.add('active');animComp(p);
+  }));
+
+  // product-suite tabs
+  const stabs=document.querySelectorAll('.stab'), spanes=document.querySelectorAll('.spane');
+  stabs.forEach(s=>s.addEventListener('click',()=>{
+    stabs.forEach(x=>x.classList.remove('active'));spanes.forEach(x=>x.classList.remove('active'));
+    s.classList.add('active');
+    document.querySelector(`.spane[data-sp="${s.dataset.s}"]`).classList.add('active');
+  }));
+
+  // case-study switching (sidebar items + bottom strip both use data-cs)
+  const csItems=document.querySelectorAll('.cs-item'), csPanes=document.querySelectorAll('.cs-pane');
+  function showCase(i){
+    csItems.forEach(x=>x.classList.toggle('active',x.dataset.cs===i));
+    csPanes.forEach(x=>x.classList.toggle('active',x.dataset.csp===i));
+  }
+  document.querySelectorAll('[data-cs]').forEach(el=>el.addEventListener('click',()=>showCase(el.dataset.cs)));
+</script>
+</body>
+</html>

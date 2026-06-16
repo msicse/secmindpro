@@ -1,0 +1,33 @@
+---
+import '../styles/global.css';
+
+const { title = "Aura - Creative Animation Portfolio", description = "A premium creative portfolio showcase utilizing Astro, Tailwind CSS, and GSAP animations." } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="custom-scrollbar">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+		
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+		
+		<title>{title}</title>
+	</head>
+	<body class="bg-[#030014] text-gray-100 min-h-screen selection:bg-purple-500/30 selection:text-purple-200">
+		<!-- Background Decorative Blobs -->
+		<div class="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-purple-900/10 blur-[120px] pointer-events-none z-[-1] animate-pulse-slow"></div>
+		<div class="fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-cyan-900/10 blur-[120px] pointer-events-none z-[-1] animate-pulse-slow" style="animation-delay: 2s;"></div>
+		
+		<div class="flex flex-col min-h-screen">
+			<slot />
+		</div>
+	</body>
+</html>
