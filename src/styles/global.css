@@ -121,3 +121,30 @@
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.2);
 }
+/* --------------------------------------------------------------------- */
+/* ALL TAB PANES — hide by default, show active only                     */
+/* --------------------------------------------------------------------- */
+
+/* Compliance tabs (ISO 27001 / PCI-DSS / Banking Circular / SOC 2) */
+.tabpane {
+  display: none;
+}
+.tabpane.active {
+  display: grid;
+}
+
+/* Platform Suite tabs (SentinelCore / ComplyHub / ThreatLens / EdgeGuard / GovShield) */
+.spane {
+  display: none;
+}
+.spane.active {
+  display: grid;
+}
+
+/* Case Study tabs */
+.cs-pane {
+  display: none;
+}
+.cs-pane.active {
+  display: grid;
+}

@@ -35,17 +35,36 @@ import Layout from '../layouts/Layout.astro';
 
       <!-- Desktop Nav -->
       <nav class="hidden md:flex items-center gap-6 text-sm font-semibold">
-        <span class="text-sec-muted hover:text-sec-ink transition-colors cursor-pointer flex items-center gap-1">Platform ▾</span>
-        <span class="text-sec-muted hover:text-sec-ink transition-colors cursor-pointer flex items-center gap-1">Solutions ▾</span>
-        <span class="text-sec-muted hover:text-sec-ink transition-colors cursor-pointer flex items-center gap-1">Compliance ▾</span>
-        <span class="text-sec-muted hover:text-sec-ink transition-colors cursor-pointer flex items-center gap-1">Company ▾</span>
-        <span class="text-sec-muted hover:text-sec-ink transition-colors cursor-pointer">Resources</span>
-        <button class="bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep text-white px-5 py-2.5 rounded-lg shadow-[0_6px_20px_rgba(31,140,255,0.4)] hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(31,140,255,0.55)] transition-all cursor-pointer">
+        <a href="#top" class="text-sec-muted hover:text-sec-ink transition-colors cursor-pointer">Home</a>
+        <a href="#platform" class="text-sec-muted hover:text-sec-ink transition-colors cursor-pointer">Platform</a>
+        <a href="#capabilities" class="text-sec-muted hover:text-sec-ink transition-colors cursor-pointer">Capabilities</a>
+        <a href="#compliance" class="text-sec-muted hover:text-sec-ink transition-colors cursor-pointer">Compliance</a>
+        <a href="#case-studies" class="text-sec-muted hover:text-sec-ink transition-colors cursor-pointer">Case Studies</a>
+        <button class="demo-trigger-btn bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep text-white px-5 py-2.5 rounded-lg shadow-[0_6px_20px_rgba(31,140,255,0.4)] hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(31,140,255,0.55)] transition-all cursor-pointer">
           Request a Demo
         </button>
       </nav>
+
+      <!-- Mobile Menu Toggle -->
+      <button id="mobile-menu-toggle" class="md:hidden text-sec-muted hover:text-white focus:outline-none cursor-pointer" aria-label="Toggle menu">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path id="hamburger-icon" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      </button>
     </div>
   </header>
+
+  <!-- ===== MOBILE NAV DRAWER ===== -->
+  <div id="mobile-drawer" class="fixed inset-0 z-40 bg-sec-bg/95 backdrop-blur-lg flex flex-col pt-28 px-8 gap-6 md:hidden transition-transform duration-300 translate-x-full">
+    <a href="/" class="mobile-nav-link text-xl font-bold text-sec-muted hover:text-white py-2 border-b border-sec-line">Home</a>
+    <a href="#platform" class="mobile-nav-link text-xl font-bold text-sec-muted hover:text-white py-2 border-b border-sec-line">Platform</a>
+    <a href="#capabilities" class="mobile-nav-link text-xl font-bold text-sec-muted hover:text-white py-2 border-b border-sec-line">Capabilities</a>
+    <a href="#compliance" class="mobile-nav-link text-xl font-bold text-sec-muted hover:text-white py-2 border-b border-sec-line">Compliance</a>
+    <a href="#case-studies" class="mobile-nav-link text-xl font-bold text-sec-muted hover:text-white py-2 border-b border-sec-line">Case Studies</a>
+    <button class="demo-trigger-btn w-full mt-4 bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep text-white font-bold py-3.5 rounded-lg shadow-lg cursor-pointer">
+      Request a Demo
+    </button>
+  </div>
 
   <main class="flex-grow bg-sec-bg text-sec-ink">
     <!-- ===== HERO ===== -->
@@ -65,7 +84,7 @@ import Layout from '../layouts/Layout.astro';
           <button class="bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep text-white font-bold text-sm px-7 py-3.5 rounded-lg shadow-lg hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(31,140,255,0.55)] transition-all cursor-pointer">
             Get My Threat Score
           </button>
-          <button class="bg-transparent border border-sec-line text-white font-bold text-sm px-7 py-3.5 rounded-lg hover:border-sec-blue hover:text-sec-blue-2 transition-all cursor-pointer">
+          <button class="demo-trigger-btn bg-transparent border border-sec-line text-white font-bold text-sm px-7 py-3.5 rounded-lg hover:border-sec-blue hover:text-sec-blue-2 transition-all cursor-pointer">
             Book a Demo
           </button>
         </div>
@@ -325,7 +344,7 @@ import Layout from '../layouts/Layout.astro';
     </div>
 
     <!-- ===== PRODUCT SUITE DOME ===== -->
-    <section class="relative pt-24 pb-0 text-center overflow-hidden bg-[radial-gradient(140%_100%_at_50%_-30%,#1f8cff_0%,#0b63d6_38%,#05080f_100%)]">
+    <section id="platform" class="relative pt-24 pb-0 text-center overflow-hidden bg-[radial-gradient(140%_100%_at_50%_-30%,#1f8cff_0%,#0b63d6_38%,#05080f_100%)]">
       <div class="max-w-7xl mx-auto px-6">
         <div class="gsap-reveal max-w-2xl mx-auto">
           <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-4 leading-tight">
@@ -828,7 +847,7 @@ import Layout from '../layouts/Layout.astro';
     </section>
 
     <!-- ===== CAPABILITIES ===== -->
-    <section class="py-24 pt-5">
+    <section id="capabilities" class="py-24 pt-5">
       <div class="max-w-7xl mx-auto px-6">
         <div class="sec-head gsap-reveal text-center max-w-2xl mx-auto mb-14">
           <div class="text-sec-blue-2 font-semibold text-xs tracking-wider uppercase mb-3">Capabilities</div>
@@ -903,7 +922,7 @@ import Layout from '../layouts/Layout.astro';
     </section>
 
     <!-- ===== COMPLIANCE TABS ===== -->
-    <section class="py-24 bg-sec-bg-2">
+    <section id="compliance" class="py-24 bg-sec-bg-2">
       <div class="max-w-7xl mx-auto px-6">
         <div class="sec-head gsap-reveal text-center max-w-2xl mx-auto mb-14">
           <div class="text-sec-blue-2 font-semibold text-xs tracking-wider uppercase mb-3">Compliance &amp; Audit</div>
@@ -1080,7 +1099,7 @@ import Layout from '../layouts/Layout.astro';
     </section>
 
     <!-- ===== CASE STUDY SHOWCASE ===== -->
-    <section class="py-24">
+    <section id="case-studies" class="py-24">
       <div class="max-w-7xl mx-auto px-6">
         <div class="sec-head gsap-reveal text-center max-w-2xl mx-auto mb-14">
           <div class="text-sec-blue-2 font-semibold text-xs tracking-wider uppercase mb-3">Proof, not promises</div>
@@ -1093,11 +1112,11 @@ import Layout from '../layouts/Layout.astro';
           <div class="bg-sec-bg p-8 flex flex-col gap-6 text-left">
             <h2 class="text-2xl md:text-3xl font-extrabold text-white mb-4 leading-tight">Proof-based detection to make your job easier</h2>
             <div class="flex flex-col gap-1">
-              <div class="cs-item active py-4 font-bold text-sm md:text-base border-b border-sec-line text-sec-muted cursor-pointer transition-colors" data-cs="0">SentinelCore Case Study</div>
-              <div class="cs-item py-4 font-bold text-sm md:text-base border-b border-sec-line text-sec-muted cursor-pointer transition-colors" data-cs="1">ComplyHub Case Study</div>
-              <div class="cs-item py-4 font-bold text-sm md:text-base border-b border-sec-line text-sec-muted cursor-pointer transition-colors" data-cs="2">GovShield Case Study</div>
+              <div class="tab cs-item active py-4 font-bold text-sm md:text-base border-b border-sec-line text-sec-muted cursor-pointer transition-colors" data-cs="0">SentinelCore Case Study</div>
+              <div class="tab cs-item py-4 font-bold text-sm md:text-base border-b border-sec-line text-sec-muted cursor-pointer transition-colors" data-cs="1">ComplyHub Case Study</div>
+              <div class="tab cs-item py-4 font-bold text-sm md:text-base border-b border-sec-line text-sec-muted cursor-pointer transition-colors" data-cs="2">GovShield Case Study</div>
             </div>
-            <button class="bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep text-white font-bold text-xs py-3 px-6 rounded-lg self-start mt-auto shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all cursor-pointer">
+            <button class="demo-trigger-btn bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep text-white font-bold text-xs py-3 px-6 rounded-lg self-start mt-auto shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all cursor-pointer">
               Book Demo
             </button>
           </div>
@@ -1181,12 +1200,12 @@ import Layout from '../layouts/Layout.astro';
     </section>
 
     <!-- ===== CTA ===== -->
-    <section class="cta-band relative text-center py-24 overflow-hidden bg-sec-bg-2 bg-[radial-gradient(700px_360px_at_50%_120%,rgba(31,140,255,0.3),transparent_60%)]">
+    <section class="cta-band relative text-center py-24 overflow-hidden bg-sec-bg-2 bg-[radial-gradient(700px_360px_at_50%_120%,rgba(31,140,255,0.38),transparent_60%)]">
       <div class="wrap gsap-reveal">
         <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">See your environment through an attacker’s eyes</h2>
         <p class="text-sec-muted text-base sm:text-lg mb-8 max-w-lg mx-auto">Book a walkthrough and get a free posture assessment of your current monitoring.</p>
         <div class="hero-cta flex gap-4 justify-center flex-wrap">
-          <button class="bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep text-white font-bold text-sm px-8 py-3.5 rounded-lg shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all cursor-pointer">
+          <button class="demo-trigger-btn bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep text-white font-bold text-sm px-8 py-3.5 rounded-lg shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all cursor-pointer">
             Book a Demo
           </button>
           <button class="bg-transparent border border-sec-line text-white font-bold text-sm px-8 py-3.5 rounded-lg hover:border-sec-blue hover:text-sec-blue-2 transition-all cursor-pointer">
@@ -1252,6 +1271,79 @@ import Layout from '../layouts/Layout.astro';
     <svg class="w-6 h-6 stroke-white" viewBox="0 0 24 24" fill="none" stroke-width="1.8">
       <path d="M21 11.5a8.38 8.38 0 01-8.5 8.5 8.5 8.5 0 01-3.6-.8L3 21l1.8-5.9A8.38 8.38 0 014 11.5 8.5 8.5 0 0112.5 3 8.38 8.38 0 0121 11.5z" stroke-linejoin="round"/>
     </svg>
+  </div>
+
+  <!-- ===== DEMO BOOKING MODAL ===== -->
+  <div id="demo-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <!-- Backdrop -->
+    <div id="modal-backdrop" class="absolute inset-0 bg-black/75 backdrop-blur-md"></div>
+    
+    <!-- Modal Card -->
+    <div id="modal-card" class="relative w-full max-w-lg rounded-2xl border border-sec-line bg-[#0c1424] p-8 shadow-2xl z-10 transform scale-95 transition-all duration-300 overflow-hidden text-left">
+      <!-- Glow effect -->
+      <div class="absolute -top-20 -left-20 w-48 h-48 bg-sec-blue/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-20 -right-20 w-48 h-48 bg-sec-cyan/10 rounded-full blur-3xl pointer-events-none"></div>
+      
+      <!-- Close Button -->
+      <button id="close-modal-btn" class="absolute top-4 right-4 text-sec-muted hover:text-white transition-colors cursor-pointer text-xl font-bold" aria-label="Close modal">
+        &times;
+      </button>
+      
+      <!-- Form Content -->
+      <div id="modal-form-content" class="transition-all duration-300">
+        <h3 class="text-2xl font-extrabold text-white mb-2 font-display">Schedule a Private Demo</h3>
+        <p class="text-sec-muted text-sm mb-6 leading-relaxed">
+          Experience SecurityMind Pro customized for your ICT guidelines and compliance goals.
+        </p>
+        
+        <form id="demo-form" class="flex flex-col gap-4">
+          <div class="flex flex-col gap-1.5">
+            <label for="demo-name" class="text-xs font-semibold text-sec-muted uppercase tracking-wider">Full Name</label>
+            <input type="text" id="demo-name" required class="w-full bg-sec-panel border border-sec-line rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-sec-blue transition-colors" placeholder="John Doe" />
+          </div>
+          
+          <div class="flex flex-col gap-1.5">
+            <label for="demo-email" class="text-xs font-semibold text-sec-muted uppercase tracking-wider">Work Email</label>
+            <input type="email" id="demo-email" required class="w-full bg-sec-panel border border-sec-line rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-sec-blue transition-colors" placeholder="john@company.com" />
+          </div>
+
+          <div class="flex flex-col gap-1.5">
+            <label for="demo-company" class="text-xs font-semibold text-sec-muted uppercase tracking-wider">Company Name</label>
+            <input type="text" id="demo-company" required class="w-full bg-sec-panel border border-sec-line rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-sec-blue transition-colors" placeholder="ACME Bank" />
+          </div>
+
+          <div class="flex flex-col gap-1.5">
+            <label for="demo-interest" class="text-xs font-semibold text-sec-muted uppercase tracking-wider">Primary Focus</label>
+            <select id="demo-interest" class="w-full bg-sec-panel border border-sec-line rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-sec-blue transition-colors">
+              <option value="siem">AI-Native Wazuh SIEM</option>
+              <option value="compliance">ComplyHub (ISO/PCI/SOC 2)</option>
+              <option value="full">All Platform Capabilities</option>
+              <option value="training">Consultancy &amp; Training</option>
+            </select>
+          </div>
+          
+          <button type="submit" class="mt-4 w-full bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep hover:brightness-110 text-white font-bold py-3.5 rounded-lg shadow-lg hover:shadow-[0_4px_20px_rgba(31,140,255,0.45)] transition-all duration-300 cursor-pointer">
+            Book My Live Session
+          </button>
+        </form>
+      </div>
+      
+      <!-- Success Content (Hidden by default) -->
+      <div id="modal-success-content" class="hidden flex flex-col items-center text-center py-8">
+        <div class="w-16 h-16 bg-sec-green/10 border border-sec-green/30 rounded-full flex items-center justify-center mb-6">
+          <svg class="w-8 h-8 text-sec-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h3 class="text-2xl font-extrabold text-white mb-2 font-display">Request Received!</h3>
+        <p class="text-sec-muted text-sm max-w-sm mb-6 leading-relaxed">
+          Thank you, <span id="success-user-name" class="text-white font-semibold"></span>. Our security engineering team will contact you at <span id="success-user-email" class="text-white font-semibold"></span> within 2 hours to coordinate your custom session.
+        </p>
+        <button id="success-done-btn" class="px-6 py-2.5 bg-sec-panel border border-sec-line hover:border-sec-blue text-white rounded-lg text-sm transition-all cursor-pointer">
+          Done
+        </button>
+      </div>
+    </div>
   </div>
 </Layout>
 
@@ -1443,12 +1535,15 @@ import Layout from '../layouts/Layout.astro';
   const csItems = document.querySelectorAll('.cs-item');
   const csPanes = document.querySelectorAll('.cs-pane');
 
+  
   function showCase(index) {
+    // Update selector active states
     csItems.forEach((x) => x.classList.toggle('active', x.dataset.cs === index));
-    
+    // Show corresponding pane and hide others
     csPanes.forEach((pane) => {
       if (pane.dataset.csp === index) {
         pane.classList.add('active');
+        // Animate pane entrance
         gsap.fromTo(pane,
           { opacity: 0, y: 10 },
           { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }
@@ -1462,6 +1557,130 @@ import Layout from '../layouts/Layout.astro';
   document.querySelectorAll('[data-cs]').forEach((el) => {
     el.addEventListener('click', () => {
       showCase(el.dataset.cs);
+    });
+  });
+
+  // --- 9. MOBILE MENU DRAWER LOGIC ---
+  const mobileToggle = document.getElementById('mobile-menu-toggle');
+  const mobileDrawer = document.getElementById('mobile-drawer');
+  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+  
+  function toggleMobileMenu() {
+    const isOpen = mobileDrawer?.classList.contains('translate-x-0');
+    if (isOpen) {
+      mobileDrawer?.classList.remove('translate-x-0');
+      mobileDrawer?.classList.add('translate-x-full');
+      const path = document.getElementById('hamburger-icon');
+      if (path) path.setAttribute('d', 'M4 6h16M4 12h16m-7 6h7');
+    } else {
+      mobileDrawer?.classList.remove('translate-x-full');
+      mobileDrawer?.classList.add('translate-x-0');
+      const path = document.getElementById('hamburger-icon');
+      if (path) path.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+    }
+  }
+
+  mobileToggle?.addEventListener('click', toggleMobileMenu);
+  
+  mobileNavLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      mobileDrawer?.classList.remove('translate-x-0');
+      mobileDrawer?.classList.add('translate-x-full');
+      const path = document.getElementById('hamburger-icon');
+      if (path) path.setAttribute('d', 'M4 6h16M4 12h16m-7 6h7');
+    });
+  });
+
+  // --- 10. DEMO BOOKING MODAL LOGIC ---
+  const demoModal = document.getElementById('demo-modal');
+  const modalCard = document.getElementById('modal-card');
+  const demoTriggers = document.querySelectorAll('.demo-trigger-btn');
+  const closeModalBtn = document.getElementById('close-modal-btn');
+  const modalBackdrop = document.getElementById('modal-backdrop');
+  const demoForm = document.getElementById('demo-form');
+  const modalFormContent = document.getElementById('modal-form-content');
+  const modalSuccessContent = document.getElementById('modal-success-content');
+  const successUserName = document.getElementById('success-user-name');
+  const successUserEmail = document.getElementById('success-user-email');
+  const successDoneBtn = document.getElementById('success-done-btn');
+
+  function openModal() {
+    document.body.style.overflow = 'hidden';
+    modalFormContent?.classList.remove('hidden');
+    modalSuccessContent?.classList.add('hidden');
+    if (demoForm) {
+      demoForm.reset();
+    }
+
+    demoModal?.classList.remove('opacity-0', 'pointer-events-none');
+    
+    gsap.fromTo(modalCard, 
+      { scale: 0.9, opacity: 0, y: 30 },
+      { scale: 1, opacity: 1, y: 0, duration: 0.5, ease: 'back.out(1.5)' }
+    );
+  }
+
+  function closeModal() {
+    document.body.style.overflow = '';
+
+    gsap.to(modalCard, {
+      scale: 0.95,
+      opacity: 0,
+      y: 20,
+      duration: 0.3,
+      ease: 'power2.in',
+      onComplete: () => {
+        demoModal?.classList.add('opacity-0', 'pointer-events-none');
+      }
+    });
+  }
+
+  demoTriggers.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (mobileDrawer?.classList.contains('translate-x-0')) {
+        toggleMobileMenu();
+      }
+      openModal();
+    });
+  });
+
+  closeModalBtn?.addEventListener('click', closeModal);
+  modalBackdrop?.addEventListener('click', closeModal);
+  successDoneBtn?.addEventListener('click', closeModal);
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !demoModal?.classList.contains('pointer-events-none')) {
+      closeModal();
+    }
+  });
+
+  demoForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const nameInput = document.getElementById('demo-name');
+    const emailInput = document.getElementById('demo-email');
+    const nameVal = nameInput ? nameInput.value : '';
+    const emailVal = emailInput ? emailInput.value : '';
+    
+    if (successUserName) successUserName.textContent = nameVal;
+    if (successUserEmail) successUserEmail.textContent = emailVal;
+
+    gsap.to(modalFormContent, {
+      opacity: 0,
+      y: -10,
+      duration: 0.3,
+      onComplete: () => {
+        modalFormContent?.classList.add('hidden');
+        modalSuccessContent?.classList.remove('hidden');
+        
+        gsap.set(modalFormContent, { opacity: 1, y: 0 });
+        
+        gsap.fromTo(modalSuccessContent,
+          { opacity: 0, y: 10 },
+          { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }
+        );
+      }
     });
   });
 </script>
