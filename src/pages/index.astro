@@ -40,6 +40,32 @@ import Layout from '../layouts/Layout.astro';
         <a href="#capabilities" class="text-sec-muted hover:text-sec-ink transition-colors cursor-pointer">Capabilities</a>
         <a href="#compliance" class="text-sec-muted hover:text-sec-ink transition-colors cursor-pointer">Compliance</a>
         <a href="#case-studies" class="text-sec-muted hover:text-sec-ink transition-colors cursor-pointer">Case Studies</a>
+
+        <!-- Theme toggle button -->
+        <button
+          id="theme-toggle"
+          aria-label="Toggle light/dark mode"
+          title="Toggle light/dark mode"
+          class="w-9 h-9 rounded-lg border border-sec-line bg-sec-panel/60 flex items-center justify-center text-sec-muted hover:text-sec-ink hover:border-sec-blue hover:bg-sec-panel transition-all duration-200 cursor-pointer"
+        >
+          <!-- Moon icon (shown in dark mode) -->
+          <svg id="theme-icon-moon" class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/>
+          </svg>
+          <!-- Sun icon (shown in light mode, hidden by default) -->
+          <svg id="theme-icon-sun" class="w-4.5 h-4.5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </button>
+
         <button class="demo-trigger-btn bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep text-white px-5 py-2.5 rounded-lg shadow-[0_6px_20px_rgba(31,140,255,0.4)] hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(31,140,255,0.55)] transition-all cursor-pointer">
           Request a Demo
         </button>
@@ -61,6 +87,29 @@ import Layout from '../layouts/Layout.astro';
     <a href="#capabilities" class="mobile-nav-link text-xl font-bold text-sec-muted hover:text-white py-2 border-b border-sec-line">Capabilities</a>
     <a href="#compliance" class="mobile-nav-link text-xl font-bold text-sec-muted hover:text-white py-2 border-b border-sec-line">Compliance</a>
     <a href="#case-studies" class="mobile-nav-link text-xl font-bold text-sec-muted hover:text-white py-2 border-b border-sec-line">Case Studies</a>
+
+    <!-- Mobile theme toggle -->
+    <button
+      id="theme-toggle-mobile"
+      class="flex items-center gap-3 text-xl font-bold text-sec-muted hover:text-sec-ink py-2 border-b border-sec-line w-full cursor-pointer transition-colors"
+    >
+      <span id="theme-mobile-icon-moon">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/>
+        </svg>
+      </span>
+      <span id="theme-mobile-icon-sun" class="hidden">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+      </span>
+      <span id="theme-mobile-label">Light Mode</span>
+    </button>
+
     <button class="demo-trigger-btn w-full mt-4 bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep text-white font-bold py-3.5 rounded-lg shadow-lg cursor-pointer">
       Request a Demo
     </button>
@@ -1296,33 +1345,41 @@ import Layout from '../layouts/Layout.astro';
           Experience SecurityMind Pro customized for your ICT guidelines and compliance goals.
         </p>
         
-        <form id="demo-form" class="flex flex-col gap-4">
+        <form id="demo-form" class="relative flex flex-col gap-4" novalidate>
+          <!-- Honeypot: hidden from users, bots often fill this -->
+          <div aria-hidden="true" class="absolute opacity-0 -z-10 h-0 w-0 overflow-hidden pointer-events-none">
+            <label for="demo-honeypot">Leave blank</label>
+            <input type="text" id="demo-honeypot" name="_honey" tabindex="-1" autocomplete="off" />
+          </div>
+
           <div class="flex flex-col gap-1.5">
             <label for="demo-name" class="text-xs font-semibold text-sec-muted uppercase tracking-wider">Full Name</label>
-            <input type="text" id="demo-name" required class="w-full bg-sec-panel border border-sec-line rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-sec-blue transition-colors" placeholder="John Doe" />
+            <input type="text" id="demo-name" name="name" required maxlength="80" autocomplete="name" class="w-full bg-sec-panel border border-sec-line rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-sec-blue transition-colors" placeholder="John Doe" />
           </div>
           
           <div class="flex flex-col gap-1.5">
             <label for="demo-email" class="text-xs font-semibold text-sec-muted uppercase tracking-wider">Work Email</label>
-            <input type="email" id="demo-email" required class="w-full bg-sec-panel border border-sec-line rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-sec-blue transition-colors" placeholder="john@company.com" />
+            <input type="email" id="demo-email" name="email" required maxlength="254" autocomplete="email" inputmode="email" class="w-full bg-sec-panel border border-sec-line rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-sec-blue transition-colors" placeholder="john@company.com" />
           </div>
 
           <div class="flex flex-col gap-1.5">
             <label for="demo-company" class="text-xs font-semibold text-sec-muted uppercase tracking-wider">Company Name</label>
-            <input type="text" id="demo-company" required class="w-full bg-sec-panel border border-sec-line rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-sec-blue transition-colors" placeholder="ACME Bank" />
+            <input type="text" id="demo-company" name="company" required maxlength="120" autocomplete="organization" class="w-full bg-sec-panel border border-sec-line rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-sec-blue transition-colors" placeholder="ACME Bank" />
           </div>
 
           <div class="flex flex-col gap-1.5">
             <label for="demo-interest" class="text-xs font-semibold text-sec-muted uppercase tracking-wider">Primary Focus</label>
-            <select id="demo-interest" class="w-full bg-sec-panel border border-sec-line rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-sec-blue transition-colors">
+            <select id="demo-interest" name="interest" class="w-full bg-sec-panel border border-sec-line rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-sec-blue transition-colors">
               <option value="siem">AI-Native Wazuh SIEM</option>
               <option value="compliance">ComplyHub (ISO/PCI/SOC 2)</option>
               <option value="full">All Platform Capabilities</option>
               <option value="training">Consultancy &amp; Training</option>
             </select>
           </div>
+
+          <p id="demo-form-error" class="hidden text-sec-red text-xs font-medium" role="alert"></p>
           
-          <button type="submit" class="mt-4 w-full bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep hover:brightness-110 text-white font-bold py-3.5 rounded-lg shadow-lg hover:shadow-[0_4px_20px_rgba(31,140,255,0.45)] transition-all duration-300 cursor-pointer">
+          <button type="submit" id="demo-submit-btn" class="mt-4 w-full bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep hover:brightness-110 text-white font-bold py-3.5 rounded-lg shadow-lg hover:shadow-[0_4px_20px_rgba(31,140,255,0.45)] transition-all duration-300 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:brightness-100">
             Book My Live Session
           </button>
         </form>
@@ -1350,6 +1407,14 @@ import Layout from '../layouts/Layout.astro';
 <script>
   import { gsap } from 'gsap';
   import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import {
+    checkRateLimit,
+    markSubmitted,
+    submitDemoToFormSubmit,
+    validateDemoForm,
+  } from '../lib/demoFormSecurity';
+
+  const FORMSUBMIT_EMAIL = import.meta.env.PUBLIC_FORMSUBMIT_EMAIL ?? '';
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -1603,13 +1668,66 @@ import Layout from '../layouts/Layout.astro';
   const successUserName = document.getElementById('success-user-name');
   const successUserEmail = document.getElementById('success-user-email');
   const successDoneBtn = document.getElementById('success-done-btn');
+  const demoFormError = document.getElementById('demo-form-error');
+  const demoSubmitBtn = document.getElementById('demo-submit-btn');
+  const demoHoneypot = document.getElementById('demo-honeypot') as HTMLInputElement | null;
+  const SUBMIT_LABEL = 'Book My Live Session';
+  const SUBMITTING_LABEL = 'Sending...';
+  let isSubmitting = false;
+
+  function clearFormError() {
+    if (!demoFormError) return;
+    demoFormError.textContent = '';
+    demoFormError.classList.add('hidden');
+  }
+
+  function showFormError(message: string) {
+    if (!demoFormError) return;
+    demoFormError.textContent = message;
+    demoFormError.classList.remove('hidden');
+  }
+
+  function setSubmittingState(active: boolean) {
+    isSubmitting = active;
+    if (demoSubmitBtn) {
+      demoSubmitBtn.disabled = active;
+      demoSubmitBtn.textContent = active ? SUBMITTING_LABEL : SUBMIT_LABEL;
+    }
+  }
+
+  function showSuccessScreen(name: string, email: string) {
+    if (successUserName) successUserName.textContent = name;
+    if (successUserEmail) successUserEmail.textContent = email;
+
+    gsap.to(modalFormContent, {
+      opacity: 0,
+      y: -10,
+      duration: 0.3,
+      onComplete: () => {
+        modalFormContent?.classList.add('hidden');
+        modalSuccessContent?.classList.remove('hidden');
+
+        gsap.set(modalFormContent, { opacity: 1, y: 0 });
+
+        gsap.fromTo(modalSuccessContent,
+          { opacity: 0, y: 10 },
+          { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }
+        );
+      }
+    });
+  }
 
   function openModal() {
     document.body.style.overflow = 'hidden';
     modalFormContent?.classList.remove('hidden');
     modalSuccessContent?.classList.add('hidden');
+    clearFormError();
+    setSubmittingState(false);
     if (demoForm) {
       demoForm.reset();
+    }
+    if (demoHoneypot) {
+      demoHoneypot.value = '';
     }
 
     demoModal?.classList.remove('opacity-0', 'pointer-events-none');
@@ -1649,38 +1767,116 @@ import Layout from '../layouts/Layout.astro';
   modalBackdrop?.addEventListener('click', closeModal);
   successDoneBtn?.addEventListener('click', closeModal);
 
+  // ===== THEME TOGGLE =====
+  const htmlEl = document.documentElement;
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+  const iconMoon = document.getElementById('theme-icon-moon');
+  const iconSun = document.getElementById('theme-icon-sun');
+  const mobileIconMoon = document.getElementById('theme-mobile-icon-moon');
+  const mobileIconSun = document.getElementById('theme-mobile-icon-sun');
+  const mobileLabel = document.getElementById('theme-mobile-label');
+
+  function syncThemeIcons() {
+    const isLight = htmlEl.getAttribute('data-theme') === 'light';
+    // Desktop
+    iconMoon?.classList.toggle('hidden', isLight);
+    iconSun?.classList.toggle('hidden', !isLight);
+    // Mobile
+    mobileIconMoon?.classList.toggle('hidden', isLight);
+    mobileIconSun?.classList.toggle('hidden', !isLight);
+    if (mobileLabel) mobileLabel.textContent = isLight ? 'Dark Mode' : 'Light Mode';
+  }
+
+  function toggleTheme() {
+    const isLight = htmlEl.getAttribute('data-theme') === 'light';
+    if (isLight) {
+      htmlEl.removeAttribute('data-theme');
+      localStorage.setItem('smp-theme', 'dark');
+    } else {
+      htmlEl.setAttribute('data-theme', 'light');
+      localStorage.setItem('smp-theme', 'light');
+    }
+    // Animate the button
+    const btn = isLight ? themeToggle : themeToggle;
+    if (btn) {
+      btn.style.transform = 'scale(0.88)';
+      setTimeout(() => { btn.style.transform = ''; }, 180);
+    }
+    syncThemeIcons();
+  }
+
+  // Sync icons on load (in case localStorage had light mode)
+  syncThemeIcons();
+
+  themeToggle?.addEventListener('click', toggleTheme);
+  themeToggleMobile?.addEventListener('click', toggleTheme);
+
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !demoModal?.classList.contains('pointer-events-none')) {
       closeModal();
     }
   });
 
-  demoForm?.addEventListener('submit', (e) => {
+  demoForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
-    const nameInput = document.getElementById('demo-name');
-    const emailInput = document.getElementById('demo-email');
-    const nameVal = nameInput ? nameInput.value : '';
-    const emailVal = emailInput ? emailInput.value : '';
-    
-    if (successUserName) successUserName.textContent = nameVal;
-    if (successUserEmail) successUserEmail.textContent = emailVal;
+    if (isSubmitting) return;
 
-    gsap.to(modalFormContent, {
-      opacity: 0,
-      y: -10,
-      duration: 0.3,
-      onComplete: () => {
-        modalFormContent?.classList.add('hidden');
-        modalSuccessContent?.classList.remove('hidden');
-        
-        gsap.set(modalFormContent, { opacity: 1, y: 0 });
-        
-        gsap.fromTo(modalSuccessContent,
-          { opacity: 0, y: 10 },
-          { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }
-        );
-      }
+    clearFormError();
+
+    const nameInput = document.getElementById('demo-name') as HTMLInputElement | null;
+    const emailInput = document.getElementById('demo-email') as HTMLInputElement | null;
+    const companyInput = document.getElementById('demo-company') as HTMLInputElement | null;
+    const interestInput = document.getElementById('demo-interest') as HTMLSelectElement | null;
+
+    const validation = validateDemoForm({
+      name: nameInput?.value ?? '',
+      email: emailInput?.value ?? '',
+      company: companyInput?.value ?? '',
+      interest: interestInput?.value ?? '',
+      honeypot: demoHoneypot?.value ?? '',
     });
+
+    if (!validation.ok) {
+      showFormError(validation.error);
+      return;
+    }
+
+    const rateLimit = checkRateLimit();
+    if (!rateLimit.ok) {
+      showFormError(rateLimit.error);
+      return;
+    }
+
+    setSubmittingState(true);
+
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), 12_000);
+
+    try {
+      const result = await submitDemoToFormSubmit(
+        FORMSUBMIT_EMAIL,
+        validation.data,
+        controller.signal,
+      );
+
+      if (!result.ok) {
+        showFormError(result.error);
+        return;
+      }
+
+      markSubmitted();
+      showSuccessScreen(validation.data.name, validation.data.email);
+    } catch (err) {
+      const aborted = err instanceof DOMException && err.name === 'AbortError';
+      showFormError(
+        aborted
+          ? 'Request timed out. Please check your connection and try again.'
+          : 'Network error. Please try again in a moment.',
+      );
+    } finally {
+      window.clearTimeout(timeoutId);
+      setSubmittingState(false);
+    }
   });
 </script>

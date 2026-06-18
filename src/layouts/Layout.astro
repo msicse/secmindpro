@@ -13,6 +13,16 @@ const { title = "Aura - Creative Animation Portfolio", description = "A premium 
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
+
+		<!-- Theme: apply before first paint to prevent flash -->
+		<script is:inline>
+			(function() {
+				var saved = localStorage.getItem('smp-theme');
+				if (saved === 'light') {
+					document.documentElement.setAttribute('data-theme', 'light');
+				}
+			})();
+		</script>
 		
 		<!-- Google Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +31,7 @@ const { title = "Aura - Creative Animation Portfolio", description = "A premium 
 		
 		<title>{title}</title>
 	</head>
-	<body class="bg-[#030014] text-gray-100 min-h-screen selection:bg-purple-500/30 selection:text-purple-200">
+	<body class="bg-sec-bg text-sec-ink min-h-screen selection:bg-purple-500/30 selection:text-purple-200">
 		<!-- Background Decorative Blobs -->
 		<div class="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-purple-900/10 blur-[120px] pointer-events-none z-[-1] animate-pulse-slow"></div>
 		<div class="fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-cyan-900/10 blur-[120px] pointer-events-none z-[-1] animate-pulse-slow" style="animation-delay: 2s;"></div>

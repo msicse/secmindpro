@@ -36,11 +36,162 @@
   }
 }
 
+/* =============================================
+   LIGHT MODE OVERRIDES
+   ============================================= */
+[data-theme="light"] {
+  --color-brand-bg:         #eef2fc;
+  --color-sec-bg:           #eef2fc;
+  --color-sec-bg-2:         #dde6f8;
+  --color-sec-panel:        #ffffff;
+  --color-sec-panel-2:      #f4f7ff;
+  --color-sec-line:         #c3d0e8;
+  --color-sec-ink:          #0d1b35;
+  --color-sec-muted:        #4a6191;
+  --color-sec-muted-2:      #6b82a8;
+  --color-brand-card:       rgba(31, 140, 255, 0.06);
+  --color-brand-border:     rgba(31, 140, 255, 0.15);
+}
+
+[data-theme="light"] body {
+  color: #0d1b35;
+}
+
+/* Light mode: header gets a clean white-glass look */
+[data-theme="light"] #hdr {
+  background-color: rgba(238, 242, 252, 0.85) !important;
+  border-bottom-color: #c3d0e8 !important;
+}
+
+/* Light mode: mobile drawer */
+[data-theme="light"] #mobile-drawer {
+  background-color: rgba(238, 242, 252, 0.97) !important;
+}
+
+/* Light mode: force text on nav links to be readable */
+[data-theme="light"] header a,
+[data-theme="light"] header nav a {
+  color: var(--color-sec-muted);
+}
+[data-theme="light"] header a:hover,
+[data-theme="light"] header nav a:hover {
+  color: var(--color-sec-ink);
+}
+
+/* Light mode: SOC ticker border */
+[data-theme="light"] #hdr .border-sec-line {
+  border-color: #c3d0e8;
+}
+
+/* Light: main area */
+[data-theme="light"] main {
+  background-color: var(--color-sec-bg) !important;
+  color: var(--color-sec-ink);
+}
+
+/* Light: scrollbar */
+[data-theme="light"] .custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(31, 140, 255, 0.04);
+}
+[data-theme="light"] .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(31, 140, 255, 0.2);
+}
+[data-theme="light"] .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(31, 140, 255, 0.35);
+}
+
+/* Light mode: remap hardcoded white text on light surfaces */
+[data-theme="light"] .text-white {
+  color: var(--color-sec-ink);
+}
+
+/* Keep white text on dark / colored surfaces */
+[data-theme="light"] #platform .text-white,
+[data-theme="light"] #platform [class*="text-white/"],
+[data-theme="light"] button.text-white[class*="bg-gradient"],
+[data-theme="light"] .demo-trigger-btn.text-white,
+[data-theme="light"] .node.text-white,
+[data-theme="light"] .panel-visual .text-white,
+[data-theme="light"] .panel-visual,
+[data-theme="light"] #modal-card .text-white,
+[data-theme="light"] .sb.text-white,
+[data-theme="light"] .from-sec-blue-2.to-sec-blue-deep .text-white,
+[data-theme="light"] .from-sec-blue-2.to-sec-blue-deep [class*="text-white/"],
+[data-theme="light"] [class*="from-sec-blue-2"][class*="to-sec-blue"] .text-white,
+[data-theme="light"] [class*="from-sec-blue-2"][class*="to-sec-blue"] [class*="text-white/"] {
+  color: #ffffff;
+}
+
+[data-theme="light"] [class*="text-white/"]:not(#platform [class*="text-white/"]):not(.from-sec-blue-2 [class*="text-white/"]):not([class*="from-sec-blue-2"] [class*="text-white/"]) {
+  color: color-mix(in srgb, var(--color-sec-ink) 90%, transparent);
+}
+
+/* Light mode: hero headline gradient (was white-on-white) */
+[data-theme="light"] main > section:first-of-type h1.bg-gradient-to-b {
+  background-image: linear-gradient(to bottom, #0d1b35, #0d1b35, #1a4a8a) !important;
+}
+
+/* Light mode: secondary outline buttons */
+[data-theme="light"] main button.border-sec-line.text-white,
+[data-theme="light"] .cta-band button.border-sec-line.text-white {
+  color: var(--color-sec-ink);
+  border-color: var(--color-sec-line);
+}
+[data-theme="light"] main button.border-sec-line.text-white:hover,
+[data-theme="light"] .cta-band button.border-sec-line.text-white:hover {
+  color: var(--color-sec-blue-2);
+  border-color: var(--color-sec-blue);
+}
+
+/* Light mode: hover states that targeted white */
+[data-theme="light"] .hover\:text-white:hover {
+  color: var(--color-sec-ink) !important;
+}
+[data-theme="light"] #platform .hover\:text-white:hover,
+[data-theme="light"] button[class*="bg-gradient"] .hover\:text-white:hover {
+  color: #ffffff !important;
+}
+
+/* Light mode: pale blue text used on dashboard headers */
+[data-theme="light"] .text-\[\#cfe0ff\] {
+  color: var(--color-sec-ink);
+}
+
+/* Dark mockup panels keep light-theme text inside */
+[data-theme="light"] #dash,
+[data-theme="light"] .panel-visual,
+[data-theme="light"] .dash-stage [class*="from-[#0c1424]"] {
+  --color-sec-ink: #eaf2ff;
+  --color-sec-muted: #8ea3c4;
+  --color-sec-muted-2: #5f7494;
+}
+
+[data-theme="light"] #dash .bg-sec-panel,
+[data-theme="light"] #dash .bg-sec-bg-2 {
+  --color-sec-ink: #0d1b35;
+  --color-sec-muted: #4a6191;
+  --color-sec-muted-2: #6b82a8;
+}
+
+[data-theme="light"] #dash .bg-sec-panel .text-white,
+[data-theme="light"] #dash .bg-sec-bg-2 .text-white {
+  color: #0d1b35;
+}
+
+[data-theme="light"] #dash .text-\[\#cfe0ff\] {
+  color: #cfe0ff;
+}
+
+/* Smooth transition when switching themes */
+html {
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
 @layer base {
   html, body {
     font-family: var(--font-sans);
     background-color: var(--color-brand-bg);
-    color: #f3f4f6;
+    color: var(--color-sec-ink);
     scroll-behavior: smooth;
     overflow-x: hidden;
   }
