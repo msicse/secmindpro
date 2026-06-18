@@ -1,513 +1,1686 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar.astro';
-import AnimatedCard from '../components/AnimatedCard.astro';
 ---
 
-<Layout title="Aura - Creative GSAP & Tailwind v4 Showcase">
-	<Navbar />
+<Layout 
+  title="SecurityMind Pro — AI-Native Wazuh SIEM + Compliance" 
+  description="Real-time threat detection, AI-assisted triage, and audit-ready compliance — deployed on your infrastructure."
+>
+  <!-- ===== HEADER ===== -->
+  <header id="hdr" class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-sec-bg/55 border-b border-transparent transition-all duration-300 py-6">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-12">
+      <!-- Logo -->
+      <a class="flex items-center gap-2.5 font-extrabold text-xl tracking-tight text-white" href="#">
+        <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-sec-blue-2 to-sec-blue-deep flex items-center justify-center shadow-[0_4px_18px_rgba(31,140,255,0.45)]">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2L20 6V11C20 16 16.5 20.5 12 22C7.5 20.5 4 16 4 11V6L12 2Z" stroke="#fff" stroke-width="1.6" fill="rgba(255,255,255,.15)"/>
+            <path d="M8.5 12L11 14.5L15.5 9.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="flex flex-col leading-none">
+          <span>SecurityMind<span class="text-sec-blue-2"> Pro</span></span>
+          <span class="text-[9px] tracking-[3px] text-sec-blue-2 font-semibold mt-1">DEFEND · DETECT · COMPLY</span>
+        </span>
+      </a>
 
-	<main class="flex-grow pt-16">
-		<!-- Hero Section -->
-		<section id="hero" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden px-6 md:px-12 py-20">
-			<!-- Subtle background grids -->
-			<div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
-			
-			<div class="max-w-5xl mx-auto text-center relative z-10 flex flex-col items-center">
-				<!-- Tagline Pill -->
-				<div class="hero-reveal opacity-0 translate-y-4 mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/5 text-purple-300 text-xs font-semibold tracking-wider uppercase">
-					<span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-ping"></span>
-					Astro 6.0 + Tailwind CSS v4 + GSAP
-				</div>
+      <!-- SOC Live Ticker -->
+      <div class="hidden md:flex items-center gap-2 text-xs py-1.5 px-3 border border-sec-line rounded-lg bg-sec-panel/60" title="Illustrative status indicator">
+        <span class="text-sec-muted font-semibold">SOC</span>
+        <span class="text-sec-green font-semibold flex items-center gap-1">
+          <span class="w-1.5 h-1.5 rounded-full bg-sec-green animate-ping"></span>
+          ▲ LIVE
+        </span>
+        <span class="text-white font-bold ml-1">99.98% uptime</span>
+      </div>
 
-				<!-- Main Headline -->
-				<h1 class="hero-reveal opacity-0 translate-y-6 text-4xl sm:text-6xl md:text-7xl font-display font-extrabold tracking-tight text-white mb-6 leading-[1.1]">
-					Design with <span class="text-gradient-purple-cyan font-black">Motion</span>,<br/>
-					Build with <span class="text-gradient-pink-orange font-black">Precision</span>
-				</h1>
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-6 text-sm font-semibold">
+        <a href="#top" class="text-sec-muted hover:text-sec-ink transition-colors cursor-pointer">Home</a>
+        <a href="#platform" class="text-sec-muted hover:text-sec-ink transition-colors cursor-pointer">Platform</a>
+        <a href="#capabilities" class="text-sec-muted hover:text-sec-ink transition-colors cursor-pointer">Capabilities</a>
+        <a href="#compliance" class="text-sec-muted hover:text-sec-ink transition-colors cursor-pointer">Compliance</a>
+        <a href="#case-studies" class="text-sec-muted hover:text-sec-ink transition-colors cursor-pointer">Case Studies</a>
+        <button class="demo-trigger-btn bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep text-white px-5 py-2.5 rounded-lg shadow-[0_6px_20px_rgba(31,140,255,0.4)] hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(31,140,255,0.55)] transition-all cursor-pointer">
+          Request a Demo
+        </button>
+      </nav>
 
-				<!-- Description -->
-				<p class="hero-reveal opacity-0 translate-y-6 text-base sm:text-xl text-gray-400 max-w-2xl mb-10 leading-relaxed font-light">
-					Welcome to AURA. Experience fluid animations, high-performance rendering, and a state-of-the-art interactive playground powered by GSAP.
-				</p>
+      <!-- Mobile Menu Toggle -->
+      <button id="mobile-menu-toggle" class="md:hidden text-sec-muted hover:text-white focus:outline-none cursor-pointer" aria-label="Toggle menu">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path id="hamburger-icon" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      </button>
+    </div>
+  </header>
 
-				<!-- Hero Actions -->
-				<div class="hero-reveal opacity-0 translate-y-8 flex flex-col sm:flex-row items-center gap-4">
-					<a 
-						href="#interactive" 
-						class="px-8 py-3.5 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 text-white font-semibold text-sm hover:opacity-95 shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:shadow-[0_0_30px_rgba(139,92,246,0.5)] transition-all duration-300 transform hover:scale-[1.02]"
-					>
-						Try Interactive Sandbox
-					</a>
-					<a 
-						href="#features" 
-						class="px-8 py-3.5 rounded-full glass-panel text-white font-semibold text-sm hover:bg-white/5 transition-all duration-300"
-					>
-						Explore Features
-					</a>
-				</div>
-			</div>
+  <!-- ===== MOBILE NAV DRAWER ===== -->
+  <div id="mobile-drawer" class="fixed inset-0 z-40 bg-sec-bg/95 backdrop-blur-lg flex flex-col pt-28 px-8 gap-6 md:hidden transition-transform duration-300 translate-x-full">
+    <a href="/" class="mobile-nav-link text-xl font-bold text-sec-muted hover:text-white py-2 border-b border-sec-line">Home</a>
+    <a href="#platform" class="mobile-nav-link text-xl font-bold text-sec-muted hover:text-white py-2 border-b border-sec-line">Platform</a>
+    <a href="#capabilities" class="mobile-nav-link text-xl font-bold text-sec-muted hover:text-white py-2 border-b border-sec-line">Capabilities</a>
+    <a href="#compliance" class="mobile-nav-link text-xl font-bold text-sec-muted hover:text-white py-2 border-b border-sec-line">Compliance</a>
+    <a href="#case-studies" class="mobile-nav-link text-xl font-bold text-sec-muted hover:text-white py-2 border-b border-sec-line">Case Studies</a>
+    <button class="demo-trigger-btn w-full mt-4 bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep text-white font-bold py-3.5 rounded-lg shadow-lg cursor-pointer">
+      Request a Demo
+    </button>
+  </div>
 
-			<!-- Floating visual nodes for aesthetic background detailing -->
-			<div class="hero-blob absolute top-1/4 left-1/10 w-24 h-24 rounded-full bg-purple-500/10 blur-xl pointer-events-none opacity-0"></div>
-			<div class="hero-blob absolute bottom-1/4 right-1/10 w-32 h-32 rounded-full bg-cyan-500/10 blur-xl pointer-events-none opacity-0"></div>
-		</section>
+  <main class="flex-grow bg-sec-bg text-sec-ink">
+    <!-- ===== HERO ===== -->
+    <section class="relative pt-44 pb-24 overflow-hidden bg-[radial-gradient(1100px_520px_at_50%_-8%,rgba(31,140,255,0.28),transparent_60%),radial-gradient(700px_400px_at_80%_30%,rgba(54,212,255,0.12),transparent_60%)]">
+      <!-- Background decorative rays -->
+      <div class="absolute inset-0 pointer-events-none opacity-50 bg-[repeating-linear-gradient(95deg,rgba(57,160,255,0.08)_0_2px,transparent_2px_60px)] [mask-image:radial-gradient(600px_600px_at_50%_0%,#000,transparent_70%)] animate-pulse-slow"></div>
+      
+      <div class="max-w-7xl mx-auto px-6 text-center">
+        <div class="gsap-reveal text-sec-blue-2 font-semibold text-sm tracking-wide mb-4">One Platform. Complete Threat Defense & Compliance.</div>
+        <h1 class="gsap-reveal text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-[#bcd5ff] mb-6 leading-none max-w-4xl mx-auto">
+          AI-Native <span class="text-transparent bg-clip-text bg-gradient-to-r from-sec-blue-2 to-sec-cyan">Wazuh SIEM</span> + Compliance
+        </h1>
+        <p class="gsap-reveal text-sec-muted text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+          Real-time threat detection, AI-assisted triage, and audit-ready compliance — deployed on your infrastructure, tuned for local regulation, and backed by hands-on consultancy and training.
+        </p>
+        <div class="gsap-reveal flex gap-4 justify-center flex-wrap">
+          <button class="bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep text-white font-bold text-sm px-7 py-3.5 rounded-lg shadow-lg hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(31,140,255,0.55)] transition-all cursor-pointer">
+            Get My Threat Score
+          </button>
+          <button class="demo-trigger-btn bg-transparent border border-sec-line text-white font-bold text-sm px-7 py-3.5 rounded-lg hover:border-sec-blue hover:text-sec-blue-2 transition-all cursor-pointer">
+            Book a Demo
+          </button>
+        </div>
 
-		<!-- Features Grid Section -->
-		<section id="features" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/5">
-			<div class="text-center mb-16">
-				<h2 class="section-title opacity-0 translate-y-6 text-3xl md:text-5xl font-display font-bold text-white mb-4">
-					Core Superpowers
-				</h2>
-				<p class="section-subtitle opacity-0 translate-y-6 text-gray-400 max-w-lg mx-auto">
-					Engineered with modern tools to deliver exceptionally fast page speeds and breathtaking transitions.
-				</p>
-			</div>
+        <!-- DASHBOARD MOCKUP -->
+        <div class="dash-stage gsap-reveal relative mt-16 max-w-5xl mx-auto">
+          <!-- Left side preview card -->
+          <div class="hidden lg:block absolute left-[-60px] top-[14%] w-[200px] rounded-xl border border-sec-line bg-gradient-to-b from-[#0c1424] to-[#070d18] shadow-2xl opacity-55 scale-90 origin-right transition-transform duration-300 hover:scale-95 hover:opacity-80">
+            <div class="flex items-center gap-2 p-3 border-b border-sec-line bg-sec-bg-2">
+              <span class="w-3.5 h-3.5 rounded bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep"></span>
+              <span class="text-xs font-bold">SOC</span>
+            </div>
+            <div class="p-3.5 flex flex-col gap-2">
+              <div class="h-2 rounded bg-sec-blue-deep/30 w-4/5"></div>
+              <div class="h-2 rounded bg-sec-blue-deep/20 w-3/5"></div>
+              <div class="h-14 rounded-lg bg-sec-panel mt-1.5"></div>
+              <div class="h-2 rounded bg-sec-blue-deep/20 w-[70%]"></div>
+              <div class="h-2 rounded bg-sec-blue-deep/20 w-[45%]"></div>
+            </div>
+          </div>
 
-			<div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="features-grid">
-				<div class="feature-card-wrapper opacity-0 translate-y-8">
-					<AnimatedCard 
-						title="High Performance" 
-						description="Leverages Astro's zero-JS-by-default architecture to ensure blazing fast first contentful paint." 
-						iconName="zap"
-					/>
-				</div>
-				<div class="feature-card-wrapper opacity-0 translate-y-8">
-					<AnimatedCard 
-						title="Tailwind CSS v4" 
-						description="Utilizes the brand new CSS-first design system with lightning fast bundling and natively extended theme values." 
-						iconName="cpu"
-					/>
-				</div>
-				<div class="feature-card-wrapper opacity-0 translate-y-8">
-					<AnimatedCard 
-						title="GSAP Magic" 
-						description="Integrates industry-leading animation engines for ultra-smooth transitions, scroll interactions, and coordinate physics." 
-						iconName="sparkles"
-					/>
-				</div>
-			</div>
-		</section>
+          <!-- Right side preview card -->
+          <div class="hidden lg:block absolute right-[-60px] top-[14%] w-[200px] rounded-xl border border-sec-line bg-gradient-to-b from-[#0c1424] to-[#070d18] shadow-2xl opacity-55 scale-90 origin-left transition-transform duration-300 hover:scale-95 hover:opacity-80">
+            <div class="flex items-center gap-2 p-3 border-b border-sec-line bg-sec-bg-2">
+              <span class="w-3.5 h-3.5 rounded bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep"></span>
+              <span class="text-xs font-bold">Alerts</span>
+            </div>
+            <div class="p-3.5 flex flex-col gap-2">
+              <div class="h-2.5 rounded bg-sec-red/20 w-[90%]"></div>
+              <div class="h-2.5 rounded bg-sec-amber/20 w-[75%]"></div>
+              <div class="h-2.5 rounded bg-sec-blue/20 w-[85%]"></div>
+              <div class="h-2.5 rounded bg-sec-blue/20 w-[55%]"></div>
+              <div class="h-2.5 rounded bg-sec-muted-2/20 w-[70%]"></div>
+            </div>
+          </div>
 
-		<!-- Interactive Playground Section -->
-		<section id="interactive" class="py-24 px-6 md:px-12 bg-white/1 border-t border-white/5 relative overflow-hidden">
-			<div class="absolute inset-0 bg-radial-gradient from-purple-500/5 to-transparent pointer-events-none"></div>
+          <!-- Main Dashboard Console -->
+          <div class="rounded-xl border border-sec-line bg-gradient-to-b from-[#0c1424] to-[#070d18] shadow-2xl overflow-hidden" id="dash">
+            <!-- Header bar -->
+            <div class="flex items-center justify-between p-3 border-b border-sec-line bg-sec-bg-2 text-xs font-semibold">
+              <div class="flex items-center gap-2 text-sec-ink">
+                <span class="w-4 h-4 rounded bg-gradient-to-br from-sec-blue-2 to-sec-blue-deep"></span>
+                <span>SecurityMind Console</span>
+              </div>
+              <div class="flex-1 max-w-[300px] mx-auto h-6 rounded-md bg-sec-panel border border-sec-line"></div>
+              <div class="flex gap-2">
+                <span class="py-1 px-2.5 rounded bg-sec-panel border border-sec-line text-sec-muted hover:text-white cursor-pointer transition-colors">Schedule Scan</span>
+                <span class="py-1 px-2.5 rounded bg-sec-panel border border-sec-line text-sec-muted hover:text-white cursor-pointer transition-colors">AI Triage</span>
+              </div>
+            </div>
 
-			<div class="max-w-7xl mx-auto">
-				<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-					<!-- Interactive Description -->
-					<div class="lg:col-span-5 text-left flex flex-col gap-6" id="playground-desc">
-						<div class="inline-flex w-fit items-center gap-1.5 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/5 text-cyan-300 text-xs font-semibold uppercase tracking-wider">
-							Interactive Sandbox
-						</div>
-						<h2 class="text-3xl md:text-5xl font-display font-bold text-white leading-tight">
-							Play with <span class="text-gradient-purple-cyan">GSAP Physics</span>
-						</h2>
-						<p class="text-gray-400 leading-relaxed font-light">
-							Experience GSAP's power firsthand. Interact with the dashboard options to morph and animate the coordinate states of fluid background particles. Watch them align, disperse, or orbit in real-time.
-						</p>
+            <!-- Grid Content -->
+            <div class="grid grid-cols-[160px_1fr] min-h-[430px]">
+              <!-- Sidebar -->
+              <div class="border-r border-sec-line bg-[#080f1c] p-3 flex flex-col gap-1 text-xs font-semibold text-sec-muted">
+                <div class="flex items-center gap-2 p-2 rounded bg-sec-blue/15 text-sec-blue-2">
+                  <span class="w-3.5 h-3.5 rounded bg-sec-blue"></span>Console
+                </div>
+                <div class="flex items-center gap-2 p-2 rounded hover:bg-white/5 cursor-pointer transition-colors">
+                  <span class="w-3.5 h-3.5 rounded bg-sec-line"></span>Insights
+                </div>
+                <div class="flex items-center gap-2 p-2 rounded hover:bg-white/5 cursor-pointer transition-colors">
+                  <span class="w-3.5 h-3.5 rounded bg-sec-line"></span>Threat Intel
+                </div>
+                <div class="flex items-center gap-2 p-2 rounded hover:bg-white/5 cursor-pointer transition-colors">
+                  <span class="w-3.5 h-3.5 rounded bg-sec-line"></span>Detections
+                </div>
+                <div class="flex items-center gap-2 p-2 rounded hover:bg-white/5 cursor-pointer transition-colors">
+                  <span class="w-3.5 h-3.5 rounded bg-sec-line"></span>Compliance
+                </div>
+                <div class="flex items-center gap-2 p-2 rounded hover:bg-white/5 cursor-pointer transition-colors">
+                  <span class="w-3.5 h-3.5 rounded bg-sec-line"></span>Agents
+                </div>
+                <div class="flex items-center gap-2 p-2 rounded hover:bg-white/5 cursor-pointer transition-colors">
+                  <span class="w-3.5 h-3.5 rounded bg-sec-line"></span>Reports
+                </div>
+                <div class="flex items-center gap-2 p-2 rounded hover:bg-white/5 cursor-pointer transition-colors">
+                  <span class="w-3.5 h-3.5 rounded bg-sec-line"></span>Tickets
+                </div>
+              </div>
 
-						<!-- Control Buttons -->
-						<div class="flex flex-wrap gap-3 mt-4">
-							<button id="btn-disperse" class="px-5 py-2.5 rounded-lg border border-purple-500/30 bg-purple-500/10 text-purple-200 text-sm font-semibold hover:bg-purple-500/20 active:scale-95 transition-all">
-								Disperse
-							</button>
-							<button id="btn-grid" class="px-5 py-2.5 rounded-lg border border-cyan-500/30 bg-cyan-500/10 text-cyan-200 text-sm font-semibold hover:bg-cyan-500/20 active:scale-95 transition-all">
-								Grid Mode
-							</button>
-							<button id="btn-orbit" class="px-5 py-2.5 rounded-lg border border-pink-500/30 bg-pink-500/10 text-pink-200 text-sm font-semibold hover:bg-pink-500/20 active:scale-95 transition-all">
-								Orbit
-							</button>
-							<button id="btn-pulse" class="px-5 py-2.5 rounded-lg border border-yellow-500/30 bg-yellow-500/10 text-yellow-200 text-sm font-semibold hover:bg-yellow-500/20 active:scale-95 transition-all">
-								Pulse Ring
-							</button>
-						</div>
-					</div>
+              <!-- Dashboard Body -->
+              <div class="p-5 flex flex-col gap-4 text-left">
+                <div class="flex justify-between items-center text-sm font-semibold text-[#cfe0ff]">
+                  <span>Security Operations Console</span>
+                  <span class="text-[10px] text-sec-muted font-medium">Last 24h · Auto-refresh</span>
+                </div>
 
-					<!-- Interactive Canvas Container -->
-					<div class="lg:col-span-7" id="playground-canvas">
-						<div class="glass-panel w-full aspect-[4/3] rounded-3xl p-8 relative overflow-hidden flex items-center justify-center border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-							<!-- Central Orb -->
-							<div id="central-orb" class="absolute w-20 h-20 rounded-full bg-gradient-to-br from-purple-500 to-cyan-500 blur-sm flex items-center justify-center shadow-[0_0_30px_rgba(139,92,246,0.3)] z-10 transition-transform duration-300">
-								<div class="w-16 h-16 rounded-full bg-[#030014] flex items-center justify-center text-xs font-semibold tracking-wider text-cyan-400">
-									AURA
-								</div>
-							</div>
+                <!-- Grid of metrics -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+                  <!-- Posture card -->
+                  <div class="bg-sec-panel border border-sec-line rounded-lg p-3.5">
+                    <div class="text-[10px] font-semibold text-sec-muted mb-2 flex items-center gap-1.5">⬡ Security Posture Score</div>
+                    <div class="w-28 h-28 mx-auto relative flex items-center justify-center">
+                      <svg class="-rotate-90" width="110" height="110" viewBox="0 0 110 110">
+                        <circle cx="55" cy="55" r="46" stroke="#13233f" stroke-width="11" fill="none"/>
+                        <circle id="gaugeArc" cx="55" cy="55" r="46" stroke="url(#gg)" stroke-width="11" fill="none"
+                          stroke-linecap="round" stroke-dasharray="289" stroke-dashoffset="289" />
+                        <defs>
+                          <linearGradient id="gg" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0" stop-color="#27d98a"/>
+                            <stop offset="1" stop-color="#36d4ff"/>
+                          </linearGradient>
+                        </defs>
+                      </svg>
+                      <div class="absolute inset-0 flex flex-col items-center justify-center text-center leading-none">
+                        <span class="text-2xl font-extrabold text-sec-green">8.6</span>
+                        <span class="text-[9px] text-sec-muted mt-1">/ 10 healthy</span>
+                      </div>
+                    </div>
+                  </div>
 
-							<!-- Floating Nodes -->
-							<div class="interactive-node absolute w-6 h-6 rounded-full bg-purple-500 shadow-[0_0_15px_#8b5cf6]" data-index="0"></div>
-							<div class="interactive-node absolute w-8 h-8 rounded-full bg-cyan-400 shadow-[0_0_15px_#22d3ee]" data-index="1"></div>
-							<div class="interactive-node absolute w-5 h-5 rounded-full bg-pink-500 shadow-[0_0_15px_#ec4899]" data-index="2"></div>
-							<div class="interactive-node absolute w-7 h-7 rounded-full bg-indigo-500 shadow-[0_0_15px_#6366f1]" data-index="3"></div>
-							<div class="interactive-node absolute w-6 h-6 rounded-full bg-yellow-400 shadow-[0_0_15px_#facc15]" data-index="4"></div>
-							<div class="interactive-node absolute w-9 h-9 rounded-full bg-teal-400 shadow-[0_0_15px_#2dd4bf]" data-index="5"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+                  <!-- Donut assets card -->
+                  <div class="bg-sec-panel border border-sec-line rounded-lg p-3.5">
+                    <div class="text-[10px] font-semibold text-sec-muted mb-2 flex items-center gap-1.5">◷ Monitored Assets</div>
+                    <div class="w-28 h-28 mx-auto relative flex items-center justify-center">
+                      <svg class="-rotate-90" width="110" height="110" viewBox="0 0 110 110">
+                        <circle cx="55" cy="55" r="44" stroke="#13233f" stroke-width="12" fill="none"/>
+                        <circle cx="55" cy="55" r="44" stroke="#1f8cff" stroke-width="12" fill="none" stroke-dasharray="138 276"/>
+                        <circle cx="55" cy="55" r="44" stroke="#36d4ff" stroke-width="12" fill="none" stroke-dasharray="83 276" stroke-dashoffset="-138"/>
+                        <circle cx="55" cy="55" r="44" stroke="#7c5cff" stroke-width="12" fill="none" stroke-dasharray="55 276" stroke-dashoffset="-221"/>
+                      </svg>
+                      <div class="absolute inset-0 flex flex-col items-center justify-center text-center leading-none">
+                        <span class="text-xl font-extrabold text-white">473</span>
+                        <span class="text-[9px] text-sec-muted mt-1">endpoints</span>
+                      </div>
+                    </div>
+                  </div>
 
-		<!-- Scroll-driven Showcase Section -->
-		<section id="showcase" class="py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-white/5">
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-				<!-- Image Container (animated scale on scroll) -->
-				<div class="relative group rounded-3xl overflow-hidden glass-panel border border-white/10 aspect-[16/10]" id="showcase-img-container">
-					<!-- Ambient glowing layer behind -->
-					<div class="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-cyan-500/20 group-hover:scale-105 duration-700 transition-transform"></div>
-					<div class="absolute inset-0 flex flex-col justify-between p-8">
-						<div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-md">
-							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-white">
-								<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5h6.75M8.625 14.25h6.75" />
-							</svg>
-						</div>
-						<div class="flex flex-col gap-2">
-							<span class="text-xs font-semibold tracking-widest text-cyan-400 uppercase">Interactive Design</span>
-							<h3 class="text-2xl font-bold text-white font-display">Spatial Interface</h3>
-						</div>
-					</div>
-				</div>
+                  <!-- Severity bar card -->
+                  <div class="bg-sec-panel border border-sec-line rounded-lg p-3.5 flex flex-col justify-between">
+                    <div class="text-[10px] font-semibold text-sec-muted mb-2 flex items-center gap-1.5">⚠ Alert Severity</div>
+                    <div class="flex flex-col gap-2" id="expo">
+                      <div class="flex items-center gap-2 text-[10px] text-sec-muted">
+                        <span class="w-12 text-left">Critical</span>
+                        <span class="flex-grow h-1.5 bg-sec-bg-2 rounded-full overflow-hidden">
+                          <span class="fill block h-full bg-sec-red rounded-full" data-w="22%"></span>
+                        </span>
+                      </div>
+                      <div class="flex items-center gap-2 text-[10px] text-sec-muted">
+                        <span class="w-12 text-left">High</span>
+                        <span class="flex-grow h-1.5 bg-sec-bg-2 rounded-full overflow-hidden">
+                          <span class="fill block h-full bg-sec-amber rounded-full" data-w="38%"></span>
+                        </span>
+                      </div>
+                      <div class="flex items-center gap-2 text-[10px] text-sec-muted">
+                        <span class="w-12 text-left">Medium</span>
+                        <span class="flex-grow h-1.5 bg-sec-bg-2 rounded-full overflow-hidden">
+                          <span class="fill block h-full bg-sec-blue-2 rounded-full" data-w="62%"></span>
+                        </span>
+                      </div>
+                      <div class="flex items-center gap-2 text-[10px] text-sec-muted">
+                        <span class="w-12 text-left">Low</span>
+                        <span class="flex-grow h-1.5 bg-sec-bg-2 rounded-full overflow-hidden">
+                          <span class="fill block h-full bg-sec-green rounded-full" data-w="85%"></span>
+                        </span>
+                      </div>
+                      <div class="flex items-center gap-2 text-[10px] text-sec-muted">
+                        <span class="w-12 text-left">Info</span>
+                        <span class="flex-grow h-1.5 bg-sec-bg-2 rounded-full overflow-hidden">
+                          <span class="fill block h-full bg-sec-muted-2 rounded-full" data-w="95%"></span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-				<!-- Text revealing scroll details -->
-				<div class="flex flex-col gap-6 text-left" id="showcase-text">
-					<h2 class="text-3xl md:text-5xl font-display font-bold text-white leading-tight">
-						Scroll Triggered <br/><span class="text-gradient-pink-orange">Storytelling</span>
-					</h2>
-					<p class="text-gray-400 leading-relaxed font-light">
-						AURA blends smooth typography with custom GSAP scroll timelines. Connect animations directly to user scrolls to capture attention and direct user flow elegantly. 
-					</p>
-					<ul class="flex flex-col gap-3 text-sm text-gray-300">
-						<li class="flex items-center gap-3">
-							<span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-							Scroll-linked scrub animations for active participation.
-						</li>
-						<li class="flex items-center gap-3">
-							<span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
-							Hardware-accelerated CSS transforms.
-						</li>
-						<li class="flex items-center gap-3">
-							<span class="w-1.5 h-1.5 rounded-full bg-pink-400"></span>
-							Mobile-optimized frame-throttled animations.
-						</li>
-					</ul>
-				</div>
-			</div>
-		</section>
+                <!-- Lower trend chart & stats grid -->
+                <div class="grid grid-cols-1 md:grid-cols-[1.6fr_1fr] gap-4">
+                  <!-- SVGs trend line -->
+                  <div class="bg-sec-panel border border-sec-line rounded-lg p-3.5">
+                    <div class="text-[10px] font-semibold text-[#cfe0ff] mb-2 flex justify-between items-center">
+                      <span>Detection Trend</span>
+                      <span class="text-sec-muted font-normal">Monthly</span>
+                    </div>
+                    <svg id="trendSvg" viewBox="0 0 400 120" preserveAspectRatio="none" class="w-full h-[120px] block">
+                      <defs>
+                        <linearGradient id="ta" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0" stop-color="rgba(57,160,255,.45)"/>
+                          <stop offset="1" stop-color="rgba(57,160,255,0)"/>
+                        </linearGradient>
+                      </defs>
+                      <path class="area-path transition-opacity duration-1000" id="areaP" fill="url(#ta)"
+                        d="M0,110 C60,70 90,30 140,45 C190,60 210,15 260,25 C310,35 340,80 400,70 L400,120 L0,120 Z"/>
+                      <path class="line-path" id="lineP" fill="none" stroke="#39a0ff" stroke-width="2.5"
+                        d="M0,110 C60,70 90,30 140,45 C190,60 210,15 260,25 C310,35 340,80 400,70"/>
+                    </svg>
+                  </div>
 
-		<!-- Call to Action / Contact Section -->
-		<section id="contact" class="py-24 px-6 md:px-12 bg-gradient-to-t from-purple-950/20 to-transparent border-t border-white/5">
-			<div class="max-w-4xl mx-auto text-center flex flex-col items-center gap-8" id="contact-panel">
-				<h2 class="text-4xl md:text-6xl font-display font-extrabold text-white leading-tight">
-					Let's build something <br/><span class="text-gradient-purple-cyan">mind-blowing</span> together
-				</h2>
-				<p class="text-gray-400 max-w-lg leading-relaxed font-light">
-					Reach out to collaborate on immersive creative sites, bespoke UI interactions, and high-performance WebGL/GSAP applications.
-				</p>
-				<a 
-					href="mailto:hello@aura-creative.io" 
-					class="px-10 py-4 rounded-full bg-white text-[#030014] font-bold text-base hover:bg-gray-200 shadow-[0_10px_30px_rgba(255,255,255,0.15)] transition-all duration-300 transform hover:scale-[1.02]"
-				>
-					Send a Message
-				</a>
-			</div>
-		</section>
-	</main>
+                  <!-- Count highlights -->
+                  <div class="grid grid-cols-3 gap-2">
+                    <div class="bg-sec-panel border border-sec-line rounded-lg p-3 text-center flex flex-col justify-center">
+                      <b class="text-xl text-white block">4,522</b>
+                      <span class="text-[9px] text-sec-muted uppercase font-bold tracking-wider mt-1">Events</span>
+                    </div>
+                    <div class="bg-sec-panel border border-sec-line rounded-lg p-3 text-center flex flex-col justify-center">
+                      <b class="text-xl text-sec-red block">38</b>
+                      <span class="text-[9px] text-sec-muted uppercase font-bold tracking-wider mt-1">Critical</span>
+                    </div>
+                    <div class="bg-sec-panel border border-sec-line rounded-lg p-3 text-center flex flex-col justify-center">
+                      <b class="text-xl text-sec-amber block">128</b>
+                      <span class="text-[9px] text-sec-muted uppercase font-bold tracking-wider mt-1">High</span>
+                    </div>
+                    <div class="bg-sec-panel border border-sec-line rounded-lg p-3 text-center flex flex-col justify-center">
+                      <b class="text-xl text-sec-blue-2 block">319</b>
+                      <span class="text-[9px] text-sec-muted uppercase font-bold tracking-wider mt-1">Medium</span>
+                    </div>
+                    <div class="bg-sec-panel border border-sec-line rounded-lg p-3 text-center flex flex-col justify-center">
+                      <b class="text-xl text-sec-green block">3,975</b>
+                      <span class="text-[9px] text-sec-muted uppercase font-bold tracking-wider mt-1">Resolved</span>
+                    </div>
+                    <div class="bg-sec-panel border border-sec-line rounded-lg p-3 text-center flex flex-col justify-center">
+                      <b class="text-xl text-purple-400 block">62</b>
+                      <span class="text-[9px] text-sec-muted uppercase font-bold tracking-wider mt-1">AI Triaged</span>
+                    </div>
+                  </div>
+                </div>
 
-	<!-- Footer -->
-	<footer class="py-12 border-t border-white/5 text-center text-xs text-gray-500">
-		<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-			<div>
-				&copy; {new Date().getFullYear()} AURA. All rights reserved. Created with Astro, Tailwind, & GSAP.
-			</div>
-			<div class="flex gap-6">
-				<a href="#" class="hover:text-gray-300 transition-colors">Twitter</a>
-				<a href="#" class="hover:text-gray-300 transition-colors">GitHub</a>
-				<a href="#" class="hover:text-gray-300 transition-colors">Dribbble</a>
-			</div>
-		</div>
-	</footer>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== TRUST STRIP ===== -->
+    <div class="bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep overflow-hidden relative py-5 border-y border-white/10 shadow-lg">
+      <div class="max-w-7xl mx-auto px-6 flex items-center gap-8">
+        <span class="text-white font-black text-sm uppercase tracking-wide leading-none whitespace-nowrap">
+          <span class="text-xs font-bold block opacity-75">Built for</span>
+          Regulated industries
+        </span>
+        <div class="overflow-hidden flex-1 [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
+          <div class="flex gap-16 w-max animate-marquee">
+            <span class="text-white/95 font-extrabold text-lg tracking-wider whitespace-nowrap">BANKS</span>
+            <span class="text-white/95 font-extrabold text-lg tracking-wider whitespace-nowrap">FINTECH</span>
+            <span class="text-white/95 font-extrabold text-lg tracking-wider whitespace-nowrap">TELECOM</span>
+            <span class="text-white/95 font-extrabold text-lg tracking-wider whitespace-nowrap">INSURANCE</span>
+            <span class="text-white/95 font-extrabold text-lg tracking-wider whitespace-nowrap">GOV & PUBLIC</span>
+            <span class="text-white/95 font-extrabold text-lg tracking-wider whitespace-nowrap">HEALTHCARE</span>
+            <span class="text-white/95 font-extrabold text-lg tracking-wider whitespace-nowrap">E-COMMERCE</span>
+            <span class="text-white/95 font-extrabold text-lg tracking-wider whitespace-nowrap">MFS / MOBILE MONEY</span>
+            <!-- duplicate labels for circular marquee overlap loop -->
+            <span class="text-white/95 font-extrabold text-lg tracking-wider whitespace-nowrap">BANKS</span>
+            <span class="text-white/95 font-extrabold text-lg tracking-wider whitespace-nowrap">FINTECH</span>
+            <span class="text-white/95 font-extrabold text-lg tracking-wider whitespace-nowrap">TELECOM</span>
+            <span class="text-white/95 font-extrabold text-lg tracking-wider whitespace-nowrap">INSURANCE</span>
+            <span class="text-white/95 font-extrabold text-lg tracking-wider whitespace-nowrap">GOV & PUBLIC</span>
+            <span class="text-white/95 font-extrabold text-lg tracking-wider whitespace-nowrap">HEALTHCARE</span>
+            <span class="text-white/95 font-extrabold text-lg tracking-wider whitespace-nowrap">E-COMMERCE</span>
+            <span class="text-white/95 font-extrabold text-lg tracking-wider whitespace-nowrap">MFS / MOBILE MONEY</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PRODUCT SUITE DOME ===== -->
+    <section id="platform" class="relative pt-24 pb-0 text-center overflow-hidden bg-[radial-gradient(140%_100%_at_50%_-30%,#1f8cff_0%,#0b63d6_38%,#05080f_100%)]">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="gsap-reveal max-w-2xl mx-auto">
+          <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-4 leading-tight">
+            Cybersecurity’s Future. <span class="block text-xl md:text-2xl font-bold opacity-90 mt-2">Powered by SecurityMind Pro.</span>
+          </h2>
+          <p class="text-white/85 text-sm md:text-base mb-8">
+            One platform for detection, response, and compliance — built on hardened open-source foundations, deployed on your infrastructure, and backed by a local team that knows your regulators.
+          </p>
+          <button class="bg-white text-sec-blue-deep font-extrabold text-sm px-6 py-3 rounded-lg hover:bg-gray-100 transition-colors shadow-lg cursor-pointer">
+            Platform Overview
+          </button>
+        </div>
+
+        <!-- Suite tabs selectors -->
+        <div class="flex justify-center gap-6 md:gap-14 flex-wrap mt-12 border-b border-white/20 pb-0" id="suiteTabs">
+          <span class="stab font-bold text-base md:text-lg text-white/70 hover:text-white pb-4 cursor-pointer relative transition-colors active" data-s="0">SentinelCore</span>
+          <span class="stab font-bold text-base md:text-lg text-white/70 hover:text-white pb-4 cursor-pointer relative transition-colors" data-s="1">ComplyHub</span>
+          <span class="stab font-bold text-base md:text-lg text-white/70 hover:text-white pb-4 cursor-pointer relative transition-colors" data-s="2">ThreatLens</span>
+          <span class="stab font-bold text-base md:text-lg text-white/70 hover:text-white pb-4 cursor-pointer relative transition-colors" data-s="3">EdgeGuard</span>
+          <span class="stab font-bold text-base md:text-lg text-white/70 hover:text-white pb-4 cursor-pointer relative transition-colors" data-s="4">GovShield</span>
+        </div>
+      </div>
+
+      <!-- Suite items dashboard body -->
+      <div class="max-w-7xl mx-auto px-6 py-12 pb-24 text-left">
+        <!-- SentinelCore Pane -->
+        <div class="spane active grid grid-cols-1 lg:grid-cols-[1fr_1.25fr] gap-12 items-center" data-sp="0">
+          <div>
+            <div class="text-xs font-extrabold tracking-wider text-white/80 uppercase mb-3">AI-Assisted SOC Platform</div>
+            <div class="flex items-center gap-3 text-2xl md:text-3xl font-extrabold text-white mb-4">
+              <span class="w-11 h-11 rounded-xl bg-white/15 border border-white/30 flex items-center justify-center">
+                <svg class="w-6 h-6 stroke-white" viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                  <path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z" stroke-linejoin="round"/>
+                  <path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="flex flex-col leading-none">
+                <span>SentinelCore</span>
+                <small class="text-[11px] font-bold opacity-80 mt-1">by SecurityMind Pro</small>
+              </span>
+            </div>
+            <p class="text-white/90 text-base mb-6 max-w-md">
+              Real-time threat detection on a tuned Wazuh core, with an AI layer that enriches and ranks every alert so your team acts on what matters.
+            </p>
+            <button class="bg-transparent border border-white/60 text-white font-bold text-sm px-6 py-3 rounded-lg hover:bg-white/15 transition-all cursor-pointer">
+              Explore SentinelCore
+            </button>
+          </div>
+          <!-- Mock inner dashboard -->
+          <div class="pdash bg-white text-sec-bg border border-white/40 shadow-2xl rounded-xl overflow-hidden">
+            <div class="flex items-center gap-2 p-3 border-b border-gray-200 bg-gray-50 text-xs font-extrabold">
+              <span class="w-4.5 h-4.5 rounded bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep"></span>
+              SentinelCore Overview
+              <div class="ml-auto flex gap-1.5">
+                <span class="text-[9px] px-2 py-0.5 rounded bg-[#eef3fb] text-[#5570a0] font-semibold">Live</span>
+                <span class="text-[9px] px-2 py-0.5 rounded bg-[#eef3fb] text-[#5570a0] font-semibold">AI</span>
+              </div>
+            </div>
+            <div class="grid grid-cols-[120px_1fr] min-h-[300px]">
+              <div class="bg-[#0e1626] p-3 flex flex-col gap-1 text-[10px] text-sec-muted">
+                <div class="flex items-center gap-1.5 p-2 rounded bg-sec-blue/18 text-[#9ecbff] font-bold">
+                  <span class="w-2.5 h-2.5 rounded bg-sec-blue"></span>Dashboard
+                </div>
+                <div class="flex items-center gap-1.5 p-2 rounded"><span class="w-2.5 h-2.5 rounded bg-[#24365c]"></span>Detections</div>
+                <div class="flex items-center gap-1.5 p-2 rounded"><span class="w-2.5 h-2.5 rounded bg-[#24365c]"></span>Threat Intel</div>
+                <div class="flex items-center gap-1.5 p-2 rounded"><span class="w-2.5 h-2.5 rounded bg-[#24365c]"></span>Agents</div>
+                <div class="flex items-center gap-1.5 p-2 rounded"><span class="w-2.5 h-2.5 rounded bg-[#24365c]"></span>Hunting</div>
+              </div>
+              <div class="p-4 bg-[#f6f8fc] flex flex-col gap-3.5">
+                <div class="grid grid-cols-3 gap-3">
+                  <div class="bg-white border border-gray-200 rounded-lg p-3 flex flex-col justify-between">
+                    <span class="text-[9px] font-semibold text-gray-500">Posture Score</span>
+                    <div class="semi w-24 h-12 relative overflow-hidden mt-1.5">
+                      <svg width="96" height="54" viewBox="0 0 96 54" class="mx-auto">
+                        <path d="M6 50 A42 42 0 0 1 90 50" fill="none" stroke="#eef2f8" stroke-width="9"/>
+                        <path d="M6 50 A42 42 0 0 1 78 18" fill="none" stroke="#27d98a" stroke-width="9" stroke-linecap="round"/>
+                      </svg>
+                      <span class="vtxt absolute bottom-0 left-0 right-0 text-center font-extrabold text-gray-800 text-lg">86%</span>
+                    </div>
+                  </div>
+                  <div class="bg-white border border-gray-200 rounded-lg p-3 flex flex-col justify-between">
+                    <span class="text-[9px] font-semibold text-gray-500">Alerts by Severity</span>
+                    <div class="pmini flex flex-col gap-1.5 mt-1">
+                      <div class="m flex items-center gap-2 text-[9px] text-gray-600"><span class="w-6">Crit</span><span class="t flex-grow h-1.5 bg-gray-100 rounded-full overflow-hidden"><span class="f block h-full bg-sec-red rounded-full" style="width:25%"></span></span></div>
+                      <div class="m flex items-center gap-2 text-[9px] text-gray-600"><span class="w-6">High</span><span class="t flex-grow h-1.5 bg-gray-100 rounded-full overflow-hidden"><span class="f block h-full bg-sec-amber rounded-full" style="width:45%"></span></span></div>
+                      <div class="m flex items-center gap-2 text-[9px] text-gray-600"><span class="w-6">Med</span><span class="t flex-grow h-1.5 bg-gray-100 rounded-full overflow-hidden"><span class="f block h-full bg-sec-blue rounded-full" style="width:70%"></span></span></div>
+                    </div>
+                  </div>
+                  <div class="bg-white border border-gray-200 rounded-lg p-3">
+                    <span class="text-[9px] font-semibold text-gray-500">24h Events</span>
+                    <div class="pstat grid grid-cols-2 gap-1.5 mt-1 text-center">
+                      <div class="b border border-gray-100 rounded p-1"><b class="text-xs text-gray-800 block">4.5k</b><span class="text-[8px] text-gray-500">Events</span></div>
+                      <div class="b border border-gray-100 rounded p-1"><b class="text-xs text-sec-red block">38</b><span class="text-[8px] text-gray-500">Critical</span></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-3">
+                  <span class="text-[9px] font-semibold text-gray-500 block mb-1">Detection trend</span>
+                  <svg width="100%" height="70" viewBox="0 0 460 70" preserveAspectRatio="none">
+                    <path d="M0,60 C70,30 110,48 170,32 C230,16 270,44 330,30 C390,18 420,40 460,28" fill="none" stroke="#1f8cff" stroke-width="2.5"/>
+                    <path d="M0,60 C70,30 110,48 170,32 C230,16 270,44 330,30 C390,18 420,40 460,28 L460,70 L0,70 Z" fill="rgba(31,140,255,.12)"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ComplyHub Pane -->
+        <div class="spane grid grid-cols-1 lg:grid-cols-[1fr_1.25fr] gap-12 items-center" data-sp="1">
+          <div>
+            <div class="text-xs font-extrabold tracking-wider text-white/80 uppercase mb-3">Compliance Automation Tool</div>
+            <div class="flex items-center gap-3 text-2xl md:text-3xl font-extrabold text-white mb-4">
+              <span class="ico w-11 h-11 rounded-xl bg-white/15 border border-white/30 flex items-center justify-center">
+                <svg class="w-6 h-6 stroke-white" viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                  <path d="M9 12l2 2 4-4M5 4h14v16l-7-3-7 3z" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="flex flex-col leading-none">
+                <span>ComplyHub</span>
+                <small class="text-[11px] font-bold opacity-80 mt-1">by SecurityMind Pro</small>
+              </span>
+            </div>
+            <p class="text-white/90 text-base mb-6 max-w-md">
+              Automate your journey to ISO 27001, PCI-DSS, SOC 2 and local banking circulars with guided workflows, evidence collection, and rapid readiness assessments.
+            </p>
+            <button class="bg-transparent border border-white/60 text-white font-bold text-sm px-6 py-3 rounded-lg hover:bg-white/15 transition-all cursor-pointer">
+              Start with ComplyHub
+            </button>
+          </div>
+          <!-- Mock inner dashboard -->
+          <div class="pdash bg-white text-sec-bg border border-white/40 shadow-2xl rounded-xl overflow-hidden">
+            <div class="flex items-center gap-2 p-3 border-b border-gray-200 bg-gray-50 text-xs font-extrabold">
+              <span class="w-4.5 h-4.5 rounded bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep"></span>
+              ComplyHub Overview
+              <div class="ml-auto flex gap-1.5">
+                <span class="text-[9px] px-2 py-0.5 rounded bg-[#eef3fb] text-[#5570a0] font-semibold">Fail only</span>
+                <span class="text-[9px] px-2 py-0.5 rounded bg-[#eef3fb] text-[#5570a0] font-semibold">Scan</span>
+              </div>
+            </div>
+            <div class="grid grid-cols-[120px_1fr] min-h-[300px]">
+              <div class="bg-[#0e1626] p-3 flex flex-col gap-1 text-[10px] text-sec-muted">
+                <div class="flex items-center gap-1.5 p-2 rounded bg-sec-blue/18 text-[#9ecbff] font-bold">
+                  <span class="w-2.5 h-2.5 rounded bg-sec-blue"></span>Dashboard
+                </div>
+                <div class="flex items-center gap-1.5 p-2 rounded"><span class="w-2.5 h-2.5 rounded bg-[#24365c]"></span>Roadmap</div>
+                <div class="flex items-center gap-1.5 p-2 rounded"><span class="w-2.5 h-2.5 rounded bg-[#24365c]"></span>Policy hub</div>
+                <div class="flex items-center gap-1.5 p-2 rounded"><span class="w-2.5 h-2.5 rounded bg-[#24365c]"></span>Evidence</div>
+              </div>
+              <div class="p-4 bg-[#f6f8fc] flex flex-col gap-3.5">
+                <div class="grid grid-cols-3 gap-3">
+                  <div class="bg-white border border-gray-200 rounded-lg p-3 text-center flex flex-col justify-between">
+                    <span class="text-[9px] font-semibold text-gray-500">Compliance Score</span>
+                    <div class="semi w-24 h-12 relative overflow-hidden mt-1">
+                      <svg width="96" height="54" viewBox="0 0 96 54" class="mx-auto">
+                        <path d="M6 50 A42 42 0 0 1 90 50" fill="none" stroke="#eef2f8" stroke-width="9"/>
+                        <path d="M6 50 A42 42 0 0 1 56 11" fill="none" stroke="#ffb43d" stroke-width="9" stroke-linecap="round"/>
+                      </svg>
+                      <span class="vtxt absolute bottom-0 left-0 right-0 text-center font-extrabold text-gray-800 text-lg">55%</span>
+                    </div>
+                    <span class="text-[8.5px] text-sec-muted">Moderate</span>
+                  </div>
+                  <div class="bg-white border border-gray-200 rounded-lg p-3">
+                    <span class="text-[9px] font-semibold text-gray-500">Findings by Severity</span>
+                    <div class="pmini flex flex-col gap-1 mt-1 text-[9px] text-gray-600">
+                      <div class="m flex justify-between"><span>Crit</span><span class="t flex-grow max-w-[50px] mx-1 h-1.5 bg-gray-100 rounded-full overflow-hidden"><span class="f block h-full bg-sec-red rounded-full" style="width:60%"></span></span><span>20</span></div>
+                      <div class="m flex justify-between"><span>High</span><span class="t flex-grow max-w-[50px] mx-1 h-1.5 bg-gray-100 rounded-full overflow-hidden"><span class="f block h-full bg-sec-amber rounded-full" style="width:48%"></span></span><span>22</span></div>
+                    </div>
+                  </div>
+                  <div class="bg-white border border-gray-200 rounded-lg p-3">
+                    <span class="text-[9px] font-semibold text-gray-500">Policies</span>
+                    <div class="pstat grid grid-cols-2 gap-1.5 mt-1 text-center text-gray-700">
+                      <div class="b border border-gray-100 rounded p-1"><b class="text-xs block">35</b><span>Active</span></div>
+                      <div class="b border border-gray-100 rounded p-1"><b class="text-xs text-sec-amber block">2</b><span>Review</span></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-3">
+                  <span class="text-[9px] font-semibold text-gray-500 block mb-1">Top failed controls</span>
+                  <div class="pmini flex flex-col gap-1.5 text-[9px] text-gray-700">
+                    <div class="m flex items-center justify-between"><span>A.5 — Access control</span><span class="t flex-grow max-w-[120px] mx-2 h-1.5 bg-gray-100 rounded-full overflow-hidden"><span class="f block h-full bg-sec-red rounded-full" style="width:80%"></span></span><span>27</span></div>
+                    <div class="m flex items-center justify-between"><span>A.8 — System ops</span><span class="t flex-grow max-w-[120px] mx-2 h-1.5 bg-gray-100 rounded-full overflow-hidden"><span class="f block h-full bg-sec-amber rounded-full" style="width:65%"></span></span><span>25</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ThreatLens Pane -->
+        <div class="spane grid grid-cols-1 lg:grid-cols-[1fr_1.25fr] gap-12 items-center" data-sp="2">
+          <div>
+            <div class="text-xs font-extrabold tracking-wider text-white/80 uppercase mb-3">Threat Intelligence Engine</div>
+            <div class="flex items-center gap-3 text-2xl md:text-3xl font-extrabold text-white mb-4">
+              <span class="ico w-11 h-11 rounded-xl bg-white/15 border border-white/30 flex items-center justify-center">
+                <svg class="w-6 h-6 stroke-white" viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                  <circle cx="11" cy="11" r="7"/>
+                  <path d="M21 21l-4.3-4.3" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <span class="flex flex-col leading-none">
+                <span>ThreatLens</span>
+                <small class="text-[11px] font-bold opacity-80 mt-1">by SecurityMind Pro</small>
+              </span>
+            </div>
+            <p class="text-white/90 text-base mb-6 max-w-md">
+              Correlate your telemetry with global and regional threat feeds. ThreatLens scores emerging risks and maps them to the assets you actually run.
+            </p>
+            <button class="bg-transparent border border-white/60 text-white font-bold text-sm px-6 py-3 rounded-lg hover:bg-white/15 transition-all cursor-pointer">
+              See ThreatLens
+            </button>
+          </div>
+          <!-- Mock inner dashboard -->
+          <div class="pdash bg-white text-sec-bg border border-white/40 shadow-2xl rounded-xl overflow-hidden">
+            <div class="flex items-center gap-2 p-3 border-b border-gray-200 bg-gray-50 text-xs font-extrabold">
+              <span class="w-4.5 h-4.5 rounded bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep"></span>
+              ThreatLens Overview
+              <div class="ml-auto flex gap-1.5">
+                <span class="text-[9px] px-2 py-0.5 rounded bg-[#eef3fb] text-[#5570a0] font-semibold">Feeds</span>
+                <span class="text-[9px] px-2 py-0.5 rounded bg-[#eef3fb] text-[#5570a0] font-semibold">IOC</span>
+              </div>
+            </div>
+            <div class="grid grid-cols-[120px_1fr] min-h-[300px]">
+              <div class="bg-[#0e1626] p-3 flex flex-col gap-1 text-[10px] text-sec-muted">
+                <div class="flex items-center gap-1.5 p-2 rounded bg-sec-blue/18 text-[#9ecbff] font-bold">
+                  <span class="w-2.5 h-2.5 rounded bg-sec-blue"></span>Overview
+                </div>
+                <div class="flex items-center gap-1.5 p-2 rounded"><span class="w-2.5 h-2.5 rounded bg-[#24365c]"></span>IOCs</div>
+                <div class="flex items-center gap-1.5 p-2 rounded"><span class="w-2.5 h-2.5 rounded bg-[#24365c]"></span>Actors</div>
+                <div class="flex items-center gap-1.5 p-2 rounded"><span class="w-2.5 h-2.5 rounded bg-[#24365c]"></span>Feeds</div>
+              </div>
+              <div class="p-4 bg-[#f6f8fc] flex flex-col gap-3.5">
+                <div class="grid grid-cols-3 gap-3">
+                  <div class="bg-white border border-gray-200 rounded-lg p-3">
+                    <span class="text-[9px] font-semibold text-gray-500">Active IOCs</span>
+                    <div class="pstat text-center mt-1">
+                      <b class="text-base text-sec-red block">1,284</b>
+                      <span class="text-[8px] text-gray-500">Indicators</span>
+                    </div>
+                  </div>
+                  <div class="bg-white border border-gray-200 rounded-lg p-3">
+                    <span class="text-[9px] font-semibold text-gray-500">Feed health</span>
+                    <div class="pmini flex flex-col gap-1 mt-1 text-[9px] text-gray-600">
+                      <div class="m flex items-center justify-between"><span>MISP</span><span class="t flex-grow max-w-[50px] mx-1 h-1.5 bg-gray-100 rounded-full overflow-hidden"><span class="f block h-full bg-sec-green rounded-full" style="width:78%"></span></span></div>
+                      <div class="m flex items-center justify-between"><span>Local</span><span class="t flex-grow max-w-[50px] mx-1 h-1.5 bg-gray-100 rounded-full overflow-hidden"><span class="f block h-full bg-sec-amber rounded-full" style="width:64%"></span></span></div>
+                    </div>
+                  </div>
+                  <div class="bg-white border border-gray-200 rounded-lg p-3">
+                    <span class="text-[9px] font-semibold text-gray-500">Risk Level</span>
+                    <div class="pstat mt-1 text-[9px] text-center">
+                      <b class="text-xs text-sec-red block">High</b>
+                      <span class="text-[8px] text-gray-500">Phishing</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-3">
+                  <span class="text-[9px] font-semibold text-gray-500 block mb-1">Threat activity (30d)</span>
+                  <svg width="100%" height="70" viewBox="0 0 460 70" preserveAspectRatio="none">
+                    <path d="M0,50 C60,52 90,20 150,30 C210,40 250,10 310,22 C370,34 410,18 460,40" fill="none" stroke="#7c5cff" stroke-width="2.5"/>
+                    <path d="M0,50 C60,52 90,20 150,30 C210,40 250,10 310,22 C370,34 410,18 460,40 L460,70 L0,70 Z" fill="rgba(124,92,255,.12)"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- EdgeGuard Pane -->
+        <div class="spane grid grid-cols-1 lg:grid-cols-[1fr_1.25fr] gap-12 items-center" data-sp="3">
+          <div>
+            <div class="text-xs font-extrabold tracking-wider text-white/80 uppercase mb-3">Endpoint & Cloud Coverage</div>
+            <div class="flex items-center gap-3 text-2xl md:text-3xl font-extrabold text-white mb-4">
+              <span class="ico w-11 h-11 rounded-xl bg-white/15 border border-white/30 flex items-center justify-center">
+                <svg class="w-6 h-6 stroke-white" viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                  <rect x="3" y="4" width="18" height="12" rx="2"/>
+                  <path d="M8 20h8M12 16v4" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <span class="flex flex-col leading-none">
+                <span>EdgeGuard</span>
+                <small class="text-[11px] font-bold opacity-80 mt-1">by SecurityMind Pro</small>
+              </span>
+            </div>
+            <p class="text-white/90 text-base mb-6 max-w-md">
+              Lightweight agents extend detection to endpoints, servers, containers and cloud workloads — with file integrity monitoring and active response.
+            </p>
+            <button class="bg-transparent border border-white/60 text-white font-bold text-sm px-6 py-3 rounded-lg hover:bg-white/15 transition-all cursor-pointer">
+              Deploy EdgeGuard
+            </button>
+          </div>
+          <!-- Mock inner dashboard -->
+          <div class="pdash bg-white text-sec-bg border border-white/40 shadow-2xl rounded-xl overflow-hidden">
+            <div class="flex items-center gap-2 p-3 border-b border-gray-200 bg-gray-50 text-xs font-extrabold">
+              <span class="w-4.5 h-4.5 rounded bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep"></span>
+              EdgeGuard Fleet
+              <div class="ml-auto">
+                <span class="text-[9px] px-2 py-0.5 rounded bg-[#eef3fb] text-[#5570a0] font-semibold">473 agents</span>
+              </div>
+            </div>
+            <div class="grid grid-cols-[120px_1fr] min-h-[300px]">
+              <div class="bg-[#0e1626] p-3 flex flex-col gap-1 text-[10px] text-sec-muted">
+                <div class="flex items-center gap-1.5 p-2 rounded bg-sec-blue/18 text-[#9ecbff] font-bold">
+                  <span class="w-2.5 h-2.5 rounded bg-sec-blue"></span>Fleet
+                </div>
+                <div class="flex items-center gap-1.5 p-2 rounded"><span class="w-2.5 h-2.5 rounded bg-[#24365c]"></span>Endpoints</div>
+                <div class="flex items-center gap-1.5 p-2 rounded"><span class="w-2.5 h-2.5 rounded bg-[#24365c]"></span>Cloud</div>
+                <div class="flex items-center gap-1.5 p-2 rounded"><span class="w-2.5 h-2.5 rounded bg-[#24365c]"></span>FIM</div>
+              </div>
+              <div class="p-4 bg-[#f6f8fc] flex flex-col gap-3.5">
+                <div class="grid grid-cols-3 gap-3">
+                  <div class="bg-white border border-gray-200 rounded-lg p-3 text-center flex flex-col justify-between">
+                    <span class="text-[9px] font-semibold text-gray-500">Agent status</span>
+                    <div class="semi w-24 h-12 relative overflow-hidden mt-1">
+                      <svg width="96" height="54" viewBox="0 0 96 54" class="mx-auto">
+                        <path d="M6 50 A42 42 0 0 1 90 50" fill="none" stroke="#eef2f8" stroke-width="9"/>
+                        <path d="M6 50 A42 42 0 0 1 86 38" fill="none" stroke="#27d98a" stroke-width="9" stroke-linecap="round"/>
+                      </svg>
+                      <span class="vtxt absolute bottom-0 left-0 right-0 text-center font-extrabold text-gray-800 text-lg">96%</span>
+                    </div>
+                    <span class="text-[8px] text-gray-500">Healthy</span>
+                  </div>
+                  <div class="bg-white border border-gray-200 rounded-lg p-3">
+                    <span class="text-[9px] font-semibold text-gray-500">Coverage</span>
+                    <div class="pmini flex flex-col gap-1 mt-1 text-[9px] text-gray-600">
+                      <div class="m flex justify-between"><span>Cloud</span><span class="t flex-grow max-w-[50px] mx-1 h-1.5 bg-gray-100 rounded-full overflow-hidden"><span class="f block h-full bg-sec-cyan rounded-full" style="width:60%"></span></span></div>
+                      <div class="m flex justify-between"><span>Server</span><span class="t flex-grow max-w-[50px] mx-1 h-1.5 bg-gray-100 rounded-full overflow-hidden"><span class="f block h-full bg-sec-blue rounded-full" style="width:74%"></span></span></div>
+                    </div>
+                  </div>
+                  <div class="bg-white border border-gray-200 rounded-lg p-3">
+                    <span class="text-[9px] font-semibold text-gray-500">Online Fleet</span>
+                    <div class="pstat grid grid-cols-2 gap-1.5 mt-1 text-center text-gray-700">
+                      <div class="b border border-gray-100 rounded p-1"><b class="text-xs text-sec-green block">454</b><span>Online</span></div>
+                      <div class="b border border-gray-100 rounded p-1"><b class="text-xs text-sec-red block">5</b><span>Offline</span></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-lg p-3">
+                  <span class="text-[9px] font-semibold text-gray-500 block mb-1">File integrity events (24h)</span>
+                  <svg width="100%" height="70" viewBox="0 0 460 70" preserveAspectRatio="none">
+                    <path d="M0,55 C60,40 110,46 170,38 C230,30 270,42 330,26 C390,12 420,30 460,24" fill="none" stroke="#27d98a" stroke-width="2.5"/>
+                    <path d="M0,55 C60,40 110,46 170,38 C230,30 270,42 330,26 C390,12 420,30 460,24 L460,70 L0,70 Z" fill="rgba(39,217,138,.12)"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- GovShield Pane -->
+        <div class="spane grid grid-cols-1 lg:grid-cols-[1fr_1.25fr] gap-12 items-center" data-sp="4">
+          <div>
+            <div class="text-xs font-extrabold tracking-wider text-white/80 uppercase mb-3">Public-Sector Security Platform</div>
+            <div class="flex items-center gap-3 text-2xl md:text-3xl font-extrabold text-white mb-4">
+              <span class="ico w-11 h-11 rounded-xl bg-white/15 border border-white/30 flex items-center justify-center">
+                <svg class="w-6 h-6 stroke-white" viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                  <path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="flex flex-col leading-none">
+                <span>GovShield</span>
+                <small class="text-[11px] font-bold opacity-80 mt-1">by SecurityMind Pro</small>
+              </span>
+            </div>
+            <p class="text-white/90 text-base mb-6 max-w-md">
+              VAPT, endpoint protection, and incident response for government infrastructure and agencies — with data residency and Bengali-language reporting.
+            </p>
+            <button class="bg-transparent border border-white/60 text-white font-bold text-sm px-6 py-3 rounded-lg hover:bg-white/15 transition-all cursor-pointer">
+              Get GovShield
+            </button>
+          </div>
+          <!-- Mock inner dashboard -->
+          <div class="pdash bg-white text-sec-bg border border-white/40 shadow-2xl rounded-xl overflow-hidden">
+            <div class="flex items-center gap-2 p-3 border-b border-gray-200 bg-gray-50 text-xs font-extrabold">
+              <span class="w-4.5 h-4.5 rounded bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep"></span>
+              GovShield Overview
+              <div class="ml-auto">
+                <span class="text-[9px] px-2 py-0.5 rounded bg-[#eef3fb] text-[#5570a0] font-semibold">15 units</span>
+              </div>
+            </div>
+            <div class="grid grid-cols-[120px_1fr] min-h-[300px]">
+              <div class="bg-[#0e1626] p-3 flex flex-col gap-1 text-[10px] text-sec-muted">
+                <div class="flex items-center gap-1.5 p-2 rounded bg-sec-blue/18 text-[#9ecbff] font-bold">
+                  <span class="w-2.5 h-2.5 rounded bg-sec-blue"></span>Overview
+                </div>
+                <div class="flex items-center gap-1.5 p-2 rounded"><span class="w-2.5 h-2.5 rounded bg-[#24365c]"></span>Agencies</div>
+                <div class="flex items-center gap-1.5 p-2 rounded"><span class="w-2.5 h-2.5 rounded bg-[#24365c]"></span>VAPT</div>
+                <div class="flex items-center gap-1.5 p-2 rounded"><span class="w-2.5 h-2.5 rounded bg-[#24365c]"></span>Incidents</div>
+              </div>
+              <div class="p-4 bg-[#f6f8fc] flex flex-col gap-3.5">
+                <div class="bg-white border border-gray-200 rounded-lg p-3">
+                  <span class="text-[9px] font-semibold text-gray-500">Vulnerability aging by unit</span>
+                  <svg width="100%" height="80" viewBox="0 0 460 80" preserveAspectRatio="none">
+                    <path d="M0,72 C80,68 130,20 200,16 C270,12 320,60 460,66" fill="none" stroke="#ff5470" stroke-width="2.5"/>
+                    <path d="M0,72 C80,68 130,20 200,16 C270,12 320,60 460,66 L460,80 L0,80 Z" fill="rgba(255,84,112,.12)"/>
+                  </svg>
+                </div>
+                <div class="grid grid-cols-3 gap-3">
+                  <div class="bg-white border border-gray-200 rounded-lg p-3">
+                    <span class="text-[9px] font-semibold text-gray-500">Open Severity</span>
+                    <div class="pmini flex flex-col gap-1 mt-1 text-[9px] text-gray-600">
+                      <div class="m flex justify-between"><span>Crit</span><span class="t flex-grow max-w-[40px] mx-1 h-1.5 bg-gray-100 rounded-full overflow-hidden"><span class="f block h-full bg-sec-red rounded-full" style="width:55%"></span></span></div>
+                      <div class="m flex justify-between"><span>High</span><span class="t flex-grow max-w-[40px] mx-1 h-1.5 bg-gray-100 rounded-full overflow-hidden"><span class="f block h-full bg-sec-amber rounded-full" style="width:40%"></span></span></div>
+                    </div>
+                  </div>
+                  <div class="bg-white border border-gray-200 rounded-lg p-3 text-center flex flex-col justify-center">
+                    <span class="text-[9px] font-semibold text-gray-500">Agencies</span>
+                    <b class="text-sm text-gray-800 block mt-1">15 Units</b>
+                  </div>
+                  <div class="bg-white border border-gray-200 rounded-lg p-3 text-center flex flex-col justify-center">
+                    <span class="text-[9px] font-semibold text-gray-500">SLA</span>
+                    <b class="text-sm text-sec-green block mt-1">92% Compliance</b>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== WORKFLOW NODE GRAPH ===== -->
+    <section class="py-24 relative">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="sec-head gsap-reveal text-center max-w-2xl mx-auto mb-14">
+          <div class="text-sec-blue-2 font-semibold text-xs tracking-wider uppercase mb-3">How it works</div>
+          <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-4">From raw logs to predicted threats</h2>
+          <p class="text-sec-muted text-base">SecurityMind Pro ingests every signal across your environment, correlates it with AI, and surfaces what matters — before an incident becomes a breach.</p>
+        </div>
+
+        <div class="flow gsap-reveal relative h-[440px] max-w-[1000px] mx-auto">
+          <!-- Connector SVG paths -->
+          <svg viewBox="0 0 1000 440" preserveAspectRatio="xMidYMid meet" class="absolute inset-0 w-full h-full">
+            <!-- Ingest cluster threads -->
+            <g stroke="#1f8cff" stroke-width="1" fill="none" opacity="0.35">
+              <path d="M120,150 C280,120 360,240 470,330"/>
+              <path d="M150,250 C300,230 380,260 470,330"/>
+              <path d="M110,320 C260,330 360,330 470,330"/>
+              <path d="M210,110 C320,160 400,260 470,330"/>
+              <path d="M250,360 C340,350 410,340 470,330"/>
+              <path d="M180,200 C300,210 390,290 470,330"/>
+            </g>
+            <!-- Dashed prediction loop -->
+            <g stroke="#3a557e" stroke-width="1.6" fill="none" stroke-dasharray="5 6">
+              <path d="M520,360 L700,360 L780,250 L740,150 L640,110 L560,170 L520,260 Z"/>
+            </g>
+            <!-- Solid predict arc -->
+            <path d="M520,360 L760,360 L840,230" stroke="#1f8cff" stroke-width="2.5" fill="none"/>
+          </svg>
+
+          <!-- Ingest nodes -->
+          <div class="node absolute rounded-full grid place-items-center text-white font-bold bg-gradient-to-br from-sec-blue-2 to-sec-blue-deep shadow-[0_10px_30px_rgba(31,140,255,0.4)] -translate-x-1/2 -translate-y-1/2 cursor-default text-xs transition-all duration-200 hover:scale-110 hover:shadow-[0_14px_40px_rgba(57,160,255,0.7)]" style="left:12%;top:34%;width:62px;height:62px">Logs</div>
+          <div class="node absolute rounded-full grid place-items-center text-white font-bold bg-gradient-to-br from-sec-blue-2 to-sec-blue-deep shadow-[0_10px_30px_rgba(31,140,255,0.4)] -translate-x-1/2 -translate-y-1/2 cursor-default text-xs transition-all duration-200 hover:scale-110 hover:shadow-[0_14px_40px_rgba(57,160,255,0.7)]" style="left:16%;top:58%;width:54px;height:54px">EDR</div>
+          <div class="node absolute rounded-full grid place-items-center text-white font-bold bg-gradient-to-br from-sec-blue-2 to-sec-blue-deep shadow-[0_10px_30px_rgba(31,140,255,0.4)] -translate-x-1/2 -translate-y-1/2 cursor-default text-xs transition-all duration-200 hover:scale-110 hover:shadow-[0_14px_40px_rgba(57,160,255,0.7)]" style="left:23%;top:24%;width:50px;height:50px">Net</div>
+          <div class="node absolute rounded-full grid place-items-center text-white font-bold bg-gradient-to-br from-sec-blue-2 to-sec-blue-deep shadow-[0_10px_30px_rgba(31,140,255,0.4)] -translate-x-1/2 -translate-y-1/2 cursor-default text-xs transition-all duration-200 hover:scale-110 hover:shadow-[0_14px_40px_rgba(57,160,255,0.7)]" style="left:30%;top:48%;width:66px;height:66px">Wazuh</div>
+          <div class="node absolute rounded-full grid place-items-center text-white font-bold bg-gradient-to-br from-sec-blue-2 to-sec-blue-deep shadow-[0_10px_30px_rgba(31,140,255,0.4)] -translate-x-1/2 -translate-y-1/2 cursor-default text-xs transition-all duration-200 hover:scale-110 hover:shadow-[0_14px_40px_rgba(57,160,255,0.7)]" style="left:37%;top:30%;width:48px;height:48px">Cloud</div>
+          <div class="node absolute rounded-full grid place-items-center text-white font-bold bg-gradient-to-br from-sec-blue-2 to-sec-blue-deep shadow-[0_10px_30px_rgba(31,140,255,0.4)] -translate-x-1/2 -translate-y-1/2 cursor-default text-xs transition-all duration-200 hover:scale-110 hover:shadow-[0_14px_40px_rgba(57,160,255,0.7)]" style="left:25%;top:78%;width:58px;height:58px">SIEM</div>
+          
+          <!-- Ingest Entrypoint -->
+          <div class="node absolute rounded-full grid place-items-center text-white font-bold bg-gradient-to-br from-sec-blue-2 to-sec-blue-deep shadow-[0_10px_30px_rgba(31,140,255,0.4)] -translate-x-1/2 -translate-y-1/2 cursor-default text-xs transition-all duration-200 hover:scale-110 hover:shadow-[0_14px_40px_rgba(57,160,255,0.7)]" style="left:47%;top:75%;width:64px;height:34px;border-radius:18px">Ingest</div>
+
+          <!-- Prediction loop stages -->
+          <div class="stage-node absolute -translate-x-1/2 -translate-y-1/2 font-bold text-sm text-sec-ink whitespace-nowrap" style="left:56%;top:38%">Correlate</div>
+          <div class="stage-node absolute -translate-x-1/2 -translate-y-1/2 font-bold text-sm text-sec-ink whitespace-nowrap" style="left:70%;top:25%">Detect</div>
+          <div class="stage-node absolute -translate-x-1/2 -translate-y-1/2 font-bold text-sm text-sec-ink whitespace-nowrap" style="left:78%;top:52%">Score</div>
+          <div class="stage-node absolute -translate-x-1/2 -translate-y-1/2 font-bold text-sm text-sec-ink whitespace-nowrap" style="left:70%;top:78%">Respond</div>
+          <div class="stage-node absolute -translate-x-1/2 -translate-y-1/2 font-bold text-sm text-sec-ink whitespace-nowrap" style="left:54%;top:55%">Triage</div>
+          <div class="stage-node absolute -translate-x-1/2 -translate-y-1/2 font-bold text-sm text-sec-blue-2 whitespace-nowrap" style="left:84%;top:30%">Predict</div>
+
+          <!-- Central Info Orb -->
+          <div class="flow-center absolute left-[62%] top-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-sec-muted text-xs max-w-[160px]">
+            <div class="orb w-8.5 h-8.5 mx-auto mb-2 rounded-full bg-[radial-gradient(circle_at_35%_30%,#fff,#39a0ff)] shadow-[0_0_26px_rgba(57,160,255,0.7)] animate-[pulse_2.6s_ease-in-out_infinite]"></div>
+            AI surfaces &amp; scores your riskiest signals — before they escalate.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STATS BAND ===== -->
+    <section class="py-10 pb-20">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="stats gsap-reveal grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div class="flex flex-col gap-1">
+            <b class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-sec-blue-2 to-sec-cyan" data-count="1200">0</b>
+            <span class="text-sec-muted text-sm font-medium">Detection rules tuned</span>
+          </div>
+          <div class="flex flex-col gap-1">
+            <b class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-sec-blue-2 to-sec-cyan" data-count="80" data-suffix="%">0</b>
+            <span class="text-sec-muted text-sm font-medium">% alert noise cut by AI</span>
+          </div>
+          <div class="flex flex-col gap-1">
+            <b class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-sec-blue-2 to-sec-cyan" data-count="24" data-suffix="/7">0</b>
+            <span class="text-sec-muted text-sm font-medium">Local SOC coverage</span>
+          </div>
+          <div class="flex flex-col gap-1">
+            <b class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-sec-blue-2 to-sec-cyan" data-count="15" data-suffix="+">0</b>
+            <span class="text-sec-muted text-sm font-medium">Compliance frameworks</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CAPABILITIES ===== -->
+    <section id="capabilities" class="py-24 pt-5">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="sec-head gsap-reveal text-center max-w-2xl mx-auto mb-14">
+          <div class="text-sec-blue-2 font-semibold text-xs tracking-wider uppercase mb-3">Capabilities</div>
+          <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-4">An AI-assisted SOC, deployed on your terms</h2>
+          <p class="text-sec-muted text-base">Everything an in-house team needs — without the burn rate. Hosted on your infrastructure so sensitive data never leaves the country.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Capability 1 -->
+          <div class="feat gsap-reveal bg-gradient-to-b from-sec-panel to-sec-bg-2 border border-sec-line rounded-xl p-6.5 transition-all duration-300 hover:-translate-y-1 hover:border-sec-blue">
+            <div class="w-11 h-11 rounded-lg bg-sec-blue/15 flex items-center justify-center text-sec-blue-2 mb-4">
+              <svg class="w-6 h-6 stroke-sec-blue-2" viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                <path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h4 class="text-lg font-bold text-white mb-2">Wazuh-powered detection</h4>
+            <p class="text-sec-muted text-sm leading-relaxed">Hardened Wazuh deployment with custom decoders and rulesets tuned to your stack and threat model.</p>
+          </div>
+          <!-- Capability 2 -->
+          <div class="feat gsap-reveal bg-gradient-to-b from-sec-panel to-sec-bg-2 border border-sec-line rounded-xl p-6.5 transition-all duration-300 hover:-translate-y-1 hover:border-sec-blue">
+            <div class="w-11 h-11 rounded-lg bg-sec-blue/15 flex items-center justify-center text-sec-blue-2 mb-4">
+              <svg class="w-6 h-6 stroke-sec-blue-2" viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                <circle cx="12" cy="12" r="3.5"/>
+                <path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>
+              </svg>
+            </div>
+            <h4 class="text-lg font-bold text-white mb-2">AI alert triage</h4>
+            <p class="text-sec-muted text-sm leading-relaxed">An assistant layer enriches and ranks alerts, cutting false-positive noise so analysts focus on real threats.</p>
+          </div>
+          <!-- Capability 3 -->
+          <div class="feat gsap-reveal bg-gradient-to-b from-sec-panel to-sec-bg-2 border border-sec-line rounded-xl p-6.5 transition-all duration-300 hover:-translate-y-1 hover:border-sec-blue">
+            <div class="w-11 h-11 rounded-lg bg-sec-blue/15 flex items-center justify-center text-sec-blue-2 mb-4">
+              <svg class="w-6 h-6 stroke-sec-blue-2" viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                <path d="M4 5h16M4 12h16M4 19h10"/>
+              </svg>
+            </div>
+            <h4 class="text-lg font-bold text-white mb-2">Natural-language queries</h4>
+            <p class="text-sec-muted text-sm leading-relaxed">Ask “failed logins from outside the country in 24h” in plain language — no query syntax required.</p>
+          </div>
+          <!-- Capability 4 -->
+          <div class="feat gsap-reveal bg-gradient-to-b from-sec-panel to-sec-bg-2 border border-sec-line rounded-xl p-6.5 transition-all duration-300 hover:-translate-y-1 hover:border-sec-blue">
+            <div class="w-11 h-11 rounded-lg bg-sec-blue/15 flex items-center justify-center text-sec-blue-2 mb-4">
+              <svg class="w-6 h-6 stroke-sec-blue-2" viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                <path d="M9 12l2 2 4-4M5 4h14v16l-7-3-7 3z" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h4 class="text-lg font-bold text-white mb-2">Audit-ready reporting</h4>
+            <p class="text-sec-muted text-sm leading-relaxed">One-click compliance narratives for ISO 27001, PCI-DSS and local banking circulars — AI drafts, humans sign off.</p>
+          </div>
+          <!-- Capability 5 -->
+          <div class="feat gsap-reveal bg-gradient-to-b from-sec-panel to-sec-bg-2 border border-sec-line rounded-xl p-6.5 transition-all duration-300 hover:-translate-y-1 hover:border-sec-blue">
+            <div class="w-11 h-11 rounded-lg bg-sec-blue/15 flex items-center justify-center text-sec-blue-2 mb-4">
+              <svg class="w-6 h-6 stroke-sec-blue-2" viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                <path d="M12 2a10 10 0 100 20 10 10 0 000-20zM2 12h20"/>
+              </svg>
+            </div>
+            <h4 class="text-lg font-bold text-white mb-2">Data stays in-country</h4>
+            <p class="text-sec-muted text-sm leading-relaxed">Self-hosted models and storage keep sensitive logs on infrastructure you control — built for data-residency rules.</p>
+          </div>
+          <!-- Capability 6 -->
+          <div class="feat gsap-reveal bg-gradient-to-b from-sec-panel to-sec-bg-2 border border-sec-line rounded-xl p-6.5 transition-all duration-300 hover:-translate-y-1 hover:border-sec-blue">
+            <div class="w-11 h-11 rounded-lg bg-sec-blue/15 flex items-center justify-center text-sec-blue-2 mb-4">
+              <svg class="w-6 h-6 stroke-sec-blue-2" viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+                <path d="M16 7a4 4 0 11-8 0 4 4 0 014-4h8a4 4 0 014 4v2"/>
+              </svg>
+            </div>
+            <h4 class="text-lg font-bold text-white mb-2">Consultancy &amp; training</h4>
+            <p class="text-sec-muted text-sm leading-relaxed">Hands-on deployment, tuning, and a local training program that builds your team’s capability over time.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== COMPLIANCE TABS ===== -->
+    <section id="compliance" class="py-24 bg-sec-bg-2">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="sec-head gsap-reveal text-center max-w-2xl mx-auto mb-14">
+          <div class="text-sec-blue-2 font-semibold text-xs tracking-wider uppercase mb-3">Compliance &amp; Audit</div>
+          <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-4">Pass your audit with evidence, not scrambling</h2>
+          <p class="text-sec-muted text-base">Map detections and controls to the frameworks your regulators care about — with progress you can show at any moment.</p>
+        </div>
+
+        <!-- Tab List Bar -->
+        <div class="tabs gsap-reveal flex justify-center gap-1.5 flex-wrap border-b border-sec-line mb-10" id="tabs">
+          <div class="tab py-3.5 px-5.5 font-semibold text-sm md:text-base text-sec-muted cursor-pointer relative transition-colors active" data-tab="0">ISO 27001</div>
+          <div class="tab py-3.5 px-5.5 font-semibold text-sm md:text-base text-sec-muted cursor-pointer relative transition-colors" data-tab="1">PCI-DSS</div>
+          <div class="tab py-3.5 px-5.5 font-semibold text-sm md:text-base text-sec-muted cursor-pointer relative transition-colors" data-tab="2">Banking Circular</div>
+          <div class="tab py-3.5 px-5.5 font-semibold text-sm md:text-base text-sec-muted cursor-pointer relative transition-colors" data-tab="3">SOC 2</div>
+        </div>
+
+        <div class="tabpanes">
+          <!-- ISO 27001 Panel -->
+          <div class="tabpane active grid grid-cols-1 md:grid-cols-[1fr_1.05fr] gap-12 items-center" data-pane="0">
+            <div>
+              <h3 class="text-3xl font-extrabold text-white mb-3 tracking-tight">ISO 27001 readiness</h3>
+              <p class="text-sec-muted text-base mb-6">Continuous control monitoring mapped to Annex A, with auto-generated evidence packs for your certification body.</p>
+              <div class="checklist flex flex-col gap-3">
+                <div class="ci flex gap-3 items-start text-sm md:text-base text-sec-ink">
+                  <span class="tick w-5.5 h-5.5 rounded bg-sec-green/15 text-sec-green flex items-center justify-center font-extrabold text-xs">✓</span>
+                  <span>Access control &amp; logging mapped to A.5–A.8</span>
+                </div>
+                <div class="ci flex gap-3 items-start text-sm md:text-base text-sec-ink">
+                  <span class="tick w-5.5 h-5.5 rounded bg-sec-green/15 text-sec-green flex items-center justify-center font-extrabold text-xs">✓</span>
+                  <span>Live evidence collection from Wazuh agents</span>
+                </div>
+                <div class="ci flex gap-3 items-start text-sm md:text-base text-sec-ink">
+                  <span class="tick w-5.5 h-5.5 rounded bg-sec-green/15 text-sec-green flex items-center justify-center font-extrabold text-xs">✓</span>
+                  <span>Gap analysis with prioritized remediation</span>
+                </div>
+                <div class="ci flex gap-3 items-start text-sm md:text-base text-sec-ink">
+                  <span class="tick w-5.5 h-5.5 rounded bg-sec-green/15 text-sec-green flex items-center justify-center font-extrabold text-xs">✓</span>
+                  <span>Surveillance-audit ready reporting</span>
+                </div>
+              </div>
+            </div>
+            <!-- Mock Visual -->
+            <div class="panel-visual border border-sec-line rounded-xl bg-gradient-to-b from-[#0c1424] to-[#070d18] p-5.5 shadow-2xl">
+              <div class="ph flex justify-between items-center mb-4 text-sm font-semibold">
+                <span>ISO 27001 — Control coverage</span>
+                <span class="text-[10px] py-1 px-2.5 border border-sec-line rounded bg-sec-panel text-sec-green">82% ready</span>
+              </div>
+              <div class="compbar comp-anim flex flex-col gap-3.5">
+                <div class="cr text-xs"><div class="top flex justify-between text-sec-muted mb-1.5"><span class="font-medium text-sec-ink">Organizational controls</span><b>90%</b></div><div class="track h-2 bg-sec-bg rounded-full overflow-hidden"><span class="fill block h-full bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep rounded-full" data-w="90%"></span></div></div>
+                <div class="cr text-xs"><div class="top flex justify-between text-sec-muted mb-1.5"><span class="font-medium text-sec-ink">People controls</span><b>75%</b></div><div class="track h-2 bg-sec-bg rounded-full overflow-hidden"><span class="fill block h-full bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep rounded-full" data-w="75%"></span></div></div>
+                <div class="cr text-xs"><div class="top flex justify-between text-sec-muted mb-1.5"><span class="font-medium text-sec-ink">Physical controls</span><b>68%</b></div><div class="track h-2 bg-sec-bg rounded-full overflow-hidden"><span class="fill block h-full bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep rounded-full" data-w="68%"></span></div></div>
+                <div class="cr text-xs"><div class="top flex justify-between text-sec-muted mb-1.5"><span class="font-medium text-sec-ink">Technological controls</span><b>88%</b></div><div class="track h-2 bg-sec-bg rounded-full overflow-hidden"><span class="fill block h-full bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep rounded-full" data-w="88%"></span></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PCI-DSS Panel -->
+          <div class="tabpane grid grid-cols-1 md:grid-cols-[1fr_1.05fr] gap-12 items-center" data-pane="1">
+            <div>
+              <h3 class="text-3xl font-extrabold text-white mb-3 tracking-tight">PCI-DSS monitoring</h3>
+              <p class="text-sec-muted text-base mb-6">File integrity, log retention and intrusion detection requirements continuously verified across cardholder environments.</p>
+              <div class="checklist flex flex-col gap-3">
+                <div class="ci flex gap-3 items-start text-sm md:text-base text-sec-ink">
+                  <span class="tick w-5.5 h-5.5 rounded bg-sec-green/15 text-sec-green flex items-center justify-center font-extrabold text-xs">✓</span>
+                  <span>Req 10 — log monitoring &amp; retention automated</span>
+                </div>
+                <div class="ci flex gap-3 items-start text-sm md:text-base text-sec-ink">
+                  <span class="tick w-5.5 h-5.5 rounded bg-sec-green/15 text-sec-green flex items-center justify-center font-extrabold text-xs">✓</span>
+                  <span>Req 11 — intrusion detection via Wazuh</span>
+                </div>
+                <div class="ci flex gap-3 items-start text-sm md:text-base text-sec-ink">
+                  <span class="tick w-5.5 h-5.5 rounded bg-sec-green/15 text-sec-green flex items-center justify-center font-extrabold text-xs">✓</span>
+                  <span>File integrity monitoring on critical assets</span>
+                </div>
+                <div class="ci flex gap-3 items-start text-sm md:text-base text-sec-ink">
+                  <span class="tick w-5.5 h-5.5 rounded bg-sec-green/15 text-sec-green flex items-center justify-center font-extrabold text-xs">✓</span>
+                  <span>Quarterly evidence export for QSA review</span>
+                </div>
+              </div>
+            </div>
+            <!-- Mock Visual -->
+            <div class="panel-visual border border-sec-line rounded-xl bg-gradient-to-b from-[#0c1424] to-[#070d18] p-5.5 shadow-2xl">
+              <div class="ph flex justify-between items-center mb-4 text-sm font-semibold">
+                <span>PCI-DSS — Requirement status</span>
+                <span class="text-[10px] py-1 px-2.5 border border-sec-line rounded bg-sec-panel text-sec-amber">76% ready</span>
+              </div>
+              <div class="compbar comp-anim flex flex-col gap-3.5">
+                <div class="cr text-xs"><div class="top flex justify-between text-sec-muted mb-1.5"><span class="font-medium text-sec-ink">Req 10 — Logging</span><b>95%</b></div><div class="track h-2 bg-sec-bg rounded-full overflow-hidden"><span class="fill block h-full bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep rounded-full" data-w="95%"></span></div></div>
+                <div class="cr text-xs"><div class="top flex justify-between text-sec-muted mb-1.5"><span class="font-medium text-sec-ink">Req 11 — Testing</span><b>80%</b></div><div class="track h-2 bg-sec-bg rounded-full overflow-hidden"><span class="fill block h-full bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep rounded-full" data-w="80%"></span></div></div>
+                <div class="cr text-xs"><div class="top flex justify-between text-sec-muted mb-1.5"><span class="font-medium text-sec-ink">Req 6 — Secure systems</span><b>64%</b></div><div class="track h-2 bg-sec-bg rounded-full overflow-hidden"><span class="fill block h-full bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep rounded-full" data-w="64%"></span></div></div>
+                <div class="cr text-xs"><div class="top flex justify-between text-sec-muted mb-1.5"><span class="font-medium text-sec-ink">Req 8 — Access</span><b>72%</b></div><div class="track h-2 bg-sec-bg rounded-full overflow-hidden"><span class="fill block h-full bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep rounded-full" data-w="72%"></span></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Central Bank Circular Panel -->
+          <div class="tabpane grid grid-cols-1 md:grid-cols-[1fr_1.05fr] gap-12 items-center" data-pane="2">
+            <div>
+              <h3 class="text-3xl font-extrabold text-white mb-3 tracking-tight">Central bank circular alignment</h3>
+              <p class="text-sec-muted text-base mb-6">Built around local banking ICT security guidelines — log retention, incident reporting timelines, and SOC requirements.</p>
+              <div class="checklist flex flex-col gap-3">
+                <div class="ci flex gap-3 items-start text-sm md:text-base text-sec-ink">
+                  <span class="tick w-5.5 h-5.5 rounded bg-sec-green/15 text-sec-green flex items-center justify-center font-extrabold text-xs">✓</span>
+                  <span>Mandated log retention windows enforced</span>
+                </div>
+                <div class="ci flex gap-3 items-start text-sm md:text-base text-sec-ink">
+                  <span class="tick w-5.5 h-5.5 rounded bg-sec-green/15 text-sec-green flex items-center justify-center font-extrabold text-xs">✓</span>
+                  <span>Incident reporting workflows &amp; timelines</span>
+                </div>
+                <div class="ci flex gap-3 items-start text-sm md:text-base text-sec-ink">
+                  <span class="tick w-5.5 h-5.5 rounded bg-sec-green/15 text-sec-green flex items-center justify-center font-extrabold text-xs">✓</span>
+                  <span>24/7 monitoring evidence for inspectors</span>
+                </div>
+                <div class="ci flex gap-3 items-start text-sm md:text-base text-sec-ink">
+                  <span class="tick w-5.5 h-5.5 rounded bg-sec-green/15 text-sec-green flex items-center justify-center font-extrabold text-xs">✓</span>
+                  <span>Bengali-language documentation on request</span>
+                </div>
+              </div>
+            </div>
+            <!-- Mock Visual -->
+            <div class="panel-visual border border-sec-line rounded-xl bg-gradient-to-b from-[#0c1424] to-[#070d18] p-5.5 shadow-2xl">
+              <div class="ph flex justify-between items-center mb-4 text-sm font-semibold">
+                <span>Circular — Compliance status</span>
+                <span class="text-[10px] py-1 px-2.5 border border-sec-line rounded bg-sec-panel text-sec-green">85% ready</span>
+              </div>
+              <div class="compbar comp-anim flex flex-col gap-3.5">
+                <div class="cr text-xs"><div class="top flex justify-between text-sec-muted mb-1.5"><span class="font-medium text-sec-ink">Log retention</span><b>98%</b></div><div class="track h-2 bg-sec-bg rounded-full overflow-hidden"><span class="fill block h-full bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep rounded-full" data-w="98%"></span></div></div>
+                <div class="cr text-xs"><div class="top flex justify-between text-sec-muted mb-1.5"><span class="font-medium text-sec-ink">Incident reporting</span><b>82%</b></div><div class="track h-2 bg-sec-bg rounded-full overflow-hidden"><span class="fill block h-full bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep rounded-full" data-w="82%"></span></div></div>
+                <div class="cr text-xs"><div class="top flex justify-between text-sec-muted mb-1.5"><span class="font-medium text-sec-ink">SOC monitoring</span><b>90%</b></div><div class="track h-2 bg-sec-bg rounded-full overflow-hidden"><span class="fill block h-full bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep rounded-full" data-w="90%"></span></div></div>
+                <div class="cr text-xs"><div class="top flex justify-between text-sec-muted mb-1.5"><span class="font-medium text-sec-ink">Governance</span><b>70%</b></div><div class="track h-2 bg-sec-bg rounded-full overflow-hidden"><span class="fill block h-full bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep rounded-full" data-w="70%"></span></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SOC 2 Panel -->
+          <div class="tabpane grid grid-cols-1 md:grid-cols-[1fr_1.05fr] gap-12 items-center" data-pane="3">
+            <div>
+              <h3 class="text-3xl font-extrabold text-white mb-3 tracking-tight">SOC 2 evidence automation</h3>
+              <p class="text-sec-muted text-base mb-6">Map your security, availability and confidentiality controls to Trust Services Criteria with continuous evidence.</p>
+              <div class="checklist flex flex-col gap-3">
+                <div class="ci flex gap-3 items-start text-sm md:text-base text-sec-ink">
+                  <span class="tick w-5.5 h-5.5 rounded bg-sec-green/15 text-sec-green flex items-center justify-center font-extrabold text-xs">✓</span>
+                  <span>Continuous control monitoring for CC-series</span>
+                </div>
+                <div class="ci flex gap-3 items-start text-sm md:text-base text-sec-ink">
+                  <span class="tick w-5.5 h-5.5 rounded bg-sec-green/15 text-sec-green flex items-center justify-center font-extrabold text-xs">✓</span>
+                  <span>Availability &amp; uptime evidence collection</span>
+                </div>
+                <div class="ci flex gap-3 items-start text-sm md:text-base text-sec-ink">
+                  <span class="tick w-5.5 h-5.5 rounded bg-sec-green/15 text-sec-green flex items-center justify-center font-extrabold text-xs">✓</span>
+                  <span>Change management &amp; access reviews logged</span>
+                </div>
+                <div class="ci flex gap-3 items-start text-sm md:text-base text-sec-ink">
+                  <span class="tick w-5.5 h-5.5 rounded bg-sec-green/15 text-sec-green flex items-center justify-center font-extrabold text-xs">✓</span>
+                  <span>Type II observation-window reporting</span>
+                </div>
+              </div>
+            </div>
+            <!-- Mock Visual -->
+            <div class="panel-visual border border-sec-line rounded-xl bg-gradient-to-b from-[#0c1424] to-[#070d18] p-5.5 shadow-2xl">
+              <div class="ph flex justify-between items-center mb-4 text-sm font-semibold">
+                <span>SOC 2 — Trust criteria</span>
+                <span class="text-[10px] py-1 px-2.5 border border-sec-line rounded bg-sec-panel text-sec-amber">78% ready</span>
+              </div>
+              <div class="compbar comp-anim flex flex-col gap-3.5">
+                <div class="cr text-xs"><div class="top flex justify-between text-sec-muted mb-1.5"><span class="font-medium text-sec-ink">Security (CC)</span><b>88%</b></div><div class="track h-2 bg-sec-bg rounded-full overflow-hidden"><span class="fill block h-full bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep rounded-full" data-w="88%"></span></div></div>
+                <div class="cr text-xs"><div class="top flex justify-between text-sec-muted mb-1.5"><span class="font-medium text-sec-ink">Availability</span><b>84%</b></div><div class="track h-2 bg-sec-bg rounded-full overflow-hidden"><span class="fill block h-full bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep rounded-full" data-w="84%"></span></div></div>
+                <div class="cr text-xs"><div class="top flex justify-between text-sec-muted mb-1.5"><span class="font-medium text-sec-ink">Confidentiality</span><b>72%</b></div><div class="track h-2 bg-sec-bg rounded-full overflow-hidden"><span class="fill block h-full bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep rounded-full" data-w="72%"></span></div></div>
+                <div class="cr text-xs"><div class="top flex justify-between text-sec-muted mb-1.5"><span class="font-medium text-sec-ink">Processing integrity</span><b>66%</b></div><div class="track h-2 bg-sec-bg rounded-full overflow-hidden"><span class="fill block h-full bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep rounded-full" data-w="66%"></span></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CASE STUDY SHOWCASE ===== -->
+    <section id="case-studies" class="py-24">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="sec-head gsap-reveal text-center max-w-2xl mx-auto mb-14">
+          <div class="text-sec-blue-2 font-semibold text-xs tracking-wider uppercase mb-3">Proof, not promises</div>
+          <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-4">Detection and compliance that makes your job easier</h2>
+          <p class="text-sec-muted text-base">How teams use SecurityMind Pro to cut noise, pass audits, and respond faster — with evidence to show for it.</p>
+        </div>
+
+        <div class="cs-wrap gsap-reveal grid grid-cols-1 md:grid-cols-[340px_1fr] rounded-2xl overflow-hidden shadow-2xl border border-sec-line">
+          <!-- Left selectors column -->
+          <div class="bg-sec-bg p-8 flex flex-col gap-6 text-left">
+            <h2 class="text-2xl md:text-3xl font-extrabold text-white mb-4 leading-tight">Proof-based detection to make your job easier</h2>
+            <div class="flex flex-col gap-1">
+              <div class="tab cs-item active py-4 font-bold text-sm md:text-base border-b border-sec-line text-sec-muted cursor-pointer transition-colors" data-cs="0">SentinelCore Case Study</div>
+              <div class="tab cs-item py-4 font-bold text-sm md:text-base border-b border-sec-line text-sec-muted cursor-pointer transition-colors" data-cs="1">ComplyHub Case Study</div>
+              <div class="tab cs-item py-4 font-bold text-sm md:text-base border-b border-sec-line text-sec-muted cursor-pointer transition-colors" data-cs="2">GovShield Case Study</div>
+            </div>
+            <button class="demo-trigger-btn bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep text-white font-bold text-xs py-3 px-6 rounded-lg self-start mt-auto shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all cursor-pointer">
+              Book Demo
+            </button>
+          </div>
+
+          <!-- Right content showcase -->
+          <div class="cs-main bg-[#e6f0ff] p-9 text-sec-bg flex flex-col justify-between min-h-[420px] text-left">
+            <!-- SentinelCore case -->
+            <div class="cs-pane active flex flex-col gap-6" data-csp="0">
+              <h3 class="text-gray-800 font-extrabold text-lg text-center">SentinelCore — SOC Case Study</h3>
+              <div class="cs-points grid grid-cols-1 md:grid-cols-3 gap-5 text-gray-700 text-xs">
+                <div class="cp text-center"><span class="ck w-7 h-7 mx-auto mb-2 rounded-full border border-sec-green text-sec-green flex items-center justify-center font-extrabold text-sm">✓</span>Secure every layer — SentinelCore watches it all in one place.</div>
+                <div class="cp text-center"><span class="ck w-7 h-7 mx-auto mb-2 rounded-full border border-sec-green text-sec-green flex items-center justify-center font-extrabold text-sm">✓</span>From endpoint to cloud, detection follows your workloads.</div>
+                <div class="cp text-center"><span class="ck w-7 h-7 mx-auto mb-2 rounded-full border border-sec-green text-sec-green flex items-center justify-center font-extrabold text-sm">✓</span>Cut alert noise by 80% with AI-assisted triage.</div>
+              </div>
+              <div class="cs-get text-center font-extrabold text-sec-blue-deep hover:underline cursor-pointer">Get started →</div>
+              <div class="cs-card max-w-lg mx-auto bg-gradient-to-br from-sec-panel to-sec-bg-2 border border-sec-line rounded-xl p-7 text-white -rotate-2 relative top-2 shadow-2xl hover:rotate-0 transition-transform duration-300">
+                <div class="chead flex justify-between items-center mb-3">
+                  <span class="clogo flex items-center gap-2 font-extrabold text-xs">
+                    <span class="cd w-5 h-5 rounded bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep"></span>
+                    SecurityMind Pro
+                  </span>
+                  <span class="tag text-[9px] px-2 py-0.5 rounded bg-white/10 tracking-wide">SOC Datasheet</span>
+                </div>
+                <h4 class="text-lg font-extrabold text-white mb-2 leading-snug">SentinelCore — One platform for detection, triage, and response with a live posture score</h4>
+                <p class="text-sec-muted text-xs leading-relaxed font-light">A modern, AI-assisted SOC built on a hardened Wazuh core — augmenting your team’s monitoring without the burn rate of building one from scratch.</p>
+              </div>
+            </div>
+
+            <!-- ComplyHub case -->
+            <div class="cs-pane flex flex-col gap-6" data-csp="1">
+              <h3 class="text-gray-800 font-extrabold text-lg text-center">ComplyHub — Compliance Case Study</h3>
+              <div class="cs-points grid grid-cols-1 md:grid-cols-3 gap-5 text-gray-700 text-xs">
+                <div class="cp text-center"><span class="ck w-7 h-7 mx-auto mb-2 rounded-full border border-sec-green text-sec-green flex items-center justify-center font-extrabold text-sm">✓</span>One workflow for ISO 27001, PCI-DSS, and SOC 2.</div>
+                <div class="cp text-center"><span class="ck w-7 h-7 mx-auto mb-2 rounded-full border border-sec-green text-sec-green flex items-center justify-center font-extrabold text-sm">✓</span>Evidence collected automatically from live agents.</div>
+                <div class="cp text-center"><span class="ck w-7 h-7 mx-auto mb-2 rounded-full border border-sec-green text-sec-green flex items-center justify-center font-extrabold text-sm">✓</span>Reach audit readiness 3× faster with guided gap analysis.</div>
+              </div>
+              <div class="cs-get text-center font-extrabold text-sec-blue-deep hover:underline cursor-pointer">Get started →</div>
+              <div class="cs-card max-w-lg mx-auto bg-gradient-to-br from-sec-panel to-sec-bg-2 border border-sec-line rounded-xl p-7 text-white -rotate-2 relative top-2 shadow-2xl hover:rotate-0 transition-transform duration-300">
+                <div class="chead flex justify-between items-center mb-3">
+                  <span class="clogo flex items-center gap-2 font-extrabold text-xs">
+                    <span class="cd w-5 h-5 rounded bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep"></span>
+                    SecurityMind Pro
+                  </span>
+                  <span class="tag text-[9px] px-2 py-0.5 rounded bg-white/10 tracking-wide">Compliance Datasheet</span>
+                </div>
+                <h4 class="text-lg font-extrabold text-white mb-2 leading-snug">ComplyHub — Continuous compliance evidence mapped to the frameworks your regulators ask for</h4>
+                <p class="text-sec-muted text-xs leading-relaxed font-light">Guided workflows, tailored policy templates, and rapid readiness assessments — so an audit becomes a report you export, not a fire drill.</p>
+              </div>
+            </div>
+
+            <!-- GovShield case -->
+            <div class="cs-pane flex flex-col gap-6" data-csp="2">
+              <h3 class="text-gray-800 font-extrabold text-lg text-center">GovShield — Public Sector Case Study</h3>
+              <div class="cs-points grid grid-cols-1 md:grid-cols-3 gap-5 text-gray-700 text-xs">
+                <div class="cp text-center"><span class="ck w-7 h-7 mx-auto mb-2 rounded-full border border-sec-green text-sec-green flex items-center justify-center font-extrabold text-sm">✓</span>VAPT and incident response across multiple agencies.</div>
+                <div class="cp text-center"><span class="ck w-7 h-7 mx-auto mb-2 rounded-full border border-sec-green text-sec-green flex items-center justify-center font-extrabold text-sm">✓</span>Data stays in-country with Bengali-language reporting.</div>
+                <div class="cp text-center"><span class="ck w-7 h-7 mx-auto mb-2 rounded-full border border-sec-green text-sec-green flex items-center justify-center font-extrabold text-sm">✓</span>92% of findings remediated within SLA.</div>
+              </div>
+              <div class="cs-get text-center font-extrabold text-sec-blue-deep hover:underline cursor-pointer">Get started →</div>
+              <div class="cs-card max-w-lg mx-auto bg-gradient-to-br from-sec-panel to-sec-bg-2 border border-sec-line rounded-xl p-7 text-white -rotate-2 relative top-2 shadow-2xl hover:rotate-0 transition-transform duration-300">
+                <div class="chead flex justify-between items-center mb-3">
+                  <span class="clogo flex items-center gap-2 font-extrabold text-xs">
+                    <span class="cd w-5 h-5 rounded bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep"></span>
+                    SecurityMind Pro
+                  </span>
+                  <span class="tag text-[9px] px-2 py-0.5 rounded bg-white/10 tracking-wide">Gov Datasheet</span>
+                </div>
+                <h4 class="text-lg font-extrabold text-white mb-2 leading-snug">GovShield — Statewide security monitoring for government infrastructure and agencies</h4>
+                <p class="text-sec-muted text-xs leading-relaxed font-light">Centralized detection, vulnerability management, and response for critical public infrastructure — built around local data-residency requirements.</p>
+              </div>
+            </div>
+
+            <!-- Bottom strip switches -->
+            <div class="cs-strip border-t border-gray-300/40 flex mt-6">
+              <div class="sb b1 flex-grow text-center font-bold text-sm py-4 px-6 text-white bg-gradient-to-r from-[#1f8cff] to-[#0b63d6] hover:brightness-110 transition-all cursor-pointer" data-cs="1">More about ComplyHub Case Study</div>
+              <div class="sb b2 flex-grow text-center font-bold text-sm py-4 px-6 text-white bg-gradient-to-r from-[#0b63d6] to-[#36d4ff] hover:brightness-110 transition-all cursor-pointer" data-cs="2">More about GovShield Case Study</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta-band relative text-center py-24 overflow-hidden bg-sec-bg-2 bg-[radial-gradient(700px_360px_at_50%_120%,rgba(31,140,255,0.38),transparent_60%)]">
+      <div class="wrap gsap-reveal">
+        <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">See your environment through an attacker’s eyes</h2>
+        <p class="text-sec-muted text-base sm:text-lg mb-8 max-w-lg mx-auto">Book a walkthrough and get a free posture assessment of your current monitoring.</p>
+        <div class="hero-cta flex gap-4 justify-center flex-wrap">
+          <button class="demo-trigger-btn bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep text-white font-bold text-sm px-8 py-3.5 rounded-lg shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition-all cursor-pointer">
+            Book a Demo
+          </button>
+          <button class="bg-transparent border border-sec-line text-white font-bold text-sm px-8 py-3.5 rounded-lg hover:border-sec-blue hover:text-sec-blue-2 transition-all cursor-pointer">
+            Talk to an Engineer
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="border-t border-sec-line py-14 bg-sec-bg">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="foot-grid grid grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr] gap-9 mb-10 text-left">
+        <div class="col-span-2 lg:col-span-1">
+          <a class="logo flex items-center gap-2.5 font-extrabold text-lg tracking-tight text-white mb-4" href="#">
+            <span class="mark w-7.5 h-7.5 rounded bg-gradient-to-br from-sec-blue-2 to-sec-blue-deep flex items-center justify-center">
+              <svg class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L20 6V11C20 16 16.5 20.5 12 22C7.5 20.5 4 16 4 11V6L12 2Z" stroke="#fff" stroke-width="1.6" fill="rgba(255,255,255,.15)"/>
+                <path d="M8.5 12L11 14.5L15.5 9.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            SecurityMind<span class="text-sec-blue-2"> Pro</span>
+          </a>
+          <p class="foot-about text-sec-muted text-sm leading-relaxed max-w-[34ch]">AI-assisted SOC, SIEM and compliance — deployed on your infrastructure, supported by a local team.</p>
+        </div>
+        <div>
+          <h5 class="text-xs font-bold uppercase tracking-widest text-sec-muted mb-4">Platform</h5>
+          <a href="#" class="block text-sec-muted-2 text-sm hover:text-sec-blue-2 mb-2 transition-colors">Detection &amp; Response</a>
+          <a href="#" class="block text-sec-muted-2 text-sm hover:text-sec-blue-2 mb-2 transition-colors">AI Triage</a>
+          <a href="#" class="block text-sec-muted-2 text-sm hover:text-sec-blue-2 mb-2 transition-colors">Compliance</a>
+          <a href="#" class="block text-sec-muted-2 text-sm hover:text-sec-blue-2 mb-2 transition-colors">Dashboards</a>
+        </div>
+        <div>
+          <h5 class="text-xs font-bold uppercase tracking-widest text-sec-muted mb-4">Services</h5>
+          <a href="#" class="block text-sec-muted-2 text-sm hover:text-sec-blue-2 mb-2 transition-colors">Deployment</a>
+          <a href="#" class="block text-sec-muted-2 text-sm hover:text-sec-blue-2 mb-2 transition-colors">Audit Support</a>
+          <a href="#" class="block text-sec-muted-2 text-sm hover:text-sec-blue-2 mb-2 transition-colors">Consultancy</a>
+          <a href="#" class="block text-sec-muted-2 text-sm hover:text-sec-blue-2 mb-2 transition-colors">Training</a>
+        </div>
+        <div>
+          <h5 class="text-xs font-bold uppercase tracking-widest text-sec-muted mb-4">Company</h5>
+          <a href="#" class="block text-sec-muted-2 text-sm hover:text-sec-blue-2 mb-2 transition-colors">About</a>
+          <a href="#" class="block text-sec-muted-2 text-sm hover:text-sec-blue-2 mb-2 transition-colors">Careers</a>
+          <a href="#" class="block text-sec-muted-2 text-sm hover:text-sec-blue-2 mb-2 transition-colors">Contact</a>
+          <a href="#" class="block text-sec-muted-2 text-sm hover:text-sec-blue-2 mb-2 transition-colors">Blog</a>
+        </div>
+      </div>
+      
+      <div class="foot-bottom border-t border-sec-line pt-6 flex flex-col md:flex-row justify-between text-xs text-sec-muted-2 gap-4">
+        <span>© 2026 SecurityMind Pro. All rights reserved.</span>
+        <div class="flex gap-4">
+          <a href="#" class="hover:text-sec-blue-2 transition-colors">Privacy</a>
+          <a href="#" class="hover:text-sec-blue-2 transition-colors">Terms</a>
+          <a href="#" class="hover:text-sec-blue-2 transition-colors">Security</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Chat Bubble -->
+  <div class="chatbub fixed bottom-6 right-6 z-50 w-13.5 h-13.5 rounded-full bg-gradient-to-r from-sec-blue-2 to-sec-blue flex items-center justify-center shadow-lg hover:scale-105 transition-all cursor-pointer" title="Chat with us">
+    <svg class="w-6 h-6 stroke-white" viewBox="0 0 24 24" fill="none" stroke-width="1.8">
+      <path d="M21 11.5a8.38 8.38 0 01-8.5 8.5 8.5 8.5 0 01-3.6-.8L3 21l1.8-5.9A8.38 8.38 0 014 11.5 8.5 8.5 0 0112.5 3 8.38 8.38 0 0121 11.5z" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <!-- ===== DEMO BOOKING MODAL ===== -->
+  <div id="demo-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <!-- Backdrop -->
+    <div id="modal-backdrop" class="absolute inset-0 bg-black/75 backdrop-blur-md"></div>
+    
+    <!-- Modal Card -->
+    <div id="modal-card" class="relative w-full max-w-lg rounded-2xl border border-sec-line bg-[#0c1424] p-8 shadow-2xl z-10 transform scale-95 transition-all duration-300 overflow-hidden text-left">
+      <!-- Glow effect -->
+      <div class="absolute -top-20 -left-20 w-48 h-48 bg-sec-blue/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-20 -right-20 w-48 h-48 bg-sec-cyan/10 rounded-full blur-3xl pointer-events-none"></div>
+      
+      <!-- Close Button -->
+      <button id="close-modal-btn" class="absolute top-4 right-4 text-sec-muted hover:text-white transition-colors cursor-pointer text-xl font-bold" aria-label="Close modal">
+        &times;
+      </button>
+      
+      <!-- Form Content -->
+      <div id="modal-form-content" class="transition-all duration-300">
+        <h3 class="text-2xl font-extrabold text-white mb-2 font-display">Schedule a Private Demo</h3>
+        <p class="text-sec-muted text-sm mb-6 leading-relaxed">
+          Experience SecurityMind Pro customized for your ICT guidelines and compliance goals.
+        </p>
+        
+        <form id="demo-form" class="flex flex-col gap-4">
+          <div class="flex flex-col gap-1.5">
+            <label for="demo-name" class="text-xs font-semibold text-sec-muted uppercase tracking-wider">Full Name</label>
+            <input type="text" id="demo-name" required class="w-full bg-sec-panel border border-sec-line rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-sec-blue transition-colors" placeholder="John Doe" />
+          </div>
+          
+          <div class="flex flex-col gap-1.5">
+            <label for="demo-email" class="text-xs font-semibold text-sec-muted uppercase tracking-wider">Work Email</label>
+            <input type="email" id="demo-email" required class="w-full bg-sec-panel border border-sec-line rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-sec-blue transition-colors" placeholder="john@company.com" />
+          </div>
+
+          <div class="flex flex-col gap-1.5">
+            <label for="demo-company" class="text-xs font-semibold text-sec-muted uppercase tracking-wider">Company Name</label>
+            <input type="text" id="demo-company" required class="w-full bg-sec-panel border border-sec-line rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-sec-blue transition-colors" placeholder="ACME Bank" />
+          </div>
+
+          <div class="flex flex-col gap-1.5">
+            <label for="demo-interest" class="text-xs font-semibold text-sec-muted uppercase tracking-wider">Primary Focus</label>
+            <select id="demo-interest" class="w-full bg-sec-panel border border-sec-line rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-sec-blue transition-colors">
+              <option value="siem">AI-Native Wazuh SIEM</option>
+              <option value="compliance">ComplyHub (ISO/PCI/SOC 2)</option>
+              <option value="full">All Platform Capabilities</option>
+              <option value="training">Consultancy &amp; Training</option>
+            </select>
+          </div>
+          
+          <button type="submit" class="mt-4 w-full bg-gradient-to-r from-sec-blue-2 to-sec-blue-deep hover:brightness-110 text-white font-bold py-3.5 rounded-lg shadow-lg hover:shadow-[0_4px_20px_rgba(31,140,255,0.45)] transition-all duration-300 cursor-pointer">
+            Book My Live Session
+          </button>
+        </form>
+      </div>
+      
+      <!-- Success Content (Hidden by default) -->
+      <div id="modal-success-content" class="hidden flex flex-col items-center text-center py-8">
+        <div class="w-16 h-16 bg-sec-green/10 border border-sec-green/30 rounded-full flex items-center justify-center mb-6">
+          <svg class="w-8 h-8 text-sec-green" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h3 class="text-2xl font-extrabold text-white mb-2 font-display">Request Received!</h3>
+        <p class="text-sec-muted text-sm max-w-sm mb-6 leading-relaxed">
+          Thank you, <span id="success-user-name" class="text-white font-semibold"></span>. Our security engineering team will contact you at <span id="success-user-email" class="text-white font-semibold"></span> within 2 hours to coordinate your custom session.
+        </p>
+        <button id="success-done-btn" class="px-6 py-2.5 bg-sec-panel border border-sec-line hover:border-sec-blue text-white rounded-lg text-sm transition-all cursor-pointer">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
 </Layout>
 
 <script>
-	// import GSAP and ScrollTrigger
-	import { gsap } from 'gsap';
-	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-	// Register ScrollTrigger plugin
-	gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(ScrollTrigger);
 
-	// --- 1. HERO ANIMATIONS ---
-	window.addEventListener('DOMContentLoaded', () => {
-		const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+  // --- 1. HEADER SCROLL STATE ---
+  const hdr = document.getElementById('hdr');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      hdr?.classList.add('bg-sec-bg/92', 'border-sec-line', 'py-4');
+      hdr?.classList.remove('bg-sec-bg/55', 'border-transparent', 'py-6');
+    } else {
+      hdr?.classList.remove('bg-sec-bg/92', 'border-sec-line', 'py-4');
+      hdr?.classList.add('bg-sec-bg/55', 'border-transparent', 'py-6');
+    }
+  });
 
-		// Entrance fade in for elements in hero section
-		tl.to('#navbar', {
-			opacity: 1,
-			y: 0,
-			duration: 1.2
-		})
-		.to('.hero-reveal', {
-			opacity: 1,
-			y: 0,
-			stagger: 0.15,
-			duration: 1.2
-		}, '-=0.8')
-		.to('.hero-blob', {
-			opacity: 0.8,
-			duration: 2,
-			stagger: 0.3
-		}, '-=1');
+  // --- 2. GSAP SCROLL REVEAL ---
+  gsap.utils.toArray('.gsap-reveal').forEach((el) => {
+    gsap.fromTo(el,
+      { opacity: 0, y: 28 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 88%',
+          toggleActions: 'play none none none'
+        }
+      }
+    );
+  });
 
-		// Subtle continuous float animations for decorative blobs
-		gsap.to('.hero-blob', {
-			y: '+=30',
-			x: '-=15',
-			duration: 6,
-			repeat: -1,
-			yoyo: true,
-			ease: 'sine.inOut',
-			stagger: {
-				each: 2,
-				from: 'random'
-			}
-		});
-	});
+  // --- 3. DASHBOARD ANIMATIONS ON VIEW ---
+  // Circle Posture Score Gauge Arc
+  gsap.fromTo('#gaugeArc', 
+    { strokeDashoffset: 289 },
+    { 
+      strokeDashoffset: 289 - (289 * 0.86),
+      duration: 1.6,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '#dash',
+        start: 'top 75%'
+      }
+    }
+  );
 
-	// --- 2. SCROLL TRIGGER ANIMATIONS ---
-	
-	// Features Section Header Reveal
-	gsap.to('.section-title', {
-		scrollTrigger: {
-			trigger: '#features',
-			start: 'top 80%',
-			toggleActions: 'play none none none'
-		},
-		opacity: 1,
-		y: 0,
-		duration: 1
-	});
-	gsap.to('.section-subtitle', {
-		scrollTrigger: {
-			trigger: '#features',
-			start: 'top 75%',
-			toggleActions: 'play none none none'
-		},
-		opacity: 1,
-		y: 0,
-		duration: 1
-	});
+  // Severity Progress Fills
+  gsap.fromTo('#expo .fill',
+    { width: 0 },
+    {
+      width: (i, el) => el.dataset.w,
+      duration: 1.3,
+      ease: 'power2.out',
+      stagger: 0.1,
+      scrollTrigger: {
+        trigger: '#dash',
+        start: 'top 75%'
+      }
+    }
+  );
 
-	// Cards Stagger reveal
-	gsap.to('.feature-card-wrapper', {
-		scrollTrigger: {
-			trigger: '#features-grid',
-			start: 'top 80%',
-			toggleActions: 'play none none none'
-		},
-		opacity: 1,
-		y: 0,
-		stagger: 0.15,
-		duration: 1.2,
-		ease: 'power3.out'
-	});
+  // SVG Trend Chart path reveals
+  gsap.fromTo('#lineP',
+    { strokeDashoffset: 1400 },
+    {
+      strokeDashoffset: 0,
+      duration: 2,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '#dash',
+        start: 'top 75%'
+      }
+    }
+  );
+  gsap.fromTo('#areaP',
+    { opacity: 0 },
+    {
+      opacity: 1,
+      duration: 1.5,
+      delay: 0.5,
+      scrollTrigger: {
+        trigger: '#dash',
+        start: 'top 75%'
+      }
+    }
+  );
 
-	// Showcase Section Scroll Trigger
-	gsap.from('#showcase-img-container', {
-		scrollTrigger: {
-			trigger: '#showcase',
-			start: 'top 75%',
-			scrub: 1
-		},
-		scale: 0.9,
-		opacity: 0.6,
-		duration: 1.5
-	});
+  // --- 4. COUNT-UP STATS ---
+  const statSection = document.querySelector('.stats');
+  if (statSection) {
+    gsap.fromTo(statSection.querySelectorAll('[data-count]'),
+      { textContent: 0 },
+      {
+        textContent: (i, el) => el.dataset.count,
+        duration: 2,
+        ease: 'power1.out',
+        snap: { textContent: 1 },
+        scrollTrigger: {
+          trigger: statSection,
+          start: 'top 80%'
+        },
+        onUpdate: function() {
+          this.targets().forEach((el) => {
+            const val = parseInt(el.textContent, 10);
+            const suffix = el.dataset.suffix || '';
+            el.innerHTML = val.toLocaleString() + suffix;
+          });
+        }
+      }
+    );
+  }
 
-	gsap.from('#showcase-text', {
-		scrollTrigger: {
-			trigger: '#showcase',
-			start: 'top 70%',
-			toggleActions: 'play none none none'
-		},
-		opacity: 0,
-		x: 50,
-		duration: 1.2,
-		ease: 'power3.out'
-	});
+  // --- 5. COMPLIANCE BARS ANIMATION HELPER ---
+  function animComp(pane) {
+    pane.querySelectorAll('.comp-anim .fill').forEach((f) => {
+      gsap.killTweensOf(f);
+      gsap.fromTo(f,
+        { width: 0 },
+        { width: f.dataset.w, duration: 1.2, ease: 'power2.out' }
+      );
+    });
+  }
 
-	// Contact panel glow-up
-	gsap.from('#contact-panel > *', {
-		scrollTrigger: {
-			trigger: '#contact',
-			start: 'top 75%'
-		},
-		opacity: 0,
-		y: 30,
-		stagger: 0.15,
-		duration: 1.2,
-		ease: 'power3.out'
-	});
+  // Trigger initial active compliance tab bars when section enters screen
+  ScrollTrigger.create({
+    trigger: '#tabs',
+    start: 'top 80%',
+    onEnter: () => {
+      const activePane = document.querySelector('.tabpane.active');
+      if (activePane) animComp(activePane);
+    }
+  });
 
-	// --- 3. INTERACTIVE PLAYGROUND (GSAP Coordinates Morphing) ---
-	const nodes = document.querySelectorAll('.interactive-node');
-	const container = document.querySelector('#playground-canvas > div');
-	const centralOrb = document.getElementById('central-orb');
-	
-	// Helper to get random bounds within container
-	const getContainerBounds = () => {
-		if (!container) return { width: 400, height: 300 };
-		const rect = container.getBoundingClientRect();
-		return {
-			width: rect.width - 60, // subtract padding
-			height: rect.height - 60
-		};
-	};
+  // --- 6. TAB LOGIC: COMPLIANCE ---
+  const tabs = document.querySelectorAll('.tab');
+  const panes = document.querySelectorAll('.tabpane');
 
-	// State 1: Disperse (Random Spread)
-	const disperseNodes = () => {
-		const bounds = getContainerBounds();
-		
-		// Stop any active orbit timelines
-		stopOrbit();
+  tabs.forEach((t) => {
+    t.addEventListener('click', () => {
+      tabs.forEach((x) => x.classList.remove('active'));
+      t.classList.add('active');
 
-		nodes.forEach((node) => {
-			const rx = Math.random() * (bounds.width - 40) - bounds.width / 2 + 20;
-			const ry = Math.random() * (bounds.height - 40) - bounds.height / 2 + 20;
-			
-			gsap.to(node, {
-				x: rx,
-				y: ry,
-				scale: 1,
-				duration: 1.5,
-				ease: 'elastic.out(1, 0.75)'
-			});
-		});
-	};
+      const targetPane = document.querySelector(`.tabpane[data-pane="${t.dataset.tab}"]`);
+      if (targetPane) {
+        panes.forEach((p) => p.classList.remove('active'));
+        targetPane.classList.add('active');
+        animComp(targetPane);
+        
+        // Quick visual snap/reveal transition
+        gsap.fromTo(targetPane, 
+          { opacity: 0, y: 10 },
+          { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }
+        );
+      }
+    });
+  });
 
-	// State 2: Grid Alignment
-	const alignNodesGrid = () => {
-		stopOrbit();
-		
-		// Grid spacing relative coordinates
-		const coords = [
-			{ x: -160, y: -70 },
-			{ x: 0, y: -90 },
-			{ x: 160, y: -70 },
-			{ x: -160, y: 70 },
-			{ x: 0, y: 90 },
-			{ x: 160, y: 70 }
-		];
+  // --- 7. TAB LOGIC: PRODUCT SUITE ---
+  const stabs = document.querySelectorAll('.stab');
+  const spanes = document.querySelectorAll('.spane');
 
-		nodes.forEach((node, i) => {
-			const pos = coords[i] || { x: 0, y: 0 };
-			gsap.to(node, {
-				x: pos.x,
-				y: pos.y,
-				scale: 1.1,
-				duration: 1.2,
-				ease: 'power4.out'
-			});
-		});
-	};
+  stabs.forEach((s) => {
+    s.addEventListener('click', () => {
+      stabs.forEach((x) => x.classList.remove('active'));
+      s.classList.add('active');
 
-	// State 3: Orbiting Motion
-	let orbitTimelineActive = false;
-	const startOrbit = () => {
-		if (orbitTimelineActive) return;
-		orbitTimelineActive = true;
-		
-		// Move nodes to circular orbit path first
-		const radius = 120;
-		nodes.forEach((node, i) => {
-			const angle = (i / nodes.length) * Math.PI * 2;
-			const targetX = Math.cos(angle) * radius;
-			const targetY = Math.sin(angle) * radius;
+      const targetPane = document.querySelector(`.spane[data-sp="${s.dataset.s}"]`);
+      if (targetPane) {
+        spanes.forEach((sp) => sp.classList.remove('active'));
+        targetPane.classList.add('active');
 
-			gsap.to(node, {
-				x: targetX,
-				y: targetY,
-				scale: 1,
-				duration: 1.2,
-				ease: 'power3.out',
-				onComplete: () => {
-					// Once aligned, start custom rotational animation
-					gsap.to(node, {
-						rotation: '+=360',
-						transformOrigin: `${-targetX}px ${-targetY}px`,
-						duration: 8 + i * 2, // variable speeds for depth
-						repeat: -1,
-						ease: 'none',
-						id: `orbit-anim-${i}`
-					});
-				}
-			});
-		});
+        gsap.fromTo(targetPane,
+          { opacity: 0, y: 10 },
+          { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }
+        );
+      }
+    });
+  });
 
-		// Animate central orb slightly
-		gsap.to(centralOrb, {
-			scale: 1.15,
-			duration: 1,
-			repeat: -1,
-			yoyo: true,
-			ease: 'sine.inOut'
-		});
-	};
+  // --- 8. CASE STUDY SWITCHING (SIDEBAR & STRIP BUTTONS) ---
+  const csItems = document.querySelectorAll('.cs-item');
+  const csPanes = document.querySelectorAll('.cs-pane');
 
-	const stopOrbit = () => {
-		orbitTimelineActive = false;
-		nodes.forEach((node, i) => {
-			// Kill specific rotation tweens
-			gsap.killTweensOf(node);
-			gsap.set(node, { rotation: 0, transformOrigin: '50% 50%' });
-		});
-		gsap.to(centralOrb, {
-			scale: 1,
-			duration: 0.5,
-			ease: 'power2.out'
-		});
-	};
+  
+  function showCase(index) {
+    // Update selector active states
+    csItems.forEach((x) => x.classList.toggle('active', x.dataset.cs === index));
+    // Show corresponding pane and hide others
+    csPanes.forEach((pane) => {
+      if (pane.dataset.csp === index) {
+        pane.classList.add('active');
+        // Animate pane entrance
+        gsap.fromTo(pane,
+          { opacity: 0, y: 10 },
+          { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }
+        );
+      } else {
+        pane.classList.remove('active');
+      }
+    });
+  }
 
-	// State 4: Pulse Ring
-	const pulseRingNodes = () => {
-		stopOrbit();
-		const radius = 80;
+  document.querySelectorAll('[data-cs]').forEach((el) => {
+    el.addEventListener('click', () => {
+      showCase(el.dataset.cs);
+    });
+  });
 
-		nodes.forEach((node, i) => {
-			const angle = (i / nodes.length) * Math.PI * 2;
-			const targetX = Math.cos(angle) * radius;
-			const targetY = Math.sin(angle) * radius;
+  // --- 9. MOBILE MENU DRAWER LOGIC ---
+  const mobileToggle = document.getElementById('mobile-menu-toggle');
+  const mobileDrawer = document.getElementById('mobile-drawer');
+  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+  
+  function toggleMobileMenu() {
+    const isOpen = mobileDrawer?.classList.contains('translate-x-0');
+    if (isOpen) {
+      mobileDrawer?.classList.remove('translate-x-0');
+      mobileDrawer?.classList.add('translate-x-full');
+      const path = document.getElementById('hamburger-icon');
+      if (path) path.setAttribute('d', 'M4 6h16M4 12h16m-7 6h7');
+    } else {
+      mobileDrawer?.classList.remove('translate-x-full');
+      mobileDrawer?.classList.add('translate-x-0');
+      const path = document.getElementById('hamburger-icon');
+      if (path) path.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+    }
+  }
 
-			// Morph timeline: move closer and expand out dynamically
-			const tl = gsap.timeline();
-			tl.to(node, {
-				x: targetX * 0.5,
-				y: targetY * 0.5,
-				scale: 0.6,
-				duration: 0.6,
-				ease: 'power2.in'
-			})
-			.to(node, {
-				x: targetX * 1.8,
-				y: targetY * 1.8,
-				scale: 1.5,
-				duration: 0.8,
-				ease: 'power3.out'
-			})
-			.to(node, {
-				x: targetX * 1.3,
-				y: targetY * 1.3,
-				scale: 1.1,
-				duration: 0.8,
-				ease: 'elastic.out(1, 0.5)'
-			});
-		});
-	};
+  mobileToggle?.addEventListener('click', toggleMobileMenu);
+  
+  mobileNavLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      mobileDrawer?.classList.remove('translate-x-0');
+      mobileDrawer?.classList.add('translate-x-full');
+      const path = document.getElementById('hamburger-icon');
+      if (path) path.setAttribute('d', 'M4 6h16M4 12h16m-7 6h7');
+    });
+  });
 
-	// Event Listeners for Playground buttons
-	document.getElementById('btn-disperse')?.addEventListener('click', disperseNodes);
-	document.getElementById('btn-grid')?.addEventListener('click', alignNodesGrid);
-	document.getElementById('btn-orbit')?.addEventListener('click', startOrbit);
-	document.getElementById('btn-pulse')?.addEventListener('click', pulseRingNodes);
+  // --- 10. DEMO BOOKING MODAL LOGIC ---
+  const demoModal = document.getElementById('demo-modal');
+  const modalCard = document.getElementById('modal-card');
+  const demoTriggers = document.querySelectorAll('.demo-trigger-btn');
+  const closeModalBtn = document.getElementById('close-modal-btn');
+  const modalBackdrop = document.getElementById('modal-backdrop');
+  const demoForm = document.getElementById('demo-form');
+  const modalFormContent = document.getElementById('modal-form-content');
+  const modalSuccessContent = document.getElementById('modal-success-content');
+  const successUserName = document.getElementById('success-user-name');
+  const successUserEmail = document.getElementById('success-user-email');
+  const successDoneBtn = document.getElementById('success-done-btn');
 
-	// Start in Disperse mode initially
-	setTimeout(disperseNodes, 2000);
+  function openModal() {
+    document.body.style.overflow = 'hidden';
+    modalFormContent?.classList.remove('hidden');
+    modalSuccessContent?.classList.add('hidden');
+    if (demoForm) {
+      demoForm.reset();
+    }
+
+    demoModal?.classList.remove('opacity-0', 'pointer-events-none');
+    
+    gsap.fromTo(modalCard, 
+      { scale: 0.9, opacity: 0, y: 30 },
+      { scale: 1, opacity: 1, y: 0, duration: 0.5, ease: 'back.out(1.5)' }
+    );
+  }
+
+  function closeModal() {
+    document.body.style.overflow = '';
+
+    gsap.to(modalCard, {
+      scale: 0.95,
+      opacity: 0,
+      y: 20,
+      duration: 0.3,
+      ease: 'power2.in',
+      onComplete: () => {
+        demoModal?.classList.add('opacity-0', 'pointer-events-none');
+      }
+    });
+  }
+
+  demoTriggers.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (mobileDrawer?.classList.contains('translate-x-0')) {
+        toggleMobileMenu();
+      }
+      openModal();
+    });
+  });
+
+  closeModalBtn?.addEventListener('click', closeModal);
+  modalBackdrop?.addEventListener('click', closeModal);
+  successDoneBtn?.addEventListener('click', closeModal);
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !demoModal?.classList.contains('pointer-events-none')) {
+      closeModal();
+    }
+  });
+
+  demoForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const nameInput = document.getElementById('demo-name');
+    const emailInput = document.getElementById('demo-email');
+    const nameVal = nameInput ? nameInput.value : '';
+    const emailVal = emailInput ? emailInput.value : '';
+    
+    if (successUserName) successUserName.textContent = nameVal;
+    if (successUserEmail) successUserEmail.textContent = emailVal;
+
+    gsap.to(modalFormContent, {
+      opacity: 0,
+      y: -10,
+      duration: 0.3,
+      onComplete: () => {
+        modalFormContent?.classList.add('hidden');
+        modalSuccessContent?.classList.remove('hidden');
+        
+        gsap.set(modalFormContent, { opacity: 1, y: 0 });
+        
+        gsap.fromTo(modalSuccessContent,
+          { opacity: 0, y: 10 },
+          { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }
+        );
+      }
+    });
+  });
 </script>
